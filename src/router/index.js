@@ -4,9 +4,9 @@ import AnalysisListView from '../views/AnalysisListView.vue'
 import LocationView from '../views/LocationView.vue' // 新增
 import DataManageView from '../views/DataManageView.vue' // 新增
 import UserManageView from '../views/UserManageView.vue' // 新增
-
+import { createRouter, createWebHashHistory } from 'vue-router'
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
+ history: createWebHashHistory(),
   routes: [
     { path: '/', name: 'dashboard', component: DashboardView },
     { path: '/analysisList', name: 'analysisList', component: AnalysisListView },
