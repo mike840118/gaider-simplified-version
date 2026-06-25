@@ -1,0 +1,41 @@
+{
+  "common": {
+    "unknown": "不明",
+    "age": " 歳",
+         "man": "男性",
+    "woman": "女性"
+  },
+  "card": {
+    "hr": "心拍数",
+    "spo2": "血中酸素",
+    "temp": "体温",
+    "bp": "血圧",
+    "hrv": "HRV",
+    "step": "歩数",
+    "kcal": "カロリー",
+    "heat_stroke": "熱中症状態",
+    "fatigue": "疲労度"
+  },
+ "status": {
+      "normal": "通常",
+      "warning": "警戒",
+      "healthy": "正常",
+      "no_data": "データなし",
+      "recovery": "回復"
+    },
+  "layout": {
+    "title": "健康ビッグデータ管理プラットフォーム",
+    "title_short": "健康プラットフォーム",
+    "nav": {
+      "dashboard": "ダッシュボード",
+      "analysis": "リアルタイム情報",
+      "location": "位置情報",
+      "data": "データ管理",
+      "users": "ユーザー管理",
+      "location_short": "位置情報",
+      "data_short": "データ",
+      "users_short": "ユーザー"
+    },
+    "logout": "ログアウト"
+  }
+}

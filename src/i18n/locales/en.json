@@ -1,0 +1,41 @@
+{
+  "common": {
+    "unknown": "Unknown",
+    "age": " yrs",
+        "man": "man",
+    "woman": "woman"
+  },
+  "card": {
+    "hr": "HR",
+    "spo2": "SpO₂",
+    "temp": "TEMP",
+    "bp": "BP",
+    "hrv": "HRV",
+    "step": "Step",
+    "kcal": "Kcal",
+    "heat_stroke": "Heat Stroke",
+    "fatigue": "Fatigue Level"
+  },
+ "status": {
+      "normal": "Normal",
+      "warning": "Warning",
+      "healthy": "Healthy",
+      "no_data": "No Data",
+      "recovery": "Recovered"
+    },
+  "layout": {
+    "title": "Health Big Data Platform",
+    "title_short": "Health App",
+    "nav": {
+      "dashboard": "Dashboard",
+      "analysis": "Real-time Info",
+      "location": "Location",
+      "data": "Data Mgmt",
+      "users": "User Mgmt",
+      "location_short": "Location",
+      "data_short": "Data",
+      "users_short": "Users"
+    },
+    "logout": "Logout"
+  }
+}

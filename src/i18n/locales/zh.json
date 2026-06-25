@@ -1,0 +1,41 @@
+{
+  "common": {
+    "unknown": "未知",
+    "age": "歲",
+    "man": "男",
+    "woman": "女"
+  },
+  "card": {
+    "hr": "HR",
+    "spo2": "SpO₂",
+    "temp": "TEMP",
+    "bp": "BP",
+    "hrv": "HRV",
+    "step": "Step",
+    "kcal": "Kcal",
+    "heat_stroke": "熱中暑狀態",
+    "fatigue": "疲勞度"
+  },
+"status": {
+    "normal": "正常",
+    "normal_heat": "普通",
+    "warning": "警戒",
+    "no_data": "尚無資料",
+    "recovery": "回復"
+  },
+  "layout": {
+    "title": "健康大數據管理平台",
+    "title_short": "健康平台",
+    "nav": {
+      "dashboard": "儀錶板",
+      "analysis": "即時資訊",
+      "location": "定位資訊",
+      "data": "數據管理",
+      "users": "用戶管理",
+      "location_short": "定位",
+      "data_short": "數據",
+      "users_short": "用戶"
+    },
+    "logout": "退出"
+  }
+}

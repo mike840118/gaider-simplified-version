@@ -1,0 +1,19 @@
+// 預設為手機版 (Mobile)
+
+// 平板版斷點 (Tablet) - 通常涵蓋 768px 到 1023px
+$tablet: 768px;
+
+// 電腦版斷點 (Desktop) - 1024px 以上 (包含你那台 2.5K 平板的橫向邏輯寬度)
+$desktop: 1024px; 
+
+@mixin tablet {
+  @media (min-width: #{$tablet}) and (max-width: #{$desktop - 1px}) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: #{$desktop}) {
+    @content;
+  }
+}
