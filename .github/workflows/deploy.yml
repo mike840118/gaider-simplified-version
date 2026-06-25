@@ -20,4 +20,5 @@ jobs:
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: dist # Vue 打包後的預設目錄
+          token: ${{ secrets.GITHUB_TOKEN }}
+          folder: dist # 這行沒錯，但請確保您的 GitHub Pages 設定正確
