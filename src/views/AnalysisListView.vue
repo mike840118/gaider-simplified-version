@@ -5,11 +5,9 @@
       <button class="search-btn">🔍 搜尋</button>
     </div>
 
-    <div class="cards-grid" :class="{ 'grid-tablet': isTablet }">
-      <MonitorCard v-for="patient in paginatedPatients" :key="patient.id" :info="patient" />
-
-      <div v-if="filteredPatients.length === 0" class="no-data">
-        找不到符合名稱的用戶
+    <div class="cards-grid">
+      <div v-for="(page, pageIndex) in pagedData" :key="pageIndex" class="cards-page">
+        <MonitorCard v-for="patient in page" :key="patient.id" :info="patient" />
       </div>
     </div>
   </div>
@@ -77,10 +75,15 @@ const filteredPatients = computed(() => {
   return mockPatients.value.filter(p => p.name.toLowerCase().includes(keyword))
 })
 
-// 平板模式：固定取前 8 個，因為滑動切換內容
-const paginatedPatients = computed(() => {
-  return filteredPatients.value.slice(0, itemsPerPage)
+const pagedData = computed(() => {
+  const result = []
+  const list = filteredPatients.value
+  for (let i = 0; i < list.length; i += 8) {
+    result.push(list.slice(i, i + 8))
+  }
+  return result
 })
+
 </script>
 
 <style scoped>
@@ -119,16 +122,29 @@ const paginatedPatients = computed(() => {
 /* ⭐ 平板滑動吸附核心 */
 .cards-grid {
   flex: 1;
-  overflow-y: auto;
+  display: flex;
+  /* 改用 flex，確保卡片橫向排成一列 */
+  overflow-x: auto;
+  /* 允許水平滑動 */
+  overflow-y: hidden;
 
-  /* 關鍵：捲動吸附效果 */
-  scroll-snap-type: y mandatory;
+  /* 關鍵：捲動吸附效果 (強迫吸附在每一頁的開頭) */
+  scroll-snap-type: x mandatory;
+  gap: 20px;
+  padding: 20px;
+}
 
+/* 每一頁的容器，假設我們讓 8 個卡片放在一個群組裡 */
+.cards-page {
+  flex: 0 0 100%;
+  /* 強制每一頁佔滿整個容器寬度 */
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 10px;
-  align-content: start;
-  padding-right: 8px;
+  /* 4x2 的排版 */
+  grid-template-rows: repeat(2, 1fr);
+  gap: 15px;
+  scroll-snap-align: start;
+  /* 這是滑動吸附的關鍵 */
 }
 
 /* 確保卡片會自動吸附對齊 */
