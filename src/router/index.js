@@ -1,10 +1,9 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHashHistory } from 'vue-router'
 import DashboardView from '../views/DashboardView.vue'
 import AnalysisListView from '../views/AnalysisListView.vue'
 import LocationView from '../views/LocationView.vue' // 新增
 import DataManageView from '../views/DataManageView.vue' // 新增
 import UserManageView from '../views/UserManageView.vue' // 新增
-import { createRouter, createWebHashHistory } from 'vue-router'
 const router = createRouter({
  history: createWebHashHistory(),
   routes: [
