@@ -137,7 +137,8 @@ const indoorPatients = computed(() => {
     display: flex;
     flex-direction: column;
     gap: 12px;
-    height: 100vh;
+    height: calc(100vh - 120px);
+    border-radius: 8px;
     padding: 16px;
     font-family: sans-serif;
     color: #333;

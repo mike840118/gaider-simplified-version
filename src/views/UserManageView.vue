@@ -115,6 +115,7 @@ const changePage = (page) => {
     background: #f4f7f9;
     padding: 20px;
     height: calc(100vh - 155px);
+    border-radius: 8px;
     font-family: sans-serif;
     display: flex;
     flex-direction: column;

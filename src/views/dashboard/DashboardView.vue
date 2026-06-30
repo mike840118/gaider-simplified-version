@@ -221,7 +221,8 @@ const announcements = ref([
 
 .dashboard-wrapper {
     background-color: #f4f7f9;
-    min-height: 100vh;
+    height: calc(100vh - 50px);
+    border-radius: 8px;
     padding: 20px;
     color: #333;
     font-family: 'Arial', sans-serif;

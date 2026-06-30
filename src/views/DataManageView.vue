@@ -266,6 +266,7 @@ watch([currentMetric, selectedUserId], () => {
     background: #f4f7f9;
     padding: 16px;
     height: calc(100vh - 150px);
+    border-radius: 8px;
     /* 扣除 Header 的高度 */
     color: #333;
     font-family: sans-serif;
