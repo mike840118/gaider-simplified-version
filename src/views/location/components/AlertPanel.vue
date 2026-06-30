@@ -1,8 +1,8 @@
 <template>
     <div class="alert-panel-container">
         <div class="filter-bar">
-            <input type="text" class="filter-input" placeholder="使用者姓名" />
-            <input type="text" class="filter-input" placeholder="請輸入設備MAC" />
+            <input type="text" class="filter-input" :placeholder="$t('alert_panel.search_name')" />
+            <input type="text" class="filter-input" :placeholder="$t('alert_panel.search_mac')" />
             <div class="date-input-wrapper">
                 <span class="icon-calendar">📅</span>
                 <input type="date" class="filter-date" value="2026-05-31" />
@@ -12,10 +12,10 @@
                 <input type="date" class="filter-date" value="2026-06-30" />
             </div>
             <button class="btn btn-search">
-                <span class="icon">🔍</span> 搜尋
+                <span class="icon">🔍</span> {{ $t('alert_panel.btn_search') }}
             </button>
             <button class="btn btn-export">
-                <span class="icon">📥</span> 導出
+                <span class="icon">📥</span> {{ $t('alert_panel.btn_export') }}
             </button>
         </div>
 
@@ -23,20 +23,20 @@
             <table class="alert-table">
                 <thead>
                     <tr>
-                        <th width="5%">序號</th>
-                        <th width="15%">警報時間</th>
-                        <th width="15%">姓名</th>
-                        <th width="12%">聯絡電話</th>
-                        <th width="18%">來源</th>
-                        <th width="10%">設備型號</th>
-                        <th width="10%">處理狀態</th>
-                        <th width="10%">處理記錄</th>
-                        <th width="5%">操作</th>
+                        <th width="5%">{{ $t('alert_panel.table.index', '序號') }}</th>
+                        <th width="15%">{{ $t('alert_panel.table.alert_time', '警報時間') }}</th>
+                        <th width="15%">{{ $t('alert_panel.table.name', '姓名') }}</th>
+                        <th width="12%">{{ $t('alert_panel.table.phone', '聯絡電話') }}</th>
+                        <th width="15%">{{ $t('alert_panel.table.source', '來源') }}</th>
+                        <th width="10%">{{ $t('alert_panel.table.device_model', '設備型號') }}</th>
+                        <th width="10%">{{ $t('alert_panel.table.status', '處理狀態') }}</th>
+                        <th width="10%">{{ $t('alert_panel.table.record', '處理記錄') }}</th>
+                        <th width="10%">{{ $t('alert_panel.table.action', '操作') }}</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="item in mockAlerts" :key="item.id">
-                        <td class="text-center">{{ item.id }}</td>
+                    <tr v-for="(item, index) in mockAlerts" :key="item.id">
+                        <td class="text-center">{{ index + 1 }}</td>
                         <td class="text-center">{{ item.time }}</td>
                         <td class="text-center">{{ item.name }}</td>
                         <td class="text-center">{{ item.phone }}</td>
@@ -45,52 +45,44 @@
                         <td class="text-center text-red">{{ item.status }}</td>
                         <td class="text-center">{{ item.record }}</td>
                         <td class="text-center">
-                            <a href="#" class="edit-link" @click.prevent="">✎ 編輯</a>
+                            <a href="#" class="edit-link" @click.prevent="">{{ $t('alert_panel.edit', '✎ 編輯') }}</a>
                         </td>
                     </tr>
                 </tbody>
             </table>
         </div>
 
-        <div class="pagination-bar">
-            <span class="total-count">共 405 項</span>
-            <select class="page-select">
-                <option>10項/頁</option>
-            </select>
 
-            <div class="page-numbers">
-                <button class="page-btn text-gray">&lt;</button>
-                <button class="page-btn active">1</button>
-                <button class="page-btn">2</button>
-                <button class="page-btn">3</button>
-                <button class="page-btn">4</button>
-                <button class="page-btn">5</button>
-                <button class="page-btn">6</button>
-                <span class="page-dots">...</span>
-                <button class="page-btn">41</button>
-                <button class="page-btn">&gt;</button>
-            </div>
-
-            <div class="page-jump">
-                前往 <input type="number" class="jump-input" value="1" /> 頁
-            </div>
-        </div>
     </div>
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
+import { useI18n } from 'vue-i18n'
+// 引入您的 patients.json 資料
+import rawPatientData from '@/mock/patients.json'
 
-// 依照截圖建立的假資料
-const mockAlerts = ref([
-    { id: 1, time: '2026-06-30 06:20:51', name: '蘇美英P1521586', phone: '919551832', mac: '863204051040958', model: '900P', status: '未處理', record: '' },
-    { id: 2, time: '2026-06-28 14:15:42', name: '范小姐', phone: '935238223', mac: '863204051032013', model: '900P', status: '未處理', record: '' },
-    { id: 3, time: '2026-06-28 12:49:26', name: '賴文來', phone: 'L1310289', mac: '863204051038341', model: '900P', status: '未處理', record: '' },
-    { id: 4, time: '2026-06-28 12:42:56', name: '賴文來', phone: 'L1310289', mac: '863204051038341', model: '900P', status: '未處理', record: '' },
-    { id: 5, time: '2026-06-28 09:47:03', name: '趙利民', phone: 'P1240687', mac: '863204051039786', model: '900P', status: '未處理', record: '' },
-    { id: 6, time: '2026-06-27 16:20:40', name: '高清潭', phone: '933131880', mac: 'C8:5F:0B:35:58:...', model: '300B', status: '未處理', record: '' },
-    { id: 7, time: '2026-06-27 10:39:26', name: '余豪俊', phone: '919426648', mac: '863204051034068', model: '900P', status: '未處理', record: '' }
-])
+const { t } = useI18n()
+
+// 抓取 JSON 中有警報狀態的資料 (sos 為 true，或者是 level 不是 NORMAL)
+const alertPatients = rawPatientData.data.data.filter(p => p.sos || p.level !== 'NORMAL')
+
+// 動態映射資料到表格
+const mockAlerts = ref(alertPatients.map((p, index) => {
+    // 格式化時間：將 JSON 中的 "2026-06-24T08:03:38Z" 替換成 "2026-06-24 08:03:38"
+    const formattedTime = p.newTestTime ? p.newTestTime.replace('T', ' ').replace('Z', '') : ''
+
+    return {
+        id: p.accountId || index,
+        time: formattedTime,
+        name: p.name || '未知使用者',
+        phone: '無資料', // JSON 中目前沒有提供電話欄位
+        mac: p.deviceCode || '未知設備',
+        model: '900P', // JSON 中目前無型號，先用假資料代替
+        status: p.sos ? t('status.urgent', '緊急') : t('alert_panel.unhandled', '未處理'),
+        record: ''
+    }
+}))
 </script>
 
 <style scoped>
@@ -172,7 +164,6 @@ const mockAlerts = ref([
 .btn-search,
 .btn-export {
     background-color: #3bc8f6;
-    /* 截圖中的亮藍色 */
 }
 
 /* 表格區 */
@@ -266,12 +257,6 @@ const mockAlerts = ref([
 .page-btn.text-gray {
     color: #ccc;
     cursor: not-allowed;
-}
-
-.page-dots {
-    display: flex;
-    align-items: flex-end;
-    padding: 0 4px;
 }
 
 .page-jump {

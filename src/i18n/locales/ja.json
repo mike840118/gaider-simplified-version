@@ -1,9 +1,33 @@
 {
   "common": {
     "unknown": "不明",
-    "age": " 歳",
-         "man": "男性",
-    "woman": "女性"
+    "age": "歳",
+    "man": "男",
+    "woman": "女",
+    "search": "検索",
+    "add": "追加",
+    "search_placeholder": "氏名",
+    "search_user_placeholder": "ユーザー名",
+    "confirm": "確定",
+    "cancel": "キャンセル",
+    "save": "保存",
+    "select": "選択",
+    "none": "なし",
+    "yes": "あり",
+    "other": "その他",
+    "time": "時間",
+    "year": "年",
+    "month": "月",
+    "unit_person": "人",
+    "unit_count": "件",
+    "view_more": "もっと見る >",
+    "view_details": "詳細を見る >"
+  },
+  "pagination": {
+    "total": "全 {count} 件",
+    "page_size": "{size}件/ページ",
+    "goto": "移動",
+    "page": "ページ"
   },
   "card": {
     "hr": "心拍数",
@@ -12,23 +36,26 @@
     "bp": "血圧",
     "hrv": "HRV",
     "step": "歩数",
-    "kcal": "カロリー",
+    "kcal": "消費カロリー",
     "heat_stroke": "熱中症状態",
     "fatigue": "疲労度"
   },
- "status": {
-      "normal": "通常",
-      "warning": "警戒",
-      "healthy": "正常",
-      "no_data": "データなし",
-      "recovery": "回復"
-    },
+  "status": {
+    "normal": "正常",
+    "normal_heat": "普通",
+    "warning": "警戒",
+    "warn": "予警報",
+    "urgent": "緊急",
+    "no_data": "データなし",
+    "recovery": "回復"
+  },
   "layout": {
-    "title": "健康ビッグデータ管理プラットフォーム",
+    "title": "健康・安全見守り",
+    "title2": "プラットフォーム",
     "title_short": "健康プラットフォーム",
     "nav": {
       "dashboard": "ダッシュボード",
-      "analysis": "リアルタイム情報",
+      "analysis": "リアルタイム",
       "location": "位置情報",
       "data": "データ管理",
       "users": "ユーザー管理",
@@ -37,5 +64,284 @@
       "users_short": "ユーザー"
     },
     "logout": "ログアウト"
+  },
+  "data_manage": {
+    "user_list": "ユーザーリスト (全 {count} 人)",
+    "all_users": "全ユーザー",
+    "tabs": {
+      "bp": "血圧",
+      "spo2": "血中酸素",
+      "hr": "心拍数",
+      "temp": "体温",
+      "hrv": "HRV"
+    },
+    "sub_tabs": {
+      "history": "履歴データ",
+      "alert": "アラートデータ",
+      "analysis": "統計分析"
+    },
+    "table": {
+      "index": "番号",
+      "avatar": "写真",
+      "name": "氏名",
+      "gender": "性別",
+      "mac": "ソース (MAC)",
+      "value": "数値",
+      "status": "状態",
+      "measure_time": "測定時間",
+      "platform": "プラットフォーム",
+      "version": "バージョン",
+      "no_data_in_category": "このカテゴリーにはデータがありません"
+    }
+  },
+  "user_manage": {
+    "no_match": "該当するユーザーが見つかりません"
+  },
+  "dashboard": {
+    "alert": "緊急：{company} {name} 様が転倒検知アラートを発生させました！",
+    "handle_now": "即時対応",
+    "close_alert": "アラート解除",
+    "announcement": "お知らせ",
+    "today": "本日",
+    "stats": {
+      "total_members": "総会員数",
+      "today_added": "本日追加",
+      "pending_events": "未処理イベント",
+      "online_count": "オンライン",
+      "offline_count": "オフライン",
+      "low_battery": "電池残量低下"
+    },
+    "actions": {
+      "title": "管理設定",
+      "add_member": "会員追加",
+      "file_manage": "ファイル管理",
+      "bind_device": "デバイス連携",
+      "admission_manage": "入院・入所管理",
+      "system_log": "システムログ",
+      "shift_log": "引継日誌"
+    },
+    "overview": {
+      "title": "データ概要",
+      "night_safety": "夜間安全監視 22:00 - 06:00",
+      "just_now": "たった今",
+      "abnormal": "異常",
+      "processing": "処理中"
+    },
+    "heat": {
+      "title": "環境熱中症アラート",
+      "room_temp_high": "室温高め",
+      "high_risk_users": "高リスク対象者"
+    },
+    "events": {
+      "title": "本日のイベント合計",
+      "urgent": "緊急イベント",
+      "warning": "予警報イベント",
+      "normal": "一般通知"
+    },
+    "announcements_data": {
+     "item1": {
+        "tag": "【重要なお知らせ】",
+        "title": "【重要なお知らせ】呼吸器感染症のピークに伴い、患者の健康観察とアプリでのリアルタイム報告を徹底してください",
+        "previewDesc": "- ケアおよび臨床スタッフの皆様：昨今の季節性インフルエンザおよび呼...",
+        "time": "午後 1:50",
+        "content": "ケアおよび臨床スタッフの皆様：\n\n昨今の季節性インフルエンザおよび呼吸器感染症のピーク入りに伴い、院内/施設内の感染管理を確実にするため、各部署にて以下の感染防止対策を必ず徹底してください：\n\n1. 毎日、患者の体温および呼吸器症状を測定し記録すること。\n2. 異常が認められた場合は、直ちにアプリのリアルタイム報告システムからアップロードすること。\n3. 高リスク患者と接触する際は、防護服を確実に着用すること。\n\n皆様のご協力とご尽力に感謝いたします。\n[配信日] 2026-06-29"
+      },
+      "item2": {
+        "tag": "【健康喚起】",
+        "title": "【健康喚起】猛暑到来につき、[高齢者/患者]の水分補給に十分ご留意ください",
+        "previewDesc": "- スタッフの皆様お疲れ様です：最近気温の上昇が続いており、[高齢者/重症患者]は喉の渇きを感じにくかったり、うまく伝えられな...",
+        "time": "午前 10:00",
+        "content": "スタッフの皆様お疲れ様です：\n\n最近気温の上昇が続いております。[高齢者/重症患者]は喉の渇きを感じにくかったり、うまく伝えられないことが多く、脱水症状や熱中症のリスクが高まるため、以下の原則に従ってケアを強化してください：\n\n1. 定期的に白湯を提供し、毎日の水分摂取量を記録すること。\n2. 室内の温度と換気に注意し、必要に応じてエアコンの設定を調整すること。\n3. 尿量の減少や皮膚の乾燥など、脱水症状の前兆が見られた場合は、早めに対処すること。\n\n予防は治療に勝ります。皆様のご留意をお願いいたします。\n[配信日] 2026-06-29"
+      },
+      "item3": {
+        "tag": "【ケア喚起】",
+        "title": "【ケア喚起】「転倒防止5大巡回チェック」の徹底と、プラットフォームを活用した環境ハザードの即時報告のお願い",
+        "previewDesc": "- スタッフの皆様へ：最近、各フロアの[入居者/患者]の転倒リスク評価指数に変動が...",
+        "time": "午前 08:42",
+        "content": "スタッフの皆様へ：\n\n最近、各フロアの[入居者/患者]の転倒リスク評価指数に変動が見られます。対象者の安全を確保するため、全現場ケアスタッフは毎回の引き継ぎ後、以下の転倒防止巡回チェックを徹底してください：\n\n1. ベッド周りの安全確認：[入居者/患者]の離床時または臥床時、ベッド柵が確実に引き上げられているか、ベッドの車輪がロックされているか、離床センサーが正常に機能しているかを確認すること。\n\n2. 環境巡回チェック：通路の水たまり、薄暗い照明、バリアフリー手すりの緩みなどを発見した場合は、直ちに現場の写真を撮影し、プラットフォームの「後方支援修理/環境報告」専用ページから報告・アップロードを行い、総務部門が迅速に修理できるようにすること。\n\n3. プラットフォーム評価の同期更新：高リスクの対象者については、毎週の定期評価日にプラットフォーム内の「転倒リスク評価表」に最新データを更新し、引き継ぎスタッフが最新の予防重点を把握できるようにすること。\n\n転倒防止は全員の責任です。少しの注意が事故を防ぎます。\n[配信日] 2026-06-29"
+      }
+    }
+  },
+  "add_member": {
+    "title": "会員情報追加",
+    "basic_info": "基本情報",
+    "health_info": "健康情報",
+    "account_info": "アカウント情報",
+    "avatar": "写真",
+    "name": "氏名",
+    "gender": "性別",
+    "birthday": "生年月日",
+    "contact_person": "連絡先名",
+    "phone_code": "市外局番",
+    "phone": "電話番号",
+    "address": "住所",
+    "height": "身長",
+    "weight": "体重",
+    "sbp": "収縮期血圧",
+    "dbp": "拡張期血圧",
+    "health_status": "健康状態",
+    "patient_level": "患者レベル",
+    "disability_level": "障害等級",
+    "care_level": "介護度",
+    "email": "メールアドレス",
+    "password": "パスワード",
+    "organization": "所属機関",
+    "source_mac": "ソース",
+    "remark": "備考",
+    "placeholders": {
+      "name": "氏名を入力",
+      "contact": "連絡先を入力",
+      "phone_code": "番号を選択",
+      "phone": "電話番号を入力",
+      "address": "住所を入力",
+      "height": "身長を入力",
+      "weight": "体重を入力",
+      "sbp": "収縮期血圧を入力",
+      "dbp": "拡張期血圧を入力",
+      "health_status": "状態を選択",
+      "patient_level": "レベルを選択",
+      "disability_level": "レベルを選択",
+      "care_level": "レベルを選択",
+      "email": "メールを入力",
+      "password": "パスワードを入力",
+      "organization": "機関を選択",
+      "mac": "MACを入力",
+      "remark": "備考を入力"
+    }
+  },
+  "sos": {
+    "detail_title": "アラート詳細",
+    "handle_title": "アラート対応",
+    "trigger_time": "検知時間:",
+    "trigger_desc": "23:45 転倒アラート検知",
+    "current_location": "現在地:",
+    "location_desc": "1階 109号室",
+    "device_type": "デバイス: 300C",
+    "actions": {
+      "dispatched": "出動中",
+      "completed": "対応完了",
+      "false_alarm": "誤検知"
+    },
+    "please_select_action": "対応状況を選択"
+  },
+  "file_manage": {
+    "title": "ファイル編集",
+    "search_user": "ユーザー名",
+    "search_placeholder": "ユーザーを選択",
+    "table": {
+      "name": "氏名",
+      "gender": "性別",
+      "birthday": "生年月日",
+      "id_card": "ID番号",
+      "address": "住所",
+      "home_phone": "自宅電話",
+      "emergency_contact": "緊急連絡先",
+      "emergency_phone": "緊急連絡先番号",
+      "drug_allergy": "薬剤アレルギー",
+      "exposure": "暴露歴",
+      "general": "一般状態",
+      "temp": "体温",
+      "pulse": "脈拍",
+      "pulse_unit": "回/分",
+      "fbg": "空腹時血糖",
+      "hand_bp": "利き手・血圧",
+      "left_hand": "左",
+      "right_hand": "右",
+      "bp_format": "拡張期/収縮期",
+      "height": "身長",
+      "weight": "体重",
+      "past_history": "既往歴",
+      "disease": "疾患",
+      "surgery": "手術",
+      "trauma": "重大外傷",
+      "blood_transfusion": "輸血",
+      "family_history": "家族歴",
+      "father": "父",
+      "mother": "母",
+      "siblings": "兄弟姉妹",
+      "children": "子供",
+      "hereditary": "遺伝性疾患",
+      "disability": "身障者",
+      "disability_code": "障害コード:"
+    },
+    "options": {
+      "penicillin": "ペニシリン",
+      "sulfonamide": "スルホンアミド",
+      "streptomycin": "ストレプトマイシン",
+      "other": "その他",
+      "chemical": "化学物質",
+      "poison": "毒物",
+      "radiation": "放射線",
+      "hypertension": "高血圧",
+      "diabetes": "糖尿病",
+      "chd": "冠動脈疾患",
+      "tumor": "悪性腫瘍",
+      "stroke": "脳卒中",
+      "schizophrenia": "統合失調症",
+      "hepatitis": "肝炎",
+      "cervical_lumbar": "頸椎・腰椎疾患",
+      "osteoarthritis": "変形性関節症",
+      "infarction": "脳梗塞",
+      "allergy": "アレルギー症",
+      "tuberculosis": "結核",
+      "malformation": "先天奇形",
+      "hearing": "聴覚障害",
+      "speech": "音声言語障害",
+      "physical": "肢体不自由",
+      "visual": "視覚障害",
+      "mental": "精神障害",
+      "intellectual": "知的障害",
+      "diagnose_time": "診断時期 {year} 年 {month} 月",
+      "item_name": "名称"
+    }
+  },
+  "location": {
+    "tabs": {
+      "outdoor": "屋外位置情報",
+      "indoor": "屋内位置情報",
+      "alert": "アラート対応"
+    },
+    "device_info": "デバイス情報",
+    "all": "全て",
+    "search_mac": "MACで検索",
+    "search_name": "氏名で検索",
+    "status": {
+      "online": "オンライン",
+      "offline": "オフライン",
+      "sos": "SOS",
+      "all": "全て",
+      "online_short": "オンライン",
+      "offline_short": "オフライン",
+      "sos_short": "救助"
+    },
+    "status_label": "状態",
+    "map_views": {
+      "outdoor_map": "屋外地図",
+      "indoor_map": "屋内平面図",
+      "activity_track": "移動履歴"
+    },
+    "unknown_user": "不明なユーザー"
+  },
+  "alert_panel": {
+    "search_name": "氏名",
+    "search_mac": "MACを入力",
+    "btn_search": "検索",
+    "btn_export": "エクスポート",
+    "table": {
+      "index": "番号",
+      "alert_time": "検知時間",
+      "name": "氏名",
+      "phone": "電話番号",
+      "source": "ソース",
+      "device_model": "モデル",
+      "status": "対応状況",
+      "record": "記録",
+      "action": "操作"
+    },
+    "unhandled": "未対応",
+    "edit": "✎ 編集"
+  },
+  "about": {
+    "title": "このページについて"
   }
 }

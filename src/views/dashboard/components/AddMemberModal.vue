@@ -2,130 +2,131 @@
     <div v-if="isOpen" class="modal-overlay" @click.self="closeModal">
         <div class="modal-content add-member-modal">
             <button class="close-btn" @click="closeModal">✕</button>
-            <h2 class="modal-title">新增會員資訊</h2>
+            <h2 class="modal-title">{{ $t('add_member.title') }}</h2>
 
             <div class="form-grid">
                 <div class="form-section">
-                    <h3>基本訊息</h3>
+                    <h3>{{ $t('add_member.basic_info') }}</h3>
                     <div class="form-group avatar-group">
-                        <label>大頭貼</label>
+                        <label>{{ $t('add_member.avatar') }}</label>
                         <div class="avatar-upload">+</div>
                     </div>
                     <div class="form-group">
-                        <label>姓名</label>
-                        <input type="text" placeholder="請輸入姓名" />
+                        <label>{{ $t('add_member.name') }}</label>
+                        <input type="text" :placeholder="$t('add_member.placeholders.name')" />
                     </div>
                     <div class="form-group inline-group">
-                        <label><span class="text-red">*</span>性別</label>
+                        <label><span class="text-red">*</span>{{ $t('add_member.gender') }}</label>
                         <div class="radio-group">
-                            <label><input type="radio" name="gender" value="male" checked /> 男</label>
-                            <label><input type="radio" name="gender" value="female" /> 女</label>
+                            <label><input type="radio" name="gender" value="male" checked /> {{ $t('common.man')
+                                }}</label>
+                            <label><input type="radio" name="gender" value="female" /> {{ $t('common.woman') }}</label>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label>出生日期</label>
+                        <label>{{ $t('add_member.birthday') }}</label>
                         <input type="date" />
                     </div>
                     <div class="form-group">
-                        <label>聯絡人</label>
-                        <input type="text" placeholder="請輸入聯絡人" />
+                        <label>{{ $t('add_member.contact_person') }}</label>
+                        <input type="text" :placeholder="$t('add_member.placeholders.contact')" />
                     </div>
                     <div class="form-group">
-                        <label><span class="text-red">*</span>電話區碼</label>
+                        <label><span class="text-red">*</span>{{ $t('add_member.phone_code') }}</label>
                         <select>
-                            <option>請選擇電話區碼</option>
+                            <option>{{ $t('add_member.placeholders.phone_code') }}</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label>聯絡電話</label>
-                        <input type="text" placeholder="請輸入聯絡電話" />
+                        <label>{{ $t('add_member.phone') }}</label>
+                        <input type="text" :placeholder="$t('add_member.placeholders.phone')" />
                     </div>
                     <div class="form-group">
-                        <label>聯絡地址</label>
-                        <input type="text" placeholder="請輸入內容" />
+                        <label>{{ $t('add_member.address') }}</label>
+                        <input type="text" :placeholder="$t('add_member.placeholders.address')" />
                     </div>
                 </div>
 
                 <div class="form-section">
-                    <h3>健康訊息</h3>
+                    <h3>{{ $t('add_member.health_info') }}</h3>
                     <div class="form-group with-unit">
-                        <label>身高</label>
+                        <label>{{ $t('add_member.height') }}</label>
                         <div class="input-wrapper">
-                            <input type="number" placeholder="請輸入身高" />
+                            <input type="number" :placeholder="$t('add_member.placeholders.height')" />
                             <span class="unit">cm</span>
                         </div>
                     </div>
                     <div class="form-group with-unit">
-                        <label>體重</label>
+                        <label>{{ $t('add_member.weight') }}</label>
                         <div class="input-wrapper">
-                            <input type="number" placeholder="請輸入體重" />
+                            <input type="number" :placeholder="$t('add_member.placeholders.weight')" />
                             <span class="unit">kg</span>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label>收縮壓</label>
-                        <input type="number" placeholder="請輸入收縮壓" />
+                        <label>{{ $t('add_member.sbp') }}</label>
+                        <input type="number" :placeholder="$t('add_member.placeholders.sbp')" />
                     </div>
                     <div class="form-group">
-                        <label>舒張壓</label>
-                        <input type="number" placeholder="請輸入舒張壓" />
+                        <label>{{ $t('add_member.dbp') }}</label>
+                        <input type="number" :placeholder="$t('add_member.placeholders.dbp')" />
                     </div>
                     <div class="form-group">
-                        <label><span class="text-red">*</span>健康狀態</label>
+                        <label><span class="text-red">*</span>{{ $t('add_member.health_status') }}</label>
                         <select>
-                            <option>請選擇健康狀態</option>
+                            <option>{{ $t('add_member.placeholders.health_status') }}</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label>患者級別</label>
+                        <label>{{ $t('add_member.patient_level') }}</label>
                         <select>
-                            <option>請選擇患者級別</option>
+                            <option>{{ $t('add_member.placeholders.patient_level') }}</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label><span class="text-red">*</span>身障等級</label>
+                        <label><span class="text-red">*</span>{{ $t('add_member.disability_level') }}</label>
                         <select>
-                            <option>請選擇身障等級</option>
+                            <option>{{ $t('add_member.placeholders.disability_level') }}</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label><span class="text-red">*</span>失能等級</label>
+                        <label><span class="text-red">*</span>{{ $t('add_member.care_level') }}</label>
                         <select>
-                            <option>請選擇失能等級</option>
+                            <option>{{ $t('add_member.placeholders.care_level') }}</option>
                         </select>
                     </div>
                 </div>
 
                 <div class="form-section">
-                    <h3>帳號訊息</h3>
+                    <h3>{{ $t('add_member.account_info') }}</h3>
                     <div class="form-group">
-                        <label><span class="text-red">*</span>電子信箱</label>
-                        <input type="email" placeholder="請輸入信箱" />
+                        <label><span class="text-red">*</span>{{ $t('add_member.email') }}</label>
+                        <input type="email" :placeholder="$t('add_member.placeholders.email')" />
                     </div>
                     <div class="form-group">
-                        <label><span class="text-red">*</span>密碼</label>
-                        <input type="password" placeholder="請輸入密碼" />
+                        <label><span class="text-red">*</span>{{ $t('add_member.password') }}</label>
+                        <input type="password" :placeholder="$t('add_member.placeholders.password')" />
                     </div>
                     <div class="form-group">
-                        <label><span class="text-red">*</span>所屬機構</label>
+                        <label><span class="text-red">*</span>{{ $t('add_member.organization') }}</label>
                         <select>
-                            <option>請選擇所屬機構</option>
+                            <option>{{ $t('add_member.placeholders.organization') }}</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label>來源</label>
-                        <input type="text" placeholder="請輸入設備MAC" />
+                        <label>{{ $t('add_member.source_mac') }}</label>
+                        <input type="text" :placeholder="$t('add_member.placeholders.mac')" />
                     </div>
                     <div class="form-group textarea-group">
-                        <label>備註</label>
-                        <textarea placeholder="請輸入內容"></textarea>
+                        <label>{{ $t('add_member.remark') }}</label>
+                        <textarea :placeholder="$t('add_member.placeholders.remark')"></textarea>
                     </div>
                 </div>
             </div>
 
             <div class="modal-footer">
-                <button class="btn-primary" @click="closeModal">確定</button>
-                <button class="btn-default" @click="closeModal">取消</button>
+                <button class="btn-primary" @click="closeModal">{{ $t('common.confirm') }}</button>
+                <button class="btn-default" @click="closeModal">{{ $t('common.cancel') }}</button>
             </div>
         </div>
     </div>

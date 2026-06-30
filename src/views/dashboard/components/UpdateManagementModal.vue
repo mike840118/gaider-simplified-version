@@ -2,227 +2,249 @@
     <div v-if="isOpen" class="modal-overlay" @click.self="closeModal">
         <div class="modal-content file-modal">
             <button class="close-btn" @click="closeModal">✕</button>
-            <h2 class="modal-title">修改檔案</h2>
+            <h2 class="modal-title">{{ $t('file_manage.title') }}</h2>
 
             <div class="user-select-bar">
-                <span>使用者姓名</span>
-                <input type="text" placeholder="請選擇用戶" />
-                <button class="btn-select">選擇</button>
+                <span>{{ $t('file_manage.search_user') }}</span>
+                <input type="text" :placeholder="$t('file_manage.search_placeholder')" />
+                <button class="btn-select">{{ $t('common.select') }}</button>
             </div>
 
             <div class="table-container">
                 <table class="medical-table">
                     <tbody>
                         <tr>
-                            <td class="header-cell">姓名</td>
+                            <td class="header-cell">{{ $t('file_manage.table.name') }}</td>
                             <td><input type="text" class="w-full" /></td>
-                            <td class="header-cell">性別</td>
+                            <td class="header-cell">{{ $t('file_manage.table.gender') }}</td>
                             <td>
-                                <label><input type="radio" name="fgender" /> 男</label>
-                                <label class="ml-2"><input type="radio" name="fgender" /> 女</label>
+                                <label><input type="radio" name="fgender" /> {{ $t('common.man') }}</label>
+                                <label class="ml-2"><input type="radio" name="fgender" /> {{ $t('common.woman')
+                                }}</label>
                             </td>
-                            <td class="header-cell">出生日期</td>
+                            <td class="header-cell">{{ $t('file_manage.table.birthday') }}</td>
                             <td colspan="3"><input type="date" class="w-full" /></td>
                         </tr>
                         <tr>
-                            <td class="header-cell">身份證號</td>
+                            <td class="header-cell">{{ $t('file_manage.table.id_card') }}</td>
                             <td><input type="text" class="w-full" /></td>
-                            <td class="header-cell">住址</td>
+                            <td class="header-cell">{{ $t('file_manage.table.address') }}</td>
                             <td colspan="5"><input type="text" class="w-full" /></td>
                         </tr>
                         <tr>
-                            <td class="header-cell">家庭電話</td>
+                            <td class="header-cell">{{ $t('file_manage.table.home_phone') }}</td>
                             <td><input type="text" class="w-full" /></td>
-                            <td class="header-cell">緊急聯絡人姓名</td>
+                            <td class="header-cell">{{ $t('file_manage.table.emergency_contact') }}</td>
                             <td><input type="text" class="w-full" /></td>
-                            <td class="header-cell">緊急聯絡人電話</td>
+                            <td class="header-cell">{{ $t('file_manage.table.emergency_phone') }}</td>
                             <td colspan="3"><input type="text" class="w-full" /></td>
                         </tr>
                         <tr>
-                            <td class="header-cell">藥物過敏史</td>
+                            <td class="header-cell">{{ $t('file_manage.table.drug_allergy') }}</td>
                             <td colspan="7">
-                                <label><input type="radio" name="allergy" /> 無</label>
-                                <label class="ml-4"><input type="radio" name="allergy" /> 有：</label>
-                                <label class="ml-2 text-gray"><input type="checkbox" disabled /> 青黴素</label>
-                                <label class="ml-2 text-gray"><input type="checkbox" disabled /> 磺胺</label>
-                                <label class="ml-2 text-gray"><input type="checkbox" disabled /> 鏈黴素</label>
-                                <label class="ml-2 text-gray"><input type="checkbox" disabled /> 其它</label>
+                                <label><input type="radio" name="allergy" /> {{ $t('common.none') }}</label>
+                                <label class="ml-4"><input type="radio" name="allergy" /> {{ $t('common.yes')
+                                }}：</label>
+                                <label class="ml-2 text-gray"><input type="checkbox" disabled /> {{
+                                    $t('file_manage.options.penicillin') }}</label>
+                                <label class="ml-2 text-gray"><input type="checkbox" disabled /> {{
+                                    $t('file_manage.options.sulfonamide') }}</label>
+                                <label class="ml-2 text-gray"><input type="checkbox" disabled /> {{
+                                    $t('file_manage.options.streptomycin') }}</label>
+                                <label class="ml-2 text-gray"><input type="checkbox" disabled /> {{
+                                    $t('file_manage.options.other') }}</label>
                             </td>
                         </tr>
                         <tr>
-                            <td class="header-cell">暴露史</td>
+                            <td class="header-cell">{{ $t('file_manage.table.exposure') }}</td>
                             <td colspan="7">
-                                <label><input type="radio" name="exposure" /> 無</label>
-                                <label class="ml-4"><input type="radio" name="exposure" /> 有：</label>
-                                <label class="ml-2 text-gray"><input type="checkbox" disabled /> 化學品</label>
-                                <label class="ml-2 text-gray"><input type="checkbox" disabled /> 毒物</label>
-                                <label class="ml-2 text-gray"><input type="checkbox" disabled /> 射線</label>
+                                <label><input type="radio" name="exposure" /> {{ $t('common.none') }}</label>
+                                <label class="ml-4"><input type="radio" name="exposure" /> {{ $t('common.yes')
+                                }}：</label>
+                                <label class="ml-2 text-gray"><input type="checkbox" disabled /> {{
+                                    $t('file_manage.options.chemical') }}</label>
+                                <label class="ml-2 text-gray"><input type="checkbox" disabled /> {{
+                                    $t('file_manage.options.poison') }}</label>
+                                <label class="ml-2 text-gray"><input type="checkbox" disabled /> {{
+                                    $t('file_manage.options.radiation') }}</label>
                             </td>
                         </tr>
 
                         <tr>
-                            <td class="header-cell" rowspan="3">一般狀況</td>
-                            <td class="sub-header">體溫</td>
+                            <td class="header-cell" rowspan="3">{{ $t('file_manage.table.general') }}</td>
+                            <td class="sub-header">{{ $t('file_manage.table.temp') }}</td>
                             <td>
                                 <div class="flex-center"><input type="text" class="w-half" /> °C</div>
                             </td>
-                            <td class="sub-header">脈搏</td>
+                            <td class="sub-header">{{ $t('file_manage.table.pulse') }}</td>
                             <td colspan="4">
-                                <div class="flex-end"><input type="text" class="w-half" /> 次 / 分</div>
+                                <div class="flex-end"><input type="text" class="w-half" /> {{
+                                    $t('file_manage.table.pulse_unit') }}</div>
                             </td>
                         </tr>
                         <tr>
-                            <td class="sub-header">空腹血糖</td>
+                            <td class="sub-header">{{ $t('file_manage.table.fbg') }}</td>
                             <td>
                                 <div class="flex-center"><input type="text" class="w-half" /> mg/dL</div>
                             </td>
-                            <td class="sub-header">慣用手・血壓</td>
+                            <td class="sub-header">{{ $t('file_manage.table.hand_bp') }}</td>
                             <td colspan="4">
-                                <label><input type="radio" name="hand" /> 左側</label>
-                                <label class="ml-2"><input type="radio" name="hand" /> 右側</label>
-                                <span class="ml-4">舒張壓 / 收縮壓 <input type="text" class="w-20 ml-2" /> mmHg</span>
+                                <label><input type="radio" name="hand" /> {{ $t('file_manage.table.left_hand')
+                                }}</label>
+                                <label class="ml-2"><input type="radio" name="hand" /> {{
+                                    $t('file_manage.table.right_hand') }}</label>
+                                <span class="ml-4">{{ $t('file_manage.table.bp_format') }} <input type="text"
+                                        class="w-20 ml-2" /> mmHg</span>
                             </td>
                         </tr>
                         <tr>
-                            <td class="sub-header">身高</td>
+                            <td class="sub-header">{{ $t('file_manage.table.height') }}</td>
                             <td>
                                 <div class="flex-center"><input type="text" class="w-half" /> CM</div>
                             </td>
-                            <td class="sub-header">體重</td>
+                            <td class="sub-header">{{ $t('file_manage.table.weight') }}</td>
                             <td colspan="4">
                                 <div class="flex-end"><input type="text" class="w-half" /> KG</div>
                             </td>
                         </tr>
 
                         <tr>
-                            <td class="header-cell" rowspan="4">既往史</td>
-                            <td class="sub-header" rowspan="1">疾病</td>
+                            <td class="header-cell" rowspan="4">{{ $t('file_manage.table.past_history') }}</td>
+                            <td class="sub-header" rowspan="1">{{ $t('file_manage.table.disease') }}</td>
                             <td colspan="6">
                                 <div class="checkbox-grid mb-2">
-                                    <label><input type="checkbox" /> 高壓力</label>
-                                    <label><input type="checkbox" /> 糖尿病</label>
-                                    <label><input type="checkbox" /> 冠心病</label>
-                                    <label><input type="checkbox" /> 惡性腫瘤</label>
-                                    <label><input type="checkbox" /> 腦出血、腦梗塞</label>
-                                    <label><input type="checkbox" /> 精神分裂症</label>
-                                    <label><input type="checkbox" /> 肝炎</label>
-                                    <label><input type="checkbox" /> 頸椎病、腰椎病</label>
-                                    <label><input type="checkbox" /> 骨性關節炎</label>
-                                    <label><input type="checkbox" /> 腦梗塞</label>
-                                    <label><input type="checkbox" /> 其他</label>
+                                    <label><input type="checkbox" /> {{ $t('file_manage.options.hypertension')
+                                    }}</label>
+                                    <label><input type="checkbox" /> {{ $t('file_manage.options.diabetes') }}</label>
+                                    <label><input type="checkbox" /> {{ $t('file_manage.options.chd') }}</label>
+                                    <label><input type="checkbox" /> {{ $t('file_manage.options.tumor') }}</label>
+                                    <label><input type="checkbox" /> {{ $t('file_manage.options.stroke') }}</label>
+                                    <label><input type="checkbox" /> {{ $t('file_manage.options.schizophrenia')
+                                    }}</label>
+                                    <label><input type="checkbox" /> {{ $t('file_manage.options.hepatitis') }}</label>
+                                    <label><input type="checkbox" /> {{ $t('file_manage.options.cervical_lumbar')
+                                    }}</label>
+                                    <label><input type="checkbox" /> {{ $t('file_manage.options.osteoarthritis')
+                                    }}</label>
+                                    <label><input type="checkbox" /> {{ $t('file_manage.options.infarction') }}</label>
+                                    <label><input type="checkbox" /> {{ $t('common.other') }}</label>
                                 </div>
                                 <div class="date-grid text-gray">
-                                    <span><input type="checkbox" disabled /> 確診時間 ____ 年 __ 月</span>
-                                    <span><input type="checkbox" disabled /> 確診時間 ____ 年 __ 月</span>
-                                    <span><input type="checkbox" disabled /> 確診時間 ____ 年 __ 月</span>
-                                    <span><input type="checkbox" disabled /> 確診時間 ____ 年 __ 月</span>
-                                    <span><input type="checkbox" disabled /> 確診時間 ____ 年 __ 月</span>
-                                    <span><input type="checkbox" disabled /> 確診時間 ____ 年 __ 月</span>
+                                    <span v-for="i in 6" :key="i"><input type="checkbox" disabled /> {{
+                                        $t('file_manage.options.diagnose_time', { year: '____', month: '__' }) }}</span>
                                 </div>
                             </td>
                         </tr>
                         <tr>
-                            <td class="sub-header">手術</td>
+                            <td class="sub-header">{{ $t('file_manage.table.surgery') }}</td>
                             <td colspan="6" class="history-rows">
-                                <div class="flex-start"><label><input type="radio" name="surgery" /> 無</label></div>
-                                <div class="flex-start"><label><input type="radio" name="surgery" /> 有：</label>
+                                <div class="flex-start"><label><input type="radio" name="surgery" /> {{
+                                    $t('common.none') }}</label></div>
+                                <div class="flex-start"><label><input type="radio" name="surgery" /> {{ $t('common.yes')
+                                }}：</label>
                                     <div class="ml-2 flex-col">
-                                        <span>1、名稱 <input type="text" class="border-b" /> 時間 <input type="text"
-                                                class="w-10 border-b" /> 年 <input type="text" class="w-10 border-b" />
-                                            月</span>
-                                        <span>2、名稱 <input type="text" class="border-b" /> 時間 <input type="text"
-                                                class="w-10 border-b" /> 年 <input type="text" class="w-10 border-b" />
-                                            月</span>
-                                        <span>3、名稱 <input type="text" class="border-b" /> 時間 <input type="text"
-                                                class="w-10 border-b" /> 年 <input type="text" class="w-10 border-b" />
-                                            月</span>
+                                        <span v-for="i in 3" :key="i">{{ i }}、{{ $t('file_manage.options.item_name') }}
+                                            <input type="text" class="border-b" /> {{ $t('common.time') }} <input
+                                                type="text" class="w-10 border-b" /> {{ $t('common.year') }} <input
+                                                type="text" class="w-10 border-b" /> {{ $t('common.month') }}</span>
                                     </div>
                                 </div>
                             </td>
                         </tr>
                         <tr>
-                            <td class="sub-header">重大外傷</td>
+                            <td class="sub-header">{{ $t('file_manage.table.trauma') }}</td>
                             <td colspan="6" class="history-rows">
-                                <div class="flex-start"><label><input type="radio" name="trauma" /> 無</label></div>
-                                <div class="flex-start"><label><input type="radio" name="trauma" /> 有：</label>
+                                <div class="flex-start"><label><input type="radio" name="trauma" /> {{ $t('common.none')
+                                }}</label></div>
+                                <div class="flex-start"><label><input type="radio" name="trauma" /> {{ $t('common.yes')
+                                }}：</label>
                                     <div class="ml-2 flex-col">
-                                        <span>1、名稱 <input type="text" class="border-b" /> 時間 <input type="text"
-                                                class="w-10 border-b" /> 年 <input type="text" class="w-10 border-b" />
-                                            月</span>
-                                        <span>2、名稱 <input type="text" class="border-b" /> 時間 <input type="text"
-                                                class="w-10 border-b" /> 年 <input type="text" class="w-10 border-b" />
-                                            月</span>
+                                        <span v-for="i in 2" :key="i">{{ i }}、{{ $t('file_manage.options.item_name') }}
+                                            <input type="text" class="border-b" /> {{ $t('common.time') }} <input
+                                                type="text" class="w-10 border-b" /> {{ $t('common.year') }} <input
+                                                type="text" class="w-10 border-b" /> {{ $t('common.month') }}</span>
                                     </div>
                                 </div>
                             </td>
                         </tr>
                         <tr>
-                            <td class="sub-header">輸血</td>
+                            <td class="sub-header">{{ $t('file_manage.table.blood_transfusion') }}</td>
                             <td colspan="6" class="history-rows">
-                                <div class="flex-start"><label><input type="radio" name="blood" /> 無</label></div>
-                                <div class="flex-start"><label><input type="radio" name="blood" /> 有：</label>
+                                <div class="flex-start"><label><input type="radio" name="blood" /> {{ $t('common.none')
+                                }}</label></div>
+                                <div class="flex-start"><label><input type="radio" name="blood" /> {{ $t('common.yes')
+                                }}：</label>
                                     <div class="ml-2 flex-col">
-                                        <span>1、名稱 <input type="text" class="border-b" /> 時間 <input type="text"
-                                                class="w-10 border-b" /> 年 <input type="text" class="w-10 border-b" />
-                                            月</span>
-                                        <span>2、名稱 <input type="text" class="border-b" /> 時間 <input type="text"
-                                                class="w-10 border-b" /> 年 <input type="text" class="w-10 border-b" />
-                                            月</span>
+                                        <span v-for="i in 2" :key="i">{{ i }}、{{ $t('file_manage.options.item_name') }}
+                                            <input type="text" class="border-b" /> {{ $t('common.time') }} <input
+                                                type="text" class="w-10 border-b" /> {{ $t('common.year') }} <input
+                                                type="text" class="w-10 border-b" /> {{ $t('common.month') }}</span>
                                     </div>
                                 </div>
                             </td>
                         </tr>
 
                         <tr>
-                            <td class="header-cell" rowspan="3">家族史</td>
-                            <td class="sub-header">父親</td>
+                            <td class="header-cell" rowspan="3">{{ $t('file_manage.table.family_history') }}</td>
+                            <td class="sub-header">{{ $t('file_manage.table.father') }}</td>
                             <td colspan="2"><input type="text" class="w-full" /></td>
-                            <td class="sub-header">母親</td>
+                            <td class="sub-header">{{ $t('file_manage.table.mother') }}</td>
                             <td colspan="3"><input type="text" class="w-full" /></td>
                         </tr>
                         <tr>
-                            <td class="sub-header">兄弟姐妹</td>
+                            <td class="sub-header">{{ $t('file_manage.table.siblings') }}</td>
                             <td colspan="2"><input type="text" class="w-full" /></td>
-                            <td class="sub-header">子女</td>
+                            <td class="sub-header">{{ $t('file_manage.table.children') }}</td>
                             <td colspan="3"><input type="text" class="w-full" /></td>
                         </tr>
                         <tr>
                             <td colspan="7">
                                 <div class="checkbox-grid">
-                                    <label><input type="checkbox" /> 高壓力</label>
-                                    <label><input type="checkbox" /> 糖尿病</label>
-                                    <label><input type="checkbox" /> 冠心病</label>
-                                    <label><input type="checkbox" /> 惡性腫瘤</label>
-                                    <label><input type="checkbox" /> 過敏症</label>
-                                    <label><input type="checkbox" /> 精神分裂症</label>
-                                    <label><input type="checkbox" /> 結核症</label>
-                                    <label><input type="checkbox" /> 肝炎</label>
-                                    <label><input type="checkbox" /> 腦卒中 (腦出血、腦梗塞)</label>
-                                    <label><input type="checkbox" /> 先天畸形</label>
-                                    <label><input type="checkbox" /> 其他</label>
+                                    <label><input type="checkbox" /> {{ $t('file_manage.options.hypertension')
+                                    }}</label>
+                                    <label><input type="checkbox" /> {{ $t('file_manage.options.diabetes') }}</label>
+                                    <label><input type="checkbox" /> {{ $t('file_manage.options.chd') }}</label>
+                                    <label><input type="checkbox" /> {{ $t('file_manage.options.tumor') }}</label>
+                                    <label><input type="checkbox" /> {{ $t('file_manage.options.allergy') }}</label>
+                                    <label><input type="checkbox" /> {{ $t('file_manage.options.schizophrenia')
+                                    }}</label>
+                                    <label><input type="checkbox" /> {{ $t('file_manage.options.tuberculosis')
+                                    }}</label>
+                                    <label><input type="checkbox" /> {{ $t('file_manage.options.hepatitis') }}</label>
+                                    <label><input type="checkbox" /> {{ $t('file_manage.options.stroke') }}</label>
+                                    <label><input type="checkbox" /> {{ $t('file_manage.options.malformation')
+                                    }}</label>
+                                    <label><input type="checkbox" /> {{ $t('common.other') }}</label>
                                 </div>
                             </td>
                         </tr>
                         <tr>
-                            <td class="header-cell">遺傳病史</td>
+                            <td class="header-cell">{{ $t('file_manage.table.hereditary') }}</td>
                             <td colspan="7">
-                                <label><input type="radio" name="hered" /> 無</label>
-                                <label class="ml-4"><input type="radio" name="hered" /> 有</label>
+                                <label><input type="radio" name="hered" /> {{ $t('common.none') }}</label>
+                                <label class="ml-4"><input type="radio" name="hered" /> {{ $t('common.yes') }}</label>
                             </td>
                         </tr>
                         <tr>
-                            <td class="header-cell">身心障礙</td>
+                            <td class="header-cell">{{ $t('file_manage.table.disability') }}</td>
                             <td colspan="7">
                                 <div class="mb-1">
-                                    <label><input type="checkbox" /> 無</label>
-                                    <label class="ml-4"><input type="checkbox" /> 聽力障礙</label>
-                                    <label class="ml-4"><input type="checkbox" /> 語音障礙</label>
-                                    <label class="ml-4"><input type="checkbox" /> 肢體障礙</label>
-                                    <label class="ml-4"><input type="checkbox" /> 視力障礙</label>
-                                    <label class="ml-4"><input type="checkbox" /> 精神障礙</label>
-                                    <label class="ml-4"><input type="checkbox" /> 智力障礙</label>
+                                    <label><input type="checkbox" /> {{ $t('common.none') }}</label>
+                                    <label class="ml-4"><input type="checkbox" /> {{ $t('file_manage.options.hearing')
+                                    }}</label>
+                                    <label class="ml-4"><input type="checkbox" /> {{ $t('file_manage.options.speech')
+                                    }}</label>
+                                    <label class="ml-4"><input type="checkbox" /> {{ $t('file_manage.options.physical')
+                                    }}</label>
+                                    <label class="ml-4"><input type="checkbox" /> {{ $t('file_manage.options.visual')
+                                    }}</label>
+                                    <label class="ml-4"><input type="checkbox" /> {{ $t('file_manage.options.mental')
+                                    }}</label>
+                                    <label class="ml-4"><input type="checkbox" /> {{
+                                        $t('file_manage.options.intellectual') }}</label>
                                 </div>
-                                <div>障礙類別編碼：<input type="text" class="border-b" /></div>
+                                <div>{{ $t('file_manage.table.disability_code') }} <input type="text"
+                                        class="border-b" /></div>
                             </td>
                         </tr>
                     </tbody>
@@ -230,8 +252,8 @@
             </div>
 
             <div class="modal-footer">
-                <button class="btn-primary" @click="closeModal">儲存</button>
-                <button class="btn-default" @click="closeModal">取消</button>
+                <button class="btn-primary" @click="closeModal">{{ $t('common.save') }}</button>
+                <button class="btn-default" @click="closeModal">{{ $t('common.cancel') }}</button>
             </div>
         </div>
     </div>

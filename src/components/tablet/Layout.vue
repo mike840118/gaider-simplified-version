@@ -3,7 +3,10 @@
         <header class="top-navbar">
             <div class="logo-area">
                 <span class="logo-icon">💠</span>
-                <h1>{{ $t('layout.title') }}</h1>
+                <div class="logo-area">
+                    <h1>{{ $t('layout.title') }}</h1>
+                    <h1>{{ $t('layout.title2') }}</h1>
+                </div>
             </div>
 
             <nav class="nav-links">
@@ -36,12 +39,26 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted, onUnmounted, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 
 const { locale } = useI18n()
 const isFullscreen = ref(false)
 
+// ⭐ 1. 初始化讀取 LocalStorage
+onMounted(() => {
+    const savedLocale = localStorage.getItem('app-locale')
+    if (savedLocale) {
+        locale.value = savedLocale
+    }
+
+    document.addEventListener('fullscreenchange', handleFullscreenChange)
+})
+
+// ⭐ 2. 監聽 locale 變化並存入 LocalStorage
+watch(locale, (newLocale) => {
+    localStorage.setItem('app-locale', newLocale)
+})
 // 全螢幕切換邏輯
 const toggleFullscreen = () => {
     if (!document.fullscreenElement) {
@@ -86,17 +103,23 @@ onUnmounted(() => {
 
 .logo-area {
     display: flex;
-    align-items: center;
-    gap: 6px;
-    flex-shrink: 0;
+    flex-direction: column;
+    /* 讓文字上下排列 */
+    align-items: flex-start;
+    /* 文字靠左對齊 */
+    justify-content: center;
+    gap: 2px;
+    /* 兩行文字的間距 */
 }
 
 .logo-area h1 {
     font-size: 15px;
+    /* 稍微調整讓上下兩行比例更好 */
     font-weight: bold;
     margin: 0;
     color: #ffffff;
-    white-space: nowrap;
+    line-height: 1.2;
+    letter-spacing: 1px;
 }
 
 .nav-links {

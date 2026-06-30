@@ -91,7 +91,7 @@
                 </div>
                 <div class="status-text">
                     <div class="s-label">{{ $t('card.heat_stroke') }}</div>
-                    <div class="s-value" :class="info.heat === '警戒' ? 'c-red' : 'c-green'">
+                    <div class="s-value" :class="info.heat === 'warning' ? 'c-red' : 'c-green'">
                         {{ info.heat ? $t('status.' + info.heat) : '--' }}
                     </div>
                 </div>
@@ -110,7 +110,8 @@
                 </div>
                 <div class="status-text">
                     <div class="s-label">{{ $t('card.fatigue') }}</div>
-                    <div class="s-value" :class="info.fatigue === '回復' ? 'c-blue' : 'c-green'">
+                    <div class="s-value"
+                        :class="info.fatigue === 'recovery' ? 'c-blue' : (info.fatigue === 'warning' ? 'c-red' : 'c-green')">
                         {{ info.fatigue ? $t('status.' + info.fatigue) : '--' }}
                     </div>
                 </div>
@@ -127,11 +128,9 @@
 </template>
 
 <script setup>
-import { useI18n } from 'vue-i18n'
 import { ref, onMounted, nextTick, computed } from 'vue'
 import * as echarts from 'echarts'
 
-const { t } = useI18n()
 
 const props = defineProps({
     info: {

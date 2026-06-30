@@ -3,7 +3,31 @@
     "unknown": "未知",
     "age": "歲",
     "man": "男",
-    "woman": "女"
+    "woman": "女",
+    "search": "搜尋",
+    "add": "新增",
+    "search_placeholder": "姓名",
+    "search_user_placeholder": "用戶姓名",
+    "confirm": "確定",
+    "cancel": "取消",
+    "save": "儲存",
+    "select": "選擇",
+    "none": "無",
+    "yes": "有",
+    "other": "其他",
+    "time": "時間",
+    "year": "年",
+    "month": "月",
+    "unit_person": "人",
+    "unit_count": "件",
+    "view_more": "查看更多 >",
+    "view_details": "查看詳情 >"
+  },
+  "pagination": {
+    "total": "共 {count} 項",
+    "page_size": "{size}項/頁",
+    "goto": "前往",
+    "page": "頁"
   },
   "card": {
     "hr": "HR",
@@ -16,15 +40,18 @@
     "heat_stroke": "熱中暑狀態",
     "fatigue": "疲勞度"
   },
-"status": {
+  "status": {
     "normal": "正常",
     "normal_heat": "普通",
     "warning": "警戒",
-    "no_data": "尚無資料",
+    "warn": "預警",
+    "urgent": "緊急",
+    "no_data": "無資料",
     "recovery": "回復"
   },
   "layout": {
-    "title": "健康大數據管理平台",
+    "title": "健康大數據",
+    "title2": "管理平台",
     "title_short": "健康平台",
     "nav": {
       "dashboard": "儀錶板",
@@ -37,5 +64,284 @@
       "users_short": "用戶"
     },
     "logout": "退出"
+  },
+  "data_manage": {
+    "user_list": "用戶列表 (共 {count} 人)",
+    "all_users": "全部用戶",
+    "tabs": {
+      "bp": "血壓",
+      "spo2": "血氧",
+      "hr": "心率",
+      "temp": "體溫",
+      "hrv": "HRV"
+    },
+    "sub_tabs": {
+      "history": "歷史資料",
+      "alert": "警報資料",
+      "analysis": "統計分析"
+    },
+    "table": {
+      "index": "序號",
+      "avatar": "大頭貼",
+      "name": "姓名",
+      "gender": "性別",
+      "mac": "來源 (MAC)",
+      "value": "數值",
+      "status": "狀態",
+      "measure_time": "測量時間",
+      "platform": "平台",
+      "version": "版本號",
+      "no_data_in_category": "此分類尚無測量資料"
+    }
+  },
+  "user_manage": {
+    "no_match": "找不到符合名稱的用戶"
+  },
+  "dashboard": {
+    "alert": "緊急：{company} 床 {name} 觸發跌倒警報！",
+    "handle_now": "立即處理",
+    "close_alert": "關閉警報",
+    "announcement": "公告",
+    "today": "今天",
+    "stats": {
+      "total_members": "總會員人數",
+      "today_added": "今日新增",
+      "pending_events": "待處理事件",
+      "online_count": "在線人數",
+      "offline_count": "離線人數",
+      "low_battery": "設備低電量"
+    },
+    "actions": {
+      "title": "管理設定",
+      "add_member": "新增會員",
+      "file_manage": "檔案管理",
+      "bind_device": "綁定設備",
+      "admission_manage": "入院・入所管理",
+      "system_log": "系統記錄",
+      "shift_log": "交班日誌"
+    },
+    "overview": {
+      "title": "數據總覽",
+      "night_safety": "夜間安全偵測 22 : 00 - 06 : 00",
+      "just_now": "剛剛",
+      "abnormal": "異常",
+      "processing": "處理中"
+    },
+    "heat": {
+      "title": "環境中暑預警",
+      "room_temp_high": "室溫 偏高",
+      "high_risk_users": "高風險使用者"
+    },
+    "events": {
+      "title": "今日事件總數",
+      "urgent": "緊急事件",
+      "warning": "預警事件",
+      "normal": "一般提醒"
+    },
+    "announcements_data": {
+      "item1": {
+        "tag": "【重要宣導】",
+        "title": "【重要宣導】因應呼吸道傳染病高峰期，請全體同仁落實患者健康監測與 App 即時通報",
+        "previewDesc": "- 各位照護與臨床同仁好：因應近期季節性流感及呼...",
+        "time": "下午 1:50",
+        "content": "各位照護與臨床同仁好：\n\n因應近期季節性流感及呼吸道傳染病進入高峰期，為確保院內/機構內感染控制，請各單位務必落實以下防疫措施：\n\n1. 每日測量並記錄患者體溫及呼吸道症狀。\n2. 若發現異常，請立即透過 App 即時通報系統上傳。\n3. 接觸高風險個案請確實穿戴防護裝備。\n\n感謝各位同仁的配合與辛勞。\n[發布日期] 2026-06-29"
+      },
+      "item2": {
+        "tag": "【健康宣導】",
+        "title": "【健康宣導】盛夏高溫來襲，請加強留意[長者/患者]水分攝取",
+        "previewDesc": "- 各位同仁辛苦了：近日氣溫持續攀升，因[長者/重症患者]常因口渴感覺遲鈍或表達不...",
+        "time": "上午 10:00",
+        "content": "各位同仁辛苦了：\n\n近日氣溫持續攀升，因[長者/重症患者]常因口渴感覺遲鈍或表達不清，容易引發脫水或中暑危險，請依下列原則加強照護：\n\n1. 定時提供溫開水，並記錄每日飲水量。\n2. 留意室內溫度與通風，必要時調整空調設定。\n3. 若觀察到尿量減少、皮膚乾燥等脫水前兆，請提早介入處理。\n\n預防勝於治療，請大家多加留心。\n[發布日期] 2026-06-29"
+      },
+      "item3": {
+        "tag": "【照護宣導】",
+        "title": "【照護宣導】請同仁務必落實「防跌五大巡查」，並善用平台即時回報環境隱患",
+        "previewDesc": "- 各位同仁好：近期各樓層[住民/患者]跌倒風險評估指數有所...",
+        "time": "上午 08:42",
+        "content": "各位同仁好：\n\n近期各樓層[住民/患者]跌倒風險評估指數有所變動，為維護個案安全，請全體一線照護同仁於每班交班後，落實以下防跌巡查：\n\n1.床邊安全檢查：請確認[住民/患者]離床或臥床時，床欄已確實拉起、病床輪子鎖固定，且離床警報器功能正常。\n\n2.環境環境巡檢：若發現走道有積水、照明昏暗、或無障礙扶手鬆動等狀況，請立即拍攝現場照片，並透過平台的「後勤修繕/環境回報」專區上傳通報，以便總務組第一時間進行修繕。\n\n3.平台評估同步更新：針對高風險個案，請於每週固定評估日，在平台內的「跌倒風險評估表」更新最新數據，以利接班同仁掌握最新防範重點。\n\n防跌工作人人有責，多一分留意，少一分遺憾。\n[發布日期] 2026-06-29"
+      }
+    }
+  },
+  "add_member": {
+    "title": "新增會員資訊",
+    "basic_info": "基本訊息",
+    "health_info": "健康訊息",
+    "account_info": "帳號訊息",
+    "avatar": "大頭貼",
+    "name": "姓名",
+    "gender": "性別",
+    "birthday": "出生日期",
+    "contact_person": "聯絡人",
+    "phone_code": "電話區碼",
+    "phone": "聯絡電話",
+    "address": "聯絡地址",
+    "height": "身高",
+    "weight": "體重",
+    "sbp": "收縮壓",
+    "dbp": "舒張壓",
+    "health_status": "健康狀態",
+    "patient_level": "患者級別",
+    "disability_level": "身障等級",
+    "care_level": "失能等級",
+    "email": "電子信箱",
+    "password": "密碼",
+    "organization": "所屬機構",
+    "source_mac": "來源",
+    "remark": "備註",
+    "placeholders": {
+      "name": "請輸入姓名",
+      "contact": "請輸入聯絡人",
+      "phone_code": "請選擇電話區碼",
+      "phone": "請輸入聯絡電話",
+      "address": "請輸入內容",
+      "height": "請輸入身高",
+      "weight": "請輸入體重",
+      "sbp": "請輸入收縮壓",
+      "dbp": "請輸入舒張壓",
+      "health_status": "請選擇健康狀態",
+      "patient_level": "請選擇患者級別",
+      "disability_level": "請選擇身障等級",
+      "care_level": "請選擇失能等級",
+      "email": "請輸入信箱",
+      "password": "請輸入密碼",
+      "organization": "請選擇所屬機構",
+      "mac": "請輸入設備MAC",
+      "remark": "請輸入內容"
+    }
+  },
+  "sos": {
+    "detail_title": "警報詳情",
+    "handle_title": "警報處理",
+    "trigger_time": "觸發時間:",
+    "trigger_desc": "23 : 45 觸發跌倒警報",
+    "current_location": "目前位置：",
+    "location_desc": "一樓 109室",
+    "device_type": "設備類型：300C",
+    "actions": {
+      "dispatched": "已派員前往",
+      "completed": "已完成處理",
+      "false_alarm": "誤觸"
+    },
+    "please_select_action": "請選擇處理狀態"
+  },
+  "file_manage": {
+    "title": "修改檔案",
+    "search_user": "使用者姓名",
+    "search_placeholder": "請選擇用戶",
+    "table": {
+      "name": "姓名",
+      "gender": "性別",
+      "birthday": "出生日期",
+      "id_card": "身份證號",
+      "address": "住址",
+      "home_phone": "家庭電話",
+      "emergency_contact": "緊急聯絡人姓名",
+      "emergency_phone": "緊急聯絡人電話",
+      "drug_allergy": "藥物過敏史",
+      "exposure": "暴露史",
+      "general": "一般狀況",
+      "temp": "體溫",
+      "pulse": "脈搏",
+      "pulse_unit": "次 / 分",
+      "fbg": "空腹血糖",
+      "hand_bp": "慣用手・血壓",
+      "left_hand": "左側",
+      "right_hand": "右側",
+      "bp_format": "舒張壓 / 收縮壓",
+      "height": "身高",
+      "weight": "體重",
+      "past_history": "既往史",
+      "disease": "疾病",
+      "surgery": "手術",
+      "trauma": "重大外傷",
+      "blood_transfusion": "輸血",
+      "family_history": "家族史",
+      "father": "父親",
+      "mother": "母親",
+      "siblings": "兄弟姐妹",
+      "children": "子女",
+      "hereditary": "遺傳病史",
+      "disability": "身心障礙",
+      "disability_code": "障礙類別編碼："
+    },
+    "options": {
+      "penicillin": "青黴素",
+      "sulfonamide": "磺胺",
+      "streptomycin": "鏈黴素",
+      "other": "其它",
+      "chemical": "化學品",
+      "poison": "毒物",
+      "radiation": "射線",
+      "hypertension": "高血壓",
+      "diabetes": "糖尿病",
+      "chd": "冠心病",
+      "tumor": "惡性腫瘤",
+      "stroke": "腦出血、腦梗塞",
+      "schizophrenia": "精神分裂症",
+      "hepatitis": "肝炎",
+      "cervical_lumbar": "頸椎病、腰椎病",
+      "osteoarthritis": "骨性關節炎",
+      "infarction": "腦梗塞",
+      "allergy": "過敏症",
+      "tuberculosis": "結核症",
+      "malformation": "先天畸形",
+      "hearing": "聽力障礙",
+      "speech": "語音障礙",
+      "physical": "肢體障礙",
+      "visual": "視力障礙",
+      "mental": "精神障礙",
+      "intellectual": "智力障礙",
+      "diagnose_time": "確診時間 {year} 年 {month} 月",
+      "item_name": "名稱"
+    }
+  },
+  "location": {
+    "tabs": {
+      "outdoor": "室外定位",
+      "indoor": "室內定位",
+      "alert": "警報處理"
+    },
+    "device_info": "設備訊息",
+    "all": "全部",
+    "search_mac": "依設備碼搜尋",
+    "search_name": "依姓名搜尋",
+    "status": {
+      "online": "線上",
+      "offline": "離線",
+      "sos": "SOS",
+      "all": "全部",
+      "online_short": "在線",
+      "offline_short": "離線",
+      "sos_short": "求救"
+    },
+    "status_label": "狀態",
+    "map_views": {
+      "outdoor_map": "室外定位",
+      "indoor_map": "室內平面圖",
+      "activity_track": "活動軌跡"
+    },
+    "unknown_user": "未知使用者"
+  },
+  "alert_panel": {
+    "search_name": "使用者姓名",
+    "search_mac": "請輸入設備MAC",
+    "btn_search": "搜尋",
+    "btn_export": "導出",
+    "table": {
+      "index": "序號",
+      "alert_time": "警報時間",
+      "name": "姓名",
+      "phone": "聯絡電話",
+      "source": "來源",
+      "device_model": "設備型號",
+      "status": "處理狀態",
+      "record": "處理記錄",
+      "action": "操作"
+    },
+    "unhandled": "未處理",
+    "edit": "✎ 編輯"
+  },
+  "about": {
+    "title": "這是一個關於頁面"
   }
 }

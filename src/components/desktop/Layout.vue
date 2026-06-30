@@ -1,9 +1,12 @@
 <template>
     <div class="desktop-layout">
         <header class="top-navbar">
-            <div class="logo-area">
+            <div class="brand-zone">
                 <span class="logo-icon">💠</span>
-                <h1>{{ $t('layout.title') }}</h1>
+                <div class="logo-area">
+                    <h1>{{ $t('layout.title') }}</h1>
+                    <h1>{{ $t('layout.title2') }}</h1>
+                </div>
             </div>
 
             <nav class="nav-links">
@@ -36,13 +39,28 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted, onUnmounted, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 
 const { locale } = useI18n()
 const isFullscreen = ref(false)
 
-// 全螢幕切換邏輯
+// ⭐ 1. 初始化讀取 LocalStorage
+onMounted(() => {
+    const savedLocale = localStorage.getItem('app-locale')
+    if (savedLocale) {
+        locale.value = savedLocale
+    }
+
+    document.addEventListener('fullscreenchange', handleFullscreenChange)
+})
+
+// ⭐ 2. 監聽 locale 變化並存入 LocalStorage
+watch(locale, (newLocale) => {
+    localStorage.setItem('app-locale', newLocale)
+})
+
+// 全螢幕切換邏輯 (保持不變)
 const toggleFullscreen = () => {
     if (!document.fullscreenElement) {
         document.documentElement.requestFullscreen()
@@ -53,22 +71,15 @@ const toggleFullscreen = () => {
     }
 }
 
-// 監聽 ESC 鍵退出全螢幕時的狀態同步
 const handleFullscreenChange = () => {
     isFullscreen.value = !!document.fullscreenElement
 }
-
-onMounted(() => {
-    document.addEventListener('fullscreenchange', handleFullscreenChange)
-})
 
 onUnmounted(() => {
     document.removeEventListener('fullscreenchange', handleFullscreenChange)
 })
 </script>
-
 <style scoped>
-/* CSS 完全不需要更動，保持原本完美的樣式即可 */
 .desktop-layout {
     background-color: #121921;
     min-height: 100vh;
@@ -80,22 +91,46 @@ onUnmounted(() => {
     justify-content: space-between;
     align-items: center;
     background-color: #1a222c;
-    padding: 0 24px;
+    padding: 0 16px 0 0;
+    /* 右側保留一點空間 */
     height: 64px;
     border-bottom: 1px solid #2a3543;
 }
 
-.logo-area {
+/* 新增的 logo 區塊包裝器 */
+.brand-zone {
     display: flex;
     align-items: center;
     gap: 12px;
+    padding-left: 20px;
+    /* 讓 logo 距離左邊緣一點空間 */
+}
+
+.logo-icon {
+    font-size: 32px;
+    color: #00bcd4;
+    /* 調整為截圖中的亮藍色 */
+}
+
+.logo-area {
+    display: flex;
+    flex-direction: column;
+    /* 讓文字上下排列 */
+    align-items: flex-start;
+    /* 文字靠左對齊 */
+    justify-content: center;
+    gap: 2px;
+    /* 兩行文字的間距 */
 }
 
 .logo-area h1 {
-    font-size: 18px;
+    font-size: 15px;
+    /* 稍微調整讓上下兩行比例更好 */
     font-weight: bold;
     margin: 0;
     color: #ffffff;
+    line-height: 1.2;
+    letter-spacing: 1px;
 }
 
 .nav-links {
@@ -106,7 +141,8 @@ onUnmounted(() => {
 .nav-item {
     display: flex;
     align-items: center;
-    padding: 0 24px;
+    padding: 0 16px;
+    /* 稍微加寬讓點擊範圍更好 */
     color: #8da2b5;
     text-decoration: none;
     font-size: 15px;

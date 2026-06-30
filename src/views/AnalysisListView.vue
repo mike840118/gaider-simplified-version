@@ -1,8 +1,8 @@
 <template>
   <div class="home-container">
     <div class="filter-section">
-      <input type="text" v-model="searchQuery" placeholder="姓名" class="search-input" />
-      <button class="search-btn">🔍 搜尋</button>
+      <input type="text" v-model="searchQuery" :placeholder="$t('common.search_placeholder')" class="search-input" />
+      <button class="search-btn">🔍 {{ $t('common.search') }}</button>
     </div>
 
     <div class="cards-grid">
@@ -16,14 +16,17 @@
 <script setup>
 import { ref, computed } from 'vue'
 import { useBreakpoints } from '@vueuse/core'
+import { useI18n } from 'vue-i18n' // 👈 1. 引入 i18n
 import MonitorCard from '@/components/common/MonitorCard.vue'
 import rawPatientData from '@/mock/patients.json'
+
+const { t } = useI18n() // 👈 2. 實例化 t 函數
 
 const breakpoints = useBreakpoints({ tablet: 768, desktop: 1024 })
 const isTablet = breakpoints.between('tablet', 'desktop')
 
 const searchQuery = ref('')
-const itemsPerPage = 8 // 一次顯示 8 個
+const itemsPerPage = 8
 
 const formatData = (sourceArray) => {
   return sourceArray.map(item => {
@@ -45,9 +48,10 @@ const formatData = (sourceArray) => {
 
     return {
       id: item.accountId,
-      name: item.name || '未知',
+      // 👈 3. 替換為 t('common.unknown') 等
+      name: item.name || t('common.unknown'),
       age: age,
-      gender: item.gender === 'WOMAN' ? '女' : '男',
+      gender: item.gender === 'WOMAN' ? t('common.woman') : t('common.man'),
       hasAvatar: !!item.url,
       avatarUrl: item.url,
       electricity: item.electricity ?? 0,
@@ -60,9 +64,9 @@ const formatData = (sourceArray) => {
       hrv: item.data.HDRri?.hrv || 0,
       step: item.data.WalkStep?.step || 0,
       kcal: Math.round(item.data.WalkStep?.cal || 0),
-      heat: item.sunstroke ? 'warning' : 'normal_heat',
+      heat: item.sunstroke ? 'warning' : 'normal',
       fatigue: fatigueKey,
-      location: item.companyName || '未知',
+      location: item.companyName || t('common.unknown'), // 👈 替換
       status: status,
       sos: item.sos || false
     }
@@ -85,7 +89,6 @@ const pagedData = computed(() => {
   }
   return result
 })
-
 </script>
 
 <style scoped>

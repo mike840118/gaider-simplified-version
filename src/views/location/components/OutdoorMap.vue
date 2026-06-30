@@ -6,9 +6,11 @@
 
 <script setup>
 import { onMounted, onBeforeUnmount, watch } from 'vue'
+import { useI18n } from 'vue-i18n' // 👈 引入 i18n
 import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
 
+const { t } = useI18n() // 👈 初始化
 const props = defineProps({
     patients: { type: Array, required: true },
     selected: { type: Object, default: null }
@@ -17,14 +19,13 @@ const props = defineProps({
 let map = null
 let markersGroup = null
 
-// 自訂 Marker 樣式 (線上為綠色，離線為灰色，SOS為紅色閃爍)
 const createCustomIcon = (patient) => {
     let color = patient.status === 'ONLINE' ? '#10b981' : '#9ca3af'
     let ringClass = ''
 
     if (patient.sos) {
         color = '#ef4444'
-        ringClass = 'sos-ring' // SOS 閃爍特效
+        ringClass = 'sos-ring'
     }
 
     return L.divIcon({
@@ -48,16 +49,17 @@ const renderMarkers = () => {
         const marker = L.marker([patient.lat, patient.lng], {
             icon: createCustomIcon(patient)
         })
-        marker.bindPopup(`<b>${patient.name}</b><br>狀態: ${patient.status === 'ONLINE' ? '在線' : '離線'}`)
+
+        // 👈 將狀態字串套用 i18n
+        const statusText = patient.status === 'ONLINE' ? t('location.status.online_short') : t('location.status.offline_short')
+        marker.bindPopup(`<b>${patient.name}</b><br>${t('location.status_label')}: ${statusText}`)
         markersGroup.addLayer(marker)
     })
 }
 
 onMounted(() => {
-    // 初始化地圖，中心點預設在台北市 101 附近
     map = L.map('outdoor-map').setView([25.033964, 121.564468], 13)
 
-    // 使用完全免費的 OpenStreetMap 圖磚 (不需 API Key)
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; OpenStreetMap contributors',
         maxZoom: 19,
@@ -71,12 +73,10 @@ onBeforeUnmount(() => {
     if (map) map.remove()
 })
 
-// 監聽左側列表篩選，更新地圖上的標記
 watch(() => props.patients, () => {
     renderMarkers()
 }, { deep: true })
 
-// 監聽左側點擊，將地圖中心平移至該使用者
 watch(() => props.selected, (newVal) => {
     if (newVal && map) {
         map.flyTo([newVal.lat, newVal.lng], 16, { duration: 1 })

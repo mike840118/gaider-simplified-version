@@ -1,32 +1,36 @@
 <template>
     <div class="location-container">
         <div class="top-tabs">
-            <button :class="['tab-btn', { active: currentTab === 'outdoor' }]"
-                @click="currentTab = 'outdoor'">室外定位</button>
-            <button :class="['tab-btn', { active: currentTab === 'indoor' }]"
-                @click="currentTab = 'indoor'">室內定位</button>
-            <button :class="['tab-btn', { active: currentTab === 'alert' }]" @click="currentTab = 'alert'">警報處理</button>
+            <button :class="['tab-btn', { active: currentTab === 'outdoor' }]" @click="currentTab = 'outdoor'">{{
+                $t('location.tabs.outdoor') }}</button>
+            <button :class="['tab-btn', { active: currentTab === 'indoor' }]" @click="currentTab = 'indoor'">{{
+                $t('location.tabs.indoor') }}</button>
+            <button :class="['tab-btn', { active: currentTab === 'alert' }]" @click="currentTab = 'alert'">{{
+                $t('location.tabs.alert') }}</button>
         </div>
 
         <div class="main-layout" v-if="currentTab !== 'alert'">
             <div class="sidebar">
-                <h3 class="sidebar-title">{{ currentTab === 'outdoor' ? '室外定位' : '室內定位' }}</h3>
+                <h3 class="sidebar-title">{{ currentTab === 'outdoor' ? $t('location.tabs.outdoor') :
+                    $t('location.tabs.indoor') }}</h3>
                 <div class="search-box">
-                    <div class="section-label">設備訊息</div>
+                    <div class="section-label">{{ $t('location.device_info') }}</div>
                     <select class="dropdown-select">
-                        <option>全部</option>
+                        <option>{{ $t('location.all') }}</option>
                     </select>
-                    <input type="text" placeholder="依設備碼搜尋" class="input-text" />
-                    <input type="text" placeholder="依姓名搜尋" class="input-text" />
+                    <input type="text" :placeholder="$t('location.search_mac')" class="input-text" />
+                    <input type="text" :placeholder="$t('location.search_name')" class="input-text" />
                 </div>
 
                 <div class="status-tabs">
-                    <span :class="{ active: userStatusTab === 'online' }" @click="userStatusTab = 'online'">線上 ({{
-                        onlineCount }})</span>
-                    <span :class="{ active: userStatusTab === 'offline' }" @click="userStatusTab = 'offline'">離線 ({{
-                        offlineCount }})</span>
-                    <span :class="{ active: userStatusTab === 'sos' }" @click="userStatusTab = 'sos'">SOS</span>
-                    <span :class="{ active: userStatusTab === 'all' }" @click="userStatusTab = 'all'">全部</span>
+                    <span :class="{ active: userStatusTab === 'online' }" @click="userStatusTab = 'online'">{{
+                        $t('location.status.online') }} ({{ onlineCount }})</span>
+                    <span :class="{ active: userStatusTab === 'offline' }" @click="userStatusTab = 'offline'">{{
+                        $t('location.status.offline') }} ({{ offlineCount }})</span>
+                    <span :class="{ active: userStatusTab === 'sos' }" @click="userStatusTab = 'sos'">{{
+                        $t('location.status.sos') }}</span>
+                    <span :class="{ active: userStatusTab === 'all' }" @click="userStatusTab = 'all'">{{
+                        $t('location.status.all') }}</span>
                 </div>
 
                 <div class="device-list">
@@ -38,8 +42,10 @@
                                 :class="['status-dot', device.sos ? 'bg-red' : (device.status === 'ONLINE' ? 'bg-green' : 'bg-gray')]"></span>
                             {{ device.name }}
                         </div>
-                        <span class="device-status-text">{{ device.sos ? '求救' : (device.status === 'ONLINE' ? '在線' :
-                            '離線') }}</span>
+                        <span class="device-status-text">
+                            {{ device.sos ? $t('location.status.sos_short') : (device.status === 'ONLINE' ?
+                                $t('location.status.online_short') : $t('location.status.offline_short')) }}
+                        </span>
                     </div>
                 </div>
 
@@ -54,8 +60,9 @@
 
             <div class="map-area">
                 <div class="map-top-bar">
-                    <button class="map-view-btn active">{{ currentTab === 'outdoor' ? '室外定位' : '室內平面圖' }}</button>
-                    <button class="map-view-btn">活動軌跡</button>
+                    <button class="map-view-btn active">{{ currentTab === 'outdoor' ?
+                        $t('location.map_views.outdoor_map') : $t('location.map_views.indoor_map') }}</button>
+                    <button class="map-view-btn">{{ $t('location.map_views.activity_track') }}</button>
                 </div>
 
                 <OutdoorMap v-if="currentTab === 'outdoor'" :patients="filteredPatients" :selected="selectedPatient" />
@@ -71,51 +78,44 @@
 
 <script setup>
 import { ref, computed } from 'vue'
+import { useI18n } from 'vue-i18n' // 👈 引入 i18n
 import rawPatientData from '@/mock/patients.json'
 
-// 引入需要的子元件
 import OutdoorMap from './components/OutdoorMap.vue'
 import IndoorMap from './components/IndoorMap.vue'
 import AlertPanel from './components/AlertPanel.vue'
 
-const currentTab = ref('outdoor') // outdoor | indoor | alert
-const userStatusTab = ref('all') // online | offline | sos | all
+const { t } = useI18n() // 👈 初始化
+const currentTab = ref('outdoor')
+const userStatusTab = ref('all')
 const selectedPatient = ref(null)
 
-// 定義幾個台灣主要城市的基準座標
 const cities = [
-    { name: '台北', lat: 25.0330, lng: 121.5434 },
-    { name: '台中', lat: 24.1477, lng: 120.6736 },
-    { name: '台南', lat: 22.9997, lng: 120.2270 },
-    { name: '高雄', lat: 22.6273, lng: 120.3014 },
-    { name: '花蓮', lat: 23.9778, lng: 121.6044 },
-    { name: '宜蘭', lat: 24.7566, lng: 121.7530 }
+    { name: 'Taipei', lat: 25.0330, lng: 121.5434 },
+    { name: 'Taichung', lat: 24.1477, lng: 120.6736 },
+    { name: 'Tainan', lat: 22.9997, lng: 120.2270 },
+    { name: 'Kaohsiung', lat: 22.6273, lng: 120.3014 },
+    { name: 'Hualien', lat: 23.9778, lng: 121.6044 },
+    { name: 'Yilan', lat: 24.7566, lng: 121.7530 }
 ]
 
-// 處理 JSON 資料
 const allPatients = ref(rawPatientData.data.data.map(p => {
-    // 隨機挑選一個城市
     const randomCity = cities[Math.floor(Math.random() * cities.length)];
-
     return {
         id: p.accountId,
-        name: p.name || '未知使用者',
-        status: p.deviceState, // 'ONLINE' 或 'OFFLINE'
+        name: p.name || t('location.unknown_user'), // 👈 i18n
+        status: p.deviceState,
         sos: p.sos,
-        // 在選中的城市座標加上一點隨機偏移（讓他們散佈在市區各處）
         lat: randomCity.lat + (Math.random() * 0.04 - 0.02),
         lng: randomCity.lng + (Math.random() * 0.04 - 0.02),
-        // 隨機產生室內座標百分比 (10% ~ 90%)
         indoorX: 10 + Math.random() * 80,
         indoorY: 10 + Math.random() * 80
     }
 }))
 
-// 計算數量
 const onlineCount = computed(() => allPatients.value.filter(p => p.status === 'ONLINE').length)
 const offlineCount = computed(() => allPatients.value.filter(p => p.status === 'OFFLINE').length)
 
-// 左側列表過濾
 const filteredPatients = computed(() => {
     return allPatients.value.filter(p => {
         if (userStatusTab.value === 'online') return p.status === 'ONLINE'
@@ -125,11 +125,9 @@ const filteredPatients = computed(() => {
     })
 })
 
-// 室內地圖固定只取前 10 筆資料展示
 const indoorPatients = computed(() => {
     return allPatients.value.slice(0, 10)
 })
-
 </script>
 
 <style scoped>

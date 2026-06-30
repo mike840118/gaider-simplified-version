@@ -1,13 +1,8 @@
 <template>
     <div class="modal-overlay" v-if="isOpen" @click.self="closeModal">
         <div class="modal-content">
-            <!-- 右上角關閉按鈕 -->
             <button class="close-btn" @click="closeModal">✕</button>
-
-            <!-- 公告標題 -->
             <h2 class="modal-title">{{ announcement.title }}</h2>
-
-            <!-- 公告內文 (使用 pre-line 讓 \n 能自動換行) -->
             <div class="modal-body">
                 {{ announcement.content }}
             </div>
@@ -18,26 +13,13 @@
 <script setup>
 import { defineProps, defineEmits } from 'vue'
 
-// 接收父元件傳來的狀態與資料
 const props = defineProps({
-    isOpen: {
-        type: Boolean,
-        default: false
-    },
-    announcement: {
-        type: Object,
-        default: () => ({ title: '', content: '' })
-    }
+    isOpen: { type: Boolean, default: false },
+    announcement: { type: Object, default: () => ({ title: '', content: '' }) }
 })
-
-// 定義發送給父元件的事件
 const emit = defineEmits(['close'])
-
-const closeModal = () => {
-    emit('close')
-}
+const closeModal = () => { emit('close') }
 </script>
-
 <style scoped>
 /* 黑色半透明遮罩 */
 .modal-overlay {

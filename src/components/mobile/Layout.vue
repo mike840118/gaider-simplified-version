@@ -1,9 +1,10 @@
 <template>
     <div class="mobile-layout">
         <header class="mobile-header">
+            <span class="logo-icon">💠</span>
             <div class="logo-area">
-                <span class="logo-icon">💠</span>
-                <h1>{{ $t('layout.title_short') }}</h1>
+                <h1>{{ $t('layout.title') }}</h1>
+                <h1>{{ $t('layout.title2') }}</h1>
             </div>
 
             <div class="header-right">
@@ -46,11 +47,25 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted, onUnmounted, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 
 const { locale } = useI18n()
 
+// ⭐ 1. 初始化讀取 LocalStorage
+onMounted(() => {
+    const savedLocale = localStorage.getItem('app-locale')
+    if (savedLocale) {
+        locale.value = savedLocale
+    }
+
+    document.addEventListener('fullscreenchange', handleFullscreenChange)
+})
+
+// ⭐ 2. 監聽 locale 變化並存入 LocalStorage
+watch(locale, (newLocale) => {
+    localStorage.setItem('app-locale', newLocale)
+})
 // 控制漢堡選單開關的狀態
 const isNavOpen = ref(false)
 </script>

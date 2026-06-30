@@ -5,34 +5,33 @@
 
             <div class="modal-layout">
                 <div class="left-panel">
-                    <div class="section-header">警報詳情</div>
+                    <div class="section-header">{{ $t('sos.detail_title') }}</div>
                     <div class="patient-info">
-                        <div class="bed-text">{{ patient.companyName || '未知' }}床</div>
+                        <div class="bed-text">{{ patient.companyName || $t('common.unknown') }}</div>
                         <div class="name-text">{{ patient.name }}</div>
                         <div class="time-text">
-                            <span class="c-gray">觸發時間:</span><br>
-                            <span class="bold">23 : 45 觸發跌倒警報</span>
+                            <span class="c-gray">{{ $t('sos.trigger_time') }}</span><br>
+                            <span class="bold">{{ $t('sos.trigger_desc') }}</span>
                         </div>
                         <div class="loc-text">
-                            <span class="c-gray">目前位置：</span><br>
-                            <span class="bold loc-highlight">一樓 109室</span>
+                            <span class="c-gray">{{ $t('sos.current_location') }}</span><br>
+                            <span class="bold loc-highlight">{{ $t('sos.location_desc') }}</span>
                         </div>
-                        <div class="device-text c-gray">設備類型：300C</div>
+                        <div class="device-text c-gray">{{ $t('sos.device_type') }}</div>
                     </div>
 
-                    <div class="section-header mt-4">警報處理</div>
+                    <div class="section-header mt-4">{{ $t('sos.handle_title') }}</div>
                     <div class="action-form">
                         <button class="status-btn" :class="{ active: selectedAction === 'dispatched' }"
-                            @click="selectedAction = 'dispatched'">已派員前往</button>
+                            @click="selectedAction = 'dispatched'">{{ $t('sos.actions.dispatched') }}</button>
 
                         <button class="status-btn" :class="{ active: selectedAction === 'completed' }"
-                            @click="selectedAction = 'completed'">已完成處理</button>
+                            @click="selectedAction = 'completed'">{{ $t('sos.actions.completed') }}</button>
 
                         <button class="status-btn" :class="{ active: selectedAction === 'false_alarm' }"
-                            @click="selectedAction = 'false_alarm'">誤觸</button>
+                            @click="selectedAction = 'false_alarm'">{{ $t('sos.actions.false_alarm') }}</button>
 
-
-                        <button class="confirm-btn" @click="handleConfirm">確認</button>
+                        <button class="confirm-btn" @click="handleConfirm">{{ $t('common.confirm') }}</button>
                     </div>
                 </div>
 
@@ -44,7 +43,7 @@
                             <div class="pulse-ring"></div>
                             <div class="marker-avatar">
                                 <img v-if="patient.hasAvatar" :src="patient.avatarUrl" />
-                                <span v-else>{{ patient.gender === '女' ? '👩' : '👨' }}</span>
+                                <span v-else>{{ patient.gender === 'WOMAN' ? '👩' : '👨' }}</span>
                             </div>
                         </div>
                     </div>
@@ -56,7 +55,10 @@
 
 <script setup>
 import { ref, defineProps, defineEmits, watch } from 'vue'
+import { useI18n } from 'vue-i18n' // 👈 引入 i18n
 import locationMap from '@/assets/images/location.png'
+
+const { t } = useI18n()
 const props = defineProps({
     isOpen: { type: Boolean, default: false },
     patient: { type: Object, default: () => ({}) }
@@ -67,7 +69,6 @@ const emit = defineEmits(['close'])
 const selectedAction = ref('')
 const remark = ref('')
 
-// 每次開啟彈窗時重置表單
 watch(() => props.isOpen, (newVal) => {
     if (newVal) {
         selectedAction.value = ''
@@ -79,14 +80,12 @@ const closeModal = () => emit('close')
 
 const handleConfirm = () => {
     if (!selectedAction.value) {
-        alert('請選擇處理狀態')
+        alert(t('sos.please_select_action')) // 👈 i18n
         return
     }
-    // 這裡可加入發送 API 的邏輯
     closeModal()
 }
 </script>
-
 <style scoped>
 /* 遮罩層 */
 .modal-overlay {

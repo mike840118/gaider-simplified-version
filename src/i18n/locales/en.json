@@ -1,9 +1,33 @@
 {
   "common": {
     "unknown": "Unknown",
-    "age": " yrs",
-        "man": "man",
-    "woman": "woman"
+    "age": "Age",
+    "man": "Male",
+    "woman": "Female",
+    "search": "Search",
+    "add": "Add",
+    "search_placeholder": "Name",
+    "search_user_placeholder": "User Name",
+    "confirm": "Confirm",
+    "cancel": "Cancel",
+    "save": "Save",
+    "select": "Select",
+    "none": "None",
+    "yes": "Yes",
+    "other": "Other",
+    "time": "Time",
+    "year": "Year",
+    "month": "Month",
+    "unit_person": "",
+    "unit_count": "pcs",
+    "view_more": "View More >",
+    "view_details": "View Details >"
+  },
+  "pagination": {
+    "total": "Total {count}",
+    "page_size": "{size}/page",
+    "goto": "Go to",
+    "page": "Page"
   },
   "card": {
     "hr": "HR",
@@ -13,29 +37,311 @@
     "hrv": "HRV",
     "step": "Step",
     "kcal": "Kcal",
-    "heat_stroke": "Heat Stroke",
-    "fatigue": "Fatigue Level"
+    "heat_stroke": "Heat Stroke Status",
+    "fatigue": "Fatigue"
   },
- "status": {
-      "normal": "Normal",
-      "warning": "Warning",
-      "healthy": "Healthy",
-      "no_data": "No Data",
-      "recovery": "Recovered"
-    },
+  "status": {
+    "normal": "Normal",
+    "normal_heat": "Regular",
+    "warning": "Warning",
+    "warn": "Pre-warning",
+    "urgent": "Urgent",
+    "no_data": "No Data",
+    "recovery": "Recovery"
+  },
   "layout": {
-    "title": "Health Big Data Platform",
-    "title_short": "Health App",
+    "title": "Health Big Data",
+    "title2": "Management Platform",
+    "title_short": "Health Platform",
     "nav": {
       "dashboard": "Dashboard",
-      "analysis": "Real-time Info",
+      "analysis": "Real-time",
       "location": "Location",
-      "data": "Data Mgmt",
-      "users": "User Mgmt",
-      "location_short": "Location",
+      "data": "Data",
+      "users": "Users",
+      "location_short": "Loc",
       "data_short": "Data",
       "users_short": "Users"
     },
     "logout": "Logout"
+  },
+  "data_manage": {
+    "user_list": "User List (Total {count})",
+    "all_users": "All Users",
+    "tabs": {
+      "bp": "BP",
+      "spo2": "SpO₂",
+      "hr": "HR",
+      "temp": "Temp",
+      "hrv": "HRV"
+    },
+    "sub_tabs": {
+      "history": "History",
+      "alert": "Alerts",
+      "analysis": "Analysis"
+    },
+    "table": {
+      "index": "No.",
+      "avatar": "Avatar",
+      "name": "Name",
+      "gender": "Gender",
+      "mac": "Source (MAC)",
+      "value": "Value",
+      "status": "Status",
+      "measure_time": "Time",
+      "platform": "Platform",
+      "version": "Version",
+      "no_data_in_category": "No data in this category"
+    }
+  },
+  "user_manage": {
+    "no_match": "No matching user found"
+  },
+  "dashboard": {
+    "alert": "Emergency: {company} - Bed {name} triggered fall alarm!",
+    "handle_now": "Handle Now",
+    "close_alert": "Dismiss",
+    "announcement": "Announcement",
+    "today": "Today",
+    "stats": {
+      "total_members": "Total Members",
+      "today_added": "Added Today",
+      "pending_events": "Pending Events",
+      "online_count": "Online",
+      "offline_count": "Offline",
+      "low_battery": "Low Battery"
+    },
+    "actions": {
+      "title": "Management",
+      "add_member": "Add Member",
+      "file_manage": "File Manage",
+      "bind_device": "Bind Device",
+      "admission_manage": "Admission",
+      "system_log": "System Log",
+      "shift_log": "Shift Log"
+    },
+    "overview": {
+      "title": "Overview",
+      "night_safety": "Night Safety 22:00-06:00",
+      "just_now": "Just now",
+      "abnormal": "Abnormal",
+      "processing": "Processing"
+    },
+    "heat": {
+      "title": "Heat Stroke Warning",
+      "room_temp_high": "Room Temp High",
+      "high_risk_users": "High Risk Users"
+    },
+    "events": {
+      "title": "Events Today",
+      "urgent": "Urgent",
+      "warning": "Warning",
+      "normal": "Notice"
+    },
+    "announcements_data": {
+     "item1": {
+        "tag": "[Important Notice]",
+        "title": "[Important Notice] In response to the peak season of respiratory infections, please implement patient health monitoring and real-time App reporting",
+        "previewDesc": "- Dear care and clinical colleagues: Due to the recent seasonal flu and res...",
+        "time": "1:50 PM",
+        "content": "Dear care and clinical colleagues:\n\nIn response to the recent peak of seasonal flu and respiratory infectious diseases, to ensure infection control within the hospital/institution, please ensure all units implement the following epidemic prevention measures:\n\n1. Measure and record patients' body temperature and respiratory symptoms daily.\n2. If any abnormalities are found, please upload them immediately through the App's real-time reporting system.\n3. Please strictly wear protective equipment when contacting high-risk cases.\n\nThank you for your cooperation and hard work.\n[Publish Date] 2026-06-29"
+      },
+      "item2": {
+        "tag": "[Health Notice]",
+        "title": "[Health Notice] High summer temperatures are here, please pay extra attention to the hydration of [elders/patients]",
+        "previewDesc": "- Thank you for your hard work: Temperatures have been rising continuously recently. Because [elders/severe patients] often have a dull sense of thirst or poor expression...",
+        "time": "10:00 AM",
+        "content": "Thank you for your hard work, colleagues:\n\nTemperatures have been rising continuously recently. Because [elders/severe patients] often have a dull sense of thirst or cannot express it clearly, which can easily lead to dehydration or heatstroke risks, please strengthen care according to the following principles:\n\n1. Provide warm water at regular intervals and record daily water intake.\n2. Pay attention to indoor temperature and ventilation, and adjust air conditioning settings if necessary.\n3. If early signs of dehydration such as reduced urine output or dry skin are observed, please intervene early.\n\nPrevention is better than cure, please pay close attention.\n[Publish Date] 2026-06-29"
+      },
+      "item3": {
+        "tag": "[Care Notice]",
+        "title": "[Care Notice] Please ensure the implementation of the \"Five Major Fall Prevention Inspections\" and utilize the platform to report environmental hazards in real-time",
+        "previewDesc": "- Hello colleagues: Recently, the fall risk assessment index for [residents/patients] on each floor has...",
+        "time": "08:42 AM",
+        "content": "Hello colleagues:\n\nRecently, the fall risk assessment index for [residents/patients] on various floors has changed. To ensure the safety of individuals, all frontline care staff must implement the following fall prevention inspections after each shift handover:\n\n1. Bedside safety check: Please confirm that when [residents/patients] are out of bed or in bed, the bed rails are securely pulled up, the bed wheels are locked, and the bed exit alarm is functioning properly.\n\n2. Environmental inspection: If you find stagnant water in the aisles, dim lighting, or loose barrier-free handrails, please take photos immediately and report them by uploading them through the platform's \"Logistics Repair/Environmental Report\" section so that the General Affairs team can repair them promptly.\n\n3. Platform assessment sync update: For high-risk individuals, please update the latest data in the \"Fall Risk Assessment Form\" within the platform on the scheduled weekly assessment day, so that the relieving staff can grasp the latest prevention priorities.\n\nFall prevention is everyone's responsibility. A little more attention means a little less regret.\n[Publish Date] 2026-06-29"
+      }
+    }
+  },
+  "add_member": {
+    "title": "Add Member",
+    "basic_info": "Basic",
+    "health_info": "Health",
+    "account_info": "Account",
+    "avatar": "Avatar",
+    "name": "Name",
+    "gender": "Gender",
+    "birthday": "DOB",
+    "contact_person": "Contact",
+    "phone_code": "Code",
+    "phone": "Phone",
+    "address": "Address",
+    "height": "Height",
+    "weight": "Weight",
+    "sbp": "SBP",
+    "dbp": "DBP",
+    "health_status": "Status",
+    "patient_level": "Patient Level",
+    "disability_level": "Disability Level",
+    "care_level": "Care Level",
+    "email": "Email",
+    "password": "Password",
+    "organization": "Org",
+    "source_mac": "Source",
+    "remark": "Remark",
+    "placeholders": {
+      "name": "Enter name",
+      "contact": "Enter contact",
+      "phone_code": "Select code",
+      "phone": "Enter phone",
+      "address": "Enter address",
+      "height": "Enter height",
+      "weight": "Enter weight",
+      "sbp": "Enter SBP",
+      "dbp": "Enter DBP",
+      "health_status": "Select status",
+      "patient_level": "Select level",
+      "disability_level": "Select level",
+      "care_level": "Select level",
+      "email": "Enter email",
+      "password": "Enter password",
+      "organization": "Select org",
+      "mac": "Enter MAC",
+      "remark": "Enter remark"
+    }
+  },
+  "sos": {
+    "detail_title": "Alert Details",
+    "handle_title": "Handle Alert",
+    "trigger_time": "Triggered:",
+    "trigger_desc": "23:45 Fall alarm",
+    "current_location": "Location:",
+    "location_desc": "1F Room 109",
+    "device_type": "Device: 300C",
+    "actions": {
+      "dispatched": "Dispatched",
+      "completed": "Completed",
+      "false_alarm": "False Alarm"
+    },
+    "please_select_action": "Select status"
+  },
+  "file_manage": {
+    "title": "Edit File",
+    "search_user": "User Name",
+    "search_placeholder": "Select user",
+    "table": {
+      "name": "Name",
+      "gender": "Gender",
+      "birthday": "DOB",
+      "id_card": "ID Card",
+      "address": "Address",
+      "home_phone": "Home Phone",
+      "emergency_contact": "Emergency Contact",
+      "emergency_phone": "Emergency Phone",
+      "drug_allergy": "Drug Allergy",
+      "exposure": "Exposure",
+      "general": "General",
+      "temp": "Temp",
+      "pulse": "Pulse",
+      "pulse_unit": "bpm",
+      "fbg": "FBG",
+      "hand_bp": "Hand/BP",
+      "left_hand": "Left",
+      "right_hand": "Right",
+      "bp_format": "DBP/SBP",
+      "height": "Height",
+      "weight": "Weight",
+      "past_history": "History",
+      "disease": "Disease",
+      "surgery": "Surgery",
+      "trauma": "Trauma",
+      "blood_transfusion": "Transfusion",
+      "family_history": "Family",
+      "father": "Father",
+      "mother": "Mother",
+      "siblings": "Siblings",
+      "children": "Children",
+      "hereditary": "Hereditary",
+      "disability": "Disability",
+      "disability_code": "Code:"
+    },
+    "options": {
+      "penicillin": "Penicillin",
+      "sulfonamide": "Sulfonamide",
+      "streptomycin": "Streptomycin",
+      "other": "Other",
+      "chemical": "Chemical",
+      "poison": "Poison",
+      "radiation": "Radiation",
+      "hypertension": "Hypertension",
+      "diabetes": "Diabetes",
+      "chd": "CHD",
+      "tumor": "Tumor",
+      "stroke": "Stroke",
+      "schizophrenia": "Schizophrenia",
+      "hepatitis": "Hepatitis",
+      "cervical_lumbar": "Cervical/Lumbar",
+      "osteoarthritis": "Osteoarthritis",
+      "infarction": "Infarction",
+      "allergy": "Allergy",
+      "tuberculosis": "Tuberculosis",
+      "malformation": "Malformation",
+      "hearing": "Hearing",
+      "speech": "Speech",
+      "physical": "Physical",
+      "visual": "Visual",
+      "mental": "Mental",
+      "intellectual": "Intellectual",
+      "diagnose_time": "Diagnosed {year}/{month}",
+      "item_name": "Name"
+    }
+  },
+  "location": {
+    "tabs": {
+      "outdoor": "Outdoor",
+      "indoor": "Indoor",
+      "alert": "Alerts"
+    },
+    "device_info": "Device Info",
+    "all": "All",
+    "search_mac": "Search by MAC",
+    "search_name": "Search by Name",
+    "status": {
+      "online": "Online",
+      "offline": "Offline",
+      "sos": "SOS",
+      "all": "All",
+      "online_short": "On",
+      "offline_short": "Off",
+      "sos_short": "SOS"
+    },
+    "status_label": "Status",
+    "map_views": {
+      "outdoor_map": "Outdoor Map",
+      "indoor_map": "Indoor Plan",
+      "activity_track": "Track"
+    },
+    "unknown_user": "Unknown"
+  },
+  "alert_panel": {
+    "search_name": "User Name",
+    "search_mac": "Enter MAC",
+    "btn_search": "Search",
+    "btn_export": "Export",
+    "table": {
+      "index": "No.",
+      "alert_time": "Time",
+      "name": "Name",
+      "phone": "Phone",
+      "source": "Source",
+      "device_model": "Model",
+      "status": "Status",
+      "record": "Record",
+      "action": "Action"
+    },
+    "unhandled": "Unhandled",
+    "edit": "✎ Edit"
+  },
+  "about": {
+    "title": "About Page"
   }
 }

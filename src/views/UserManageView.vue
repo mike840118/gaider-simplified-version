@@ -1,9 +1,10 @@
 <template>
     <div class="user-management-container">
         <div class="action-header">
-            <input type="text" v-model="searchQuery" placeholder="用戶姓名" class="search-input" />
-            <button class="btn-search">🔍 搜尋</button>
-            <button class="btn-add">➕ 新增</button>
+            <input type="text" v-model="searchQuery" :placeholder="$t('common.search_user_placeholder')"
+                class="search-input" />
+            <button class="btn-search">🔍 {{ $t('common.search') }}</button>
+            <button class="btn-add">➕ {{ $t('common.add') }}</button>
         </div>
 
         <div class="user-grid">
@@ -11,21 +12,21 @@
                 <button class="edit-btn">✏️</button>
                 <div class="avatar-container">
                     <img v-if="user.hasAvatar" :src="user.avatarUrl" class="avatar-photo" alt="avatar" />
-                    <div v-else class="avatar-placeholder">{{ user.gender === '女' ? '👩' : '👨' }}</div>
+                    <div v-else class="avatar-placeholder">{{ user.rawGender === 'WOMAN' ? '👩' : '👨' }}</div>
                 </div>
                 <div class="user-name">{{ user.name }}</div>
-                <div class="user-meta">{{ user.age }}歲 &nbsp; {{ user.gender }}</div>
+                <div class="user-meta">{{ user.age }}{{ $t('common.age') }} &nbsp; {{ user.gender }}</div>
             </div>
 
             <div v-if="filteredUsers.length === 0" class="no-data">
-                找不到符合名稱的用戶
+                {{ $t('user_manage.no_match') }}
             </div>
         </div>
 
         <div v-if="filteredUsers.length > 0" class="footer-pagination">
-            <span>共 {{ filteredUsers.length }} 項</span>
+            <span>{{ $t('pagination.total', { count: filteredUsers.length }) }}</span>
             <select disabled class="page-size-select">
-                <option>{{ itemsPerPage }}項/頁</option>
+                <option>{{ $t('pagination.page_size', { size: itemsPerPage }) }}</option>
             </select>
 
             <div class="pages">
@@ -36,27 +37,26 @@
                 </button>
                 <button @click="changePage(currentPage + 1)" :disabled="currentPage === totalPages">&gt;</button>
             </div>
-            <span>前往 <input type="number" v-model.number="currentPage" min="1" :max="totalPages" class="page-goto" />
-                頁</span>
+            <span>{{ $t('pagination.goto') }} <input type="number" v-model.number="currentPage" min="1"
+                    :max="totalPages" class="page-goto" />
+                {{ $t('pagination.page') }}</span>
         </div>
     </div>
 </template>
 
 <script setup>
 import { ref, computed, watch } from 'vue'
-
-// ⭐ 引入我們先前存好的 JSON 檔案
+import { useI18n } from 'vue-i18n' // 👈 引入 i18n
 import rawPatientData from '@/mock/patients.json'
 
-// --- 1. 搜尋與分頁設定 ---
+const { t } = useI18n() // 👈 實例化
+
 const searchQuery = ref('')
 const currentPage = ref(1)
 const itemsPerPage = 15
 
-// ⭐ 2. 資料轉換器 (Data Mapper)
 const formatUsers = (sourceArray) => {
     return sourceArray.map((item, index) => {
-        // 計算年齡
         let age = 60
         if (item.birthday) {
             const birthYear = new Date(item.birthday).getFullYear()
@@ -65,20 +65,18 @@ const formatUsers = (sourceArray) => {
 
         return {
             id: item.accountId || index,
-            name: item.name || '未知',
+            name: item.name || t('common.unknown'), // 👈 i18n
             age: age,
-            gender: item.gender === 'WOMAN' ? '女' : '男',
-            // 判斷 URL 是否有值，並存起來
+            gender: item.gender === 'WOMAN' ? t('common.woman') : t('common.man'), // 👈 i18n
+            rawGender: item.gender, // 👈 供 template 中顯示大頭貼 emoji 邏輯使用
             hasAvatar: !!item.url,
             avatarUrl: item.url
         }
     })
 }
 
-// 載入轉換後的真實資料
 const mockUsers = ref(formatUsers(rawPatientData.data.data))
 
-// --- 3. 搜尋過濾邏輯 ---
 const filteredUsers = computed(() => {
     if (!searchQuery.value.trim()) return mockUsers.value
     const keyword = searchQuery.value.toLowerCase()
@@ -91,7 +89,6 @@ watch(searchQuery, () => {
     currentPage.value = 1
 })
 
-// --- 4. 分頁邏輯 ---
 const totalPages = computed(() => {
     return Math.ceil(filteredUsers.value.length / itemsPerPage) || 1
 })
@@ -108,7 +105,6 @@ const changePage = (page) => {
     }
 }
 </script>
-
 <style scoped>
 /* 鎖定外層高度，防止外層滾輪 */
 .user-management-container {

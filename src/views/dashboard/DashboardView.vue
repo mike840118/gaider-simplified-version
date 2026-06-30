@@ -14,12 +14,16 @@
                             <span v-if="index === 0">🔔<span class="badge top-badge">{{ sosCount }}</span></span>
                             <span v-else style="visibility: hidden;">🔔</span>
                         </span>
-                        緊急：{{ patient.companyName || '未知' }} 床 {{ patient.name }} 觸發跌倒警報！
+                        {{ $t('dashboard.alert', {
+                            company: patient.companyName || $t('common.unknown'), name:
+                                patient.name
+                        }) }}
                     </div>
 
                     <div class="alert-actions">
-                        <button class="btn-yellow" @click="openSosModal(patient)">立即處理</button>
-                        <button class="btn-red-outline">關閉警報</button>
+                        <button class="btn-yellow" @click="openSosModal(patient)">{{ $t('dashboard.handle_now')
+                        }}</button>
+                        <button class="btn-red-outline">{{ $t('dashboard.close_alert') }}</button>
                     </div>
                 </div>
             </div>
@@ -29,10 +33,10 @@
             <div class="panel-header">
                 <div class="title-with-icon">
                     <span class="announce-icon">📢<span class="badge top-badge">2</span></span>
-                    <h3 class="panel-title mb-0">公告</h3>
+                    <h3 class="panel-title mb-0">{{ $t('dashboard.announcement') }}</h3>
                 </div>
                 <select class="date-select">
-                    <option>今天</option>
+                    <option>{{ $t('dashboard.today') }}</option>
                 </select>
             </div>
             <ul class="announce-list">
@@ -49,33 +53,40 @@
 
         <div class="middle-section">
             <div class="stats-grid">
-                <div class="stat-card" v-for="stat in stats" :key="stat.title">
+                <div class="stat-card" v-for="stat in stats" :key="stat.titleKey">
                     <div class="stat-icon" :class="stat.colorClass">{{ stat.icon }}</div>
                     <div class="stat-info">
-                        <div class="title">{{ stat.title }}</div>
-                        <div class="value">{{ stat.value }}<span class="unit">人</span></div>
+                        <div class="title">{{ $t(stat.titleKey) }}</div>
+                        <div class="value">{{ stat.value }}<span class="unit">{{ $t('common.unit_person') }}</span>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="panel actions-panel">
-                <h3 class="panel-title border-bottom-0">管理設定</h3>
+                <h3 class="panel-title border-bottom-0">{{ $t('dashboard.actions.title') }}</h3>
                 <div class="action-btn-grid">
-                    <button class="action-btn border-black text-black" @click="isAddMemberOpen = true">新增會員</button>
-                    <button class="action-btn border-red text-red" @click="isFileManageOpen = true">檔案管理</button>
+                    <button class="action-btn border-black text-black" @click="isAddMemberOpen = true">{{
+                        $t('dashboard.actions.add_member') }}</button>
+                    <button class="action-btn border-red text-red" @click="isFileManageOpen = true">{{
+                        $t('dashboard.actions.file_manage') }}</button>
+                    <button class="action-btn border-blue text-blue" @click="isBindDeviceOpen = true">{{
+                        $t('dashboard.actions.bind_device') }}</button>
+                    <button class="action-btn border-purple text-purple" @click="isAdmissionOpen = true">{{
+                        $t('dashboard.actions.admission_manage') }}</button>
 
-                    <button class="action-btn border-blue text-blue">綁定設備</button>
-                    <button class="action-btn border-purple text-purple">入院・入所<br>管理</button>
-                    <button class="action-btn border-green text-green">系統記錄</button>
-                    <button class="action-btn border-yellow text-yellow">交班日誌</button>
+                    <button class="action-btn border-green text-green" @click="isSystemLogOpen = true">{{
+                        $t('dashboard.actions.system_log') }}</button>
+                    <button class="action-btn border-yellow text-yellow">{{ $t('dashboard.actions.shift_log')
+                    }}</button>
                 </div>
             </div>
         </div>
 
         <div class="bottom-section">
             <div class="panel overview-panel">
-                <h3 class="panel-title border-bottom-0">數據總覽</h3>
+                <h3 class="panel-title border-bottom-0">{{ $t('dashboard.overview.title') }}</h3>
                 <div class="overview-list">
-                    <div class="list-header">夜間安全偵測 22 : 00 - 06 : 00</div>
+                    <div class="list-header">{{ $t('dashboard.overview.night_safety') }}</div>
                     <div class="list-item" v-for="log in safetyLogs" :key="log.id">
                         <span class="time c-gray">{{ log.time }}</span>
                         <span class="desc"><strong>{{ log.desc }}</strong></span>
@@ -85,42 +96,45 @@
                         </span>
                     </div>
                 </div>
-                <a href="#" class="more-link mt-auto">查看更多 ></a>
+                <a href="#" class="more-link mt-auto">{{ $t('common.view_more') }}</a>
             </div>
 
             <div class="panel heat-panel">
-                <h3 class="panel-title border-bottom-0">環境中暑預警</h3>
+                <h3 class="panel-title border-bottom-0">{{ $t('dashboard.heat.title') }}</h3>
                 <div class="temp-display">
                     <span class="icon-temp text-red">🌡️</span>
                     <div class="temp-info">
-                        <div class="temp-status text-red">室溫 偏高</div>
+                        <div class="temp-status text-red">{{ $t('dashboard.heat.room_temp_high') }}</div>
                         <div class="temp-value text-red">31.2 <span class="unit">°C</span></div>
                     </div>
                 </div>
                 <div class="divider"></div>
-                <div class="high-risk">高風險使用者</div>
-                <div class="risk-count text-red">{{ sunstrokeCount }}<span class="unit-black">人</span></div>
-                <a href="#" class="more-link mt-auto">查看詳情 ></a>
+                <div class="high-risk">{{ $t('dashboard.heat.high_risk_users') }}</div>
+                <div class="risk-count text-red">{{ sunstrokeCount }}<span class="unit-black">{{
+                    $t('common.unit_person') }}</span></div>
+                <a href="#" class="more-link mt-auto">{{ $t('common.view_details') }}</a>
             </div>
 
             <div class="panel event-panel">
-                <h3 class="panel-title border-bottom-0">今日事件總數</h3>
+                <h3 class="panel-title border-bottom-0">{{ $t('dashboard.events.title') }}</h3>
                 <div class="event-list mt-3">
                     <div class="e-row">
-                        <span><span class="dot bg-red"></span>緊急事件</span>
-                        <span class="text-red bold">{{ urgentCount + sosCount }} <span
-                                class="unit-black">件</span></span>
+                        <span><span class="dot bg-red"></span>{{ $t('dashboard.events.urgent') }}</span>
+                        <span class="text-red bold">{{ urgentCount + sosCount }} <span class="unit-black">{{
+                            $t('common.unit_count') }}</span></span>
                     </div>
                     <div class="e-row">
-                        <span><span class="dot bg-yellow"></span>預警事件</span>
-                        <span class="text-yellow bold">{{ warningCount }} <span class="unit-black">件</span></span>
+                        <span><span class="dot bg-yellow"></span>{{ $t('dashboard.events.warning') }}</span>
+                        <span class="text-yellow bold">{{ warningCount }} <span class="unit-black">{{
+                            $t('common.unit_count') }}</span></span>
                     </div>
                     <div class="e-row">
-                        <span><span class="dot bg-blue"></span>一般提醒</span>
-                        <span class="text-blue bold">5 <span class="unit-black">件</span></span>
+                        <span><span class="dot bg-blue"></span>{{ $t('dashboard.events.normal') }}</span>
+                        <span class="text-blue bold">5 <span class="unit-black">{{ $t('common.unit_count')
+                        }}</span></span>
                     </div>
                 </div>
-                <a href="#" class="more-link mt-auto">查看詳情 ></a>
+                <a href="#" class="more-link mt-auto">{{ $t('common.view_details') }}</a>
             </div>
         </div>
 
@@ -128,20 +142,27 @@
         <SosDetailModal :is-open="isSosModalOpen" :patient="selectedSosPatient" @close="isSosModalOpen = false" />
         <AddMemberModal :is-open="isAddMemberOpen" @close="isAddMemberOpen = false" />
         <UpdateManagementModal :is-open="isFileManageOpen" @close="isFileManageOpen = false" />
+        <SystemLogModal :is-open="isSystemLogOpen" @close="isSystemLogOpen = false" />
+        <BindDeviceModal :is-open="isBindDeviceOpen" @close="isBindDeviceOpen = false" />
+        <AdmissionModal :is-open="isAdmissionOpen" @close="isAdmissionOpen = false" />
     </div>
 </template>
 
 <script setup>
 import { ref, computed } from 'vue'
+import { useI18n } from 'vue-i18n' // 👈 引入 i18n
 import rawPatientData from '@/mock/patients.json'
 import AnnouncementModal from './components/AnnouncementModal.vue'
 import SosDetailModal from './components/SosDetailModal.vue'
-// 匯入我們剛剛新增的兩個元件 (請依照您的實際資料夾結構調整路徑)
 import AddMemberModal from './components/AddMemberModal.vue'
 import UpdateManagementModal from './components/UpdateManagementModal.vue'
+import SystemLogModal from './components/SystemLogModal.vue'
+import BindDeviceModal from './components/BindDeviceModal.vue'
+import AdmissionModal from './components/AdmissionModal.vue'
+
+const { t } = useI18n() // 👈 初始化
 const patients = ref(rawPatientData.data.data)
 
-// --- 計算屬性 ---
 const totalMembers = computed(() => patients.value.length)
 const sosPatients = computed(() => patients.value.filter(p => p.sos === true))
 const sosCount = computed(() => sosPatients.value.length)
@@ -153,64 +174,65 @@ const lowBatteryCount = computed(() => patients.value.filter(p => p.electricity 
 const sunstrokeCount = computed(() => patients.value.filter(p => p.sunstroke === true).length)
 const pendingEvents = computed(() => sosCount.value + urgentCount.value)
 
-// 統計卡片資料
+// ⭐ 將 title 換成 titleKey 對應語系
 const stats = computed(() => [
-    { title: '總會員人數', value: totalMembers.value, icon: '👤', colorClass: 'c-gray' },
-    { title: '今日新增', value: 5, icon: '➕', colorClass: 'c-blue' },
-    { title: '待處理事件', value: pendingEvents.value, icon: '📋', colorClass: 'c-blue' },
-    { title: '在線人數', value: onlineCount.value, icon: '📶', colorClass: 'c-blue' },
-    { title: '離線人數', value: offlineCount.value, icon: '📴', colorClass: 'c-gray' },
-    { title: '設備低電量', value: lowBatteryCount.value, icon: '🔋', colorClass: 'c-gray' }
+    { titleKey: 'dashboard.stats.total_members', value: totalMembers.value, icon: '👤', colorClass: 'c-gray' },
+    { titleKey: 'dashboard.stats.today_added', value: 5, icon: '➕', colorClass: 'c-blue' },
+    { titleKey: 'dashboard.stats.pending_events', value: pendingEvents.value, icon: '📋', colorClass: 'c-blue' },
+    { titleKey: 'dashboard.stats.online_count', value: onlineCount.value, icon: '📶', colorClass: 'c-blue' },
+    { titleKey: 'dashboard.stats.offline_count', value: offlineCount.value, icon: '📴', colorClass: 'c-gray' },
+    { titleKey: 'dashboard.stats.low_battery', value: lowBatteryCount.value, icon: '🔋', colorClass: 'c-gray' }
 ])
 
-// 安全偵測列表
 const safetyLogs = computed(() => patients.value.filter(p => p.level !== 'NORMAL').slice(0, 4).map(p => ({
-    id: p.accountId, patient: p, time: '剛剛', desc: `${p.companyName} ${p.name} 異常`, status: p.sos ? '立即處理' : '處理中'
+    id: p.accountId,
+    patient: p,
+    time: t('dashboard.overview.just_now'), // 👈 i18n
+    desc: `${p.companyName} ${p.name} ${t('dashboard.overview.abnormal')}`, // 👈 i18n
+    status: p.sos ? t('dashboard.handle_now') : t('dashboard.overview.processing') // 👈 i18n
 })))
 
-// --- 彈窗狀態 ---
 const isModalOpen = ref(false)
 const selectedAnnouncement = ref({})
 const isAlertExpanded = ref(false)
 const isSosModalOpen = ref(false)
 const selectedSosPatient = ref({})
-
-// 加入控制這兩個新 Modal 的響應式變數
 const isAddMemberOpen = ref(false)
 const isFileManageOpen = ref(false)
-
+const isSystemLogOpen = ref(false)
+const isBindDeviceOpen = ref(false)
+const isAdmissionOpen = ref(false)
 
 const openSosModal = (p) => { selectedSosPatient.value = p; isSosModalOpen.value = true; isAlertExpanded.value = false; }
 const openAnnouncement = (item) => { selectedAnnouncement.value = item; isModalOpen.value = true; }
 
-
-const announcements = ref([
+const announcements = computed(() => [
     {
         id: 1,
-        tag: '【重要宣導】',
-        title: '【重要宣導】因應呼吸道傳染病高峰期，請全體同仁落實患者健康監測與 App 即時通報',
-        previewDesc: '- 各位照護與臨床同仁好：因應近期季節性流感及呼...',
-        time: '下午 1:50',
+        tag: t('dashboard.announcements_data.item1.tag'),
+        title: t('dashboard.announcements_data.item1.title'),
+        previewDesc: t('dashboard.announcements_data.item1.previewDesc'),
+        time: t('dashboard.announcements_data.item1.time'),
         type: 'yellow',
-        content: '各位照護與臨床同仁好：\n\n因應近期季節性流感及呼吸道傳染病進入高峰期，為確保院內/機構內感染控制，請各單位務必落實以下防疫措施：\n\n1. 每日測量並記錄患者體溫及呼吸道症狀。\n2. 若發現異常，請立即透過 App 即時通報系統上傳。\n3. 接觸高風險個案請確實穿戴防護裝備。\n\n感謝各位同仁的配合與辛勞。\n[發布日期] 2026-06-29'
+        content: t('dashboard.announcements_data.item1.content')
     },
     {
         id: 2,
-        tag: '【健康宣導】',
-        title: '【健康宣導】盛夏高溫來襲，請加強留意[長者/患者]水分攝取',
-        previewDesc: '- 各位同仁辛苦了：近日氣溫持續攀升，因[長者/重症患者]常因口渴感覺遲鈍或表達不...',
-        time: '上午 10:00',
+        tag: t('dashboard.announcements_data.item2.tag'),
+        title: t('dashboard.announcements_data.item2.title'),
+        previewDesc: t('dashboard.announcements_data.item2.previewDesc'),
+        time: t('dashboard.announcements_data.item2.time'),
         type: 'yellow',
-        content: '各位同仁辛苦了：\n\n近日氣溫持續攀升，因[長者/重症患者]常因口渴感覺遲鈍或表達不清，容易引發脫水或中暑危險，請依下列原則加強照護：\n\n1. 定時提供溫開水，並記錄每日飲水量。\n2. 留意室內溫度與通風，必要時調整空調設定。\n3. 若觀察到尿量減少、皮膚乾燥等脫水前兆，請提早介入處理。\n\n預防勝於治療，請大家多加留心。\n[發布日期] 2026-06-29'
+        content: t('dashboard.announcements_data.item2.content')
     },
     {
         id: 3,
-        tag: '【照護宣導】',
-        title: '【照護宣導】請同仁務必落實「防跌五大巡查」，並善用平台即時回報環境隱患',
-        previewDesc: '- 各位同仁好：近期各樓層[住民/患者]跌倒風險評估指數有所...',
-        time: '上午 08:42',
+        tag: t('dashboard.announcements_data.item3.tag'),
+        title: t('dashboard.announcements_data.item3.title'),
+        previewDesc: t('dashboard.announcements_data.item3.previewDesc'),
+        time: t('dashboard.announcements_data.item3.time'),
         type: 'gray',
-        content: '各位同仁好：\n\n近期各樓層[住民/患者]跌倒風險評估指數有所變動，為維護個案安全，請全體一線照護同仁於每班交班後，落實以下防跌巡查：\n\n1.床邊安全檢查：請確認[住民/患者]離床或臥床時，床欄已確實拉起、病床輪子鎖固定，且離床警報器功能正常。\n\n2.環境環境巡檢：若發現走道有積水、照明昏暗、或無障礙扶手鬆動等狀況，請立即拍攝現場照片，並透過平台的「後勤修繕/環境回報」專區上傳通報，以便總務組第一時間進行修繕。\n\n3.平台評估同步更新：針對高風險個案，請於每週固定評估日，在平台內的「跌倒風險評估表」更新最新數據，以利接班同仁掌握最新防範重點。\n\n防跌工作人人有責，多一分留意，少一分遺憾。\n[發布日期] 2026-06-29'
+        content: t('dashboard.announcements_data.item3.content')
     }
 ])
 </script>
@@ -579,8 +601,8 @@ const announcements = ref([
 .bottom-section {
     display: grid;
     grid-template-columns: 2fr 1fr 1fr;
-    gap: 16px;
-    flex: 1;
+    gap: 15px;
+    /* flex: 1; */
 }
 
 /* 數據總覽列表 */
