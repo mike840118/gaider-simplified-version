@@ -21,17 +21,17 @@
 
     <div class="charts-grid">
       <div class="chart-card">
-        <h4 class="chart-title">依狀態分析</h4>
+        <h4 class="chart-title">依歷史狀態分析 ({{ metricName }})</h4>
         <div ref="statusChartRef" class="echart-container"></div>
       </div>
 
       <div class="chart-card">
-        <h4 class="chart-title">依性別統計</h4>
+        <h4 class="chart-title">依用戶性別統計</h4>
         <div ref="genderChartRef" class="echart-container"></div>
       </div>
 
       <div class="chart-card full-width">
-        <h4 class="chart-title">依年齡分析</h4>
+        <h4 class="chart-title">依年齡狀態分佈</h4>
         <div ref="ageChartRef" class="echart-container"></div>
       </div>
     </div>
@@ -39,7 +39,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, watch, nextTick } from 'vue'
+import { ref, onMounted, watch, nextTick, computed } from 'vue'
 import * as echarts from 'echarts'
 
 const props = defineProps({
@@ -54,37 +54,37 @@ const ageChartRef = ref(null)
 
 let statusChart, genderChart, ageChart
 
-// 分析資料邏輯 (動態計算)
+const metricName = computed(() => {
+  const map = { 'bp': '血壓', 'spo2': '血氧', 'hr': '心率', 'temp': '體溫', 'hrv': 'HRV' }
+  return map[props.metric] || ''
+})
+
 const analyzeData = () => {
-  let list = props.patients
+  let list = props.patients || []
   if (props.selectedUserId) list = list.filter(p => p.accountId === props.selectedUserId)
 
   let normalCount = 0, warnCount = 0, urgentCount = 0
   let maleCount = 0, femaleCount = 0
 
-  // 簡單的假資料年齡分佈矩陣 [0-30, 31-40, 41-50, 51-60, 61-70, 71-80, 80+]
+  // (假資料年齡區間展示)
   let ageData = {
     normal: [50, 5, 2, 8, 10, 8, 3],
-    warn: [2, 0, 1, 3, 1, 1, 0],
-    urgent: [0, 0, 1, 2, 1, 2, 0]
+    warn: [12, 10, 5, 3, 1, 1, 0],
+    urgent: [5, 2, 1, 2, 1, 2, 0]
   }
 
   list.forEach(p => {
-    // 性別統計
+    // 性別人數統計
     if (p.gender === 'WOMAN') femaleCount++
     else maleCount++
 
-    // 狀態統計 (依據當前 metric)
-    let levelCode = 'NORMAL'
-    const d = p.data || {}
-    if (props.metric === 'bp') levelCode = d.BloodPressure?.level || 'NORMAL'
-    else if (props.metric === 'spo2') levelCode = d.BloodOxygen?.level || 'NORMAL'
-    else if (props.metric === 'hr') levelCode = d.HeartBeat?.level || 'NORMAL'
-    else if (props.metric === 'temp') levelCode = d.BodyTemp?.level || 'NORMAL'
-
-    if (levelCode === 'URGENT') urgentCount++
-    else if (levelCode === 'WARN') warnCount++
-    else normalCount++
+    // 🌟 統計此人所有的歷史資料數據比例
+    const records = p.records ? (p.records[props.metric] || []) : []
+    records.forEach(r => {
+      if (r.level === 'URGENT') urgentCount++
+      else if (r.level === 'WARN') warnCount++
+      else normalCount++
+    })
   })
 
   return { normalCount, warnCount, urgentCount, maleCount, femaleCount, ageData }
@@ -94,10 +94,10 @@ const renderCharts = () => {
   if (!statusChartRef.value || !genderChartRef.value || !ageChartRef.value) return
   const data = analyzeData()
 
-  // 1. 狀態圓餅圖 (對齊圖片顏色：正常藍、預警綠、緊急黃)
+  // 1. 狀態圓餅圖 (正常藍、預警綠、緊急黃)
   if (!statusChart) statusChart = echarts.init(statusChartRef.value)
   statusChart.setOption({
-    tooltip: { trigger: 'item' },
+    tooltip: { trigger: 'item', formatter: '{b}: {c} 筆 ({d}%)' },
     legend: { orient: 'vertical', right: 10, top: 'center', icon: 'circle' },
     color: ['#63c2e6', '#66c2a5', '#ffd92f'],
     series: [{
@@ -111,16 +111,16 @@ const renderCharts = () => {
     }]
   })
 
-  // 2. 性別圓餅圖 (對齊圖片顏色：男紅、女藍)
+  // 2. 性別圓餅圖 (男紅、女藍)
   if (!genderChart) genderChart = echarts.init(genderChartRef.value)
   genderChart.setOption({
-    tooltip: { trigger: 'item' },
+    tooltip: { trigger: 'item', formatter: '{b}: {c} 人' },
     legend: { orient: 'vertical', right: 10, top: 'center', icon: 'circle' },
     color: ['#f16b6f', '#63c2e6'],
     series: [{
       type: 'pie', radius: ['40%', '70%'], center: ['40%', '50%'],
       data: [
-        { value: data.maleCount || 1, name: '男' }, // 如果左側單選一人，圓餅圖可能只有一個值
+        { value: data.maleCount || 0, name: '男' },
         { value: data.femaleCount || 0, name: '女' }
       ],
       label: { show: false }
@@ -135,7 +135,7 @@ const renderCharts = () => {
     color: ['#63c2e6', '#66c2a5', '#ffd92f'],
     grid: { left: '3%', right: '4%', bottom: '3%', containLabel: true },
     xAxis: { type: 'category', data: ['0-30', '31-40', '41-50', '51-60', '61-70', '71-80', '80以上'], axisLine: { show: false }, axisTick: { show: false } },
-    yAxis: { type: 'value', axisLabel: { formatter: '{value} %' }, splitLine: { lineStyle: { color: '#f0f0f0' } } },
+    yAxis: { type: 'value', splitLine: { lineStyle: { color: '#f0f0f0' } } },
     series: [
       { name: '正常', type: 'bar', stack: 'total', barWidth: '30%', data: data.ageData.normal },
       { name: '預警', type: 'bar', stack: 'total', data: data.ageData.warn },
@@ -197,7 +197,6 @@ watch([() => props.metric, () => props.selectedUserId], () => renderCharts(), { 
   font-weight: bold;
 }
 
-/* Switch Toggle (共用) */
 .toggle-switch {
   margin-left: auto;
   display: flex;
@@ -234,6 +233,7 @@ watch([() => props.metric, () => props.selectedUserId], () => renderCharts(), { 
   bottom: 0;
   background-color: #ccc;
   transition: .4s;
+  border-radius: 34px;
 }
 
 .slider:before {
@@ -245,6 +245,7 @@ watch([() => props.metric, () => props.selectedUserId], () => renderCharts(), { 
   bottom: 2px;
   background-color: white;
   transition: .4s;
+  border-radius: 50%;
 }
 
 input:checked+.slider {
@@ -255,15 +256,6 @@ input:checked+.slider:before {
   transform: translateX(20px);
 }
 
-.slider.round {
-  border-radius: 34px;
-}
-
-.slider.round:before {
-  border-radius: 50%;
-}
-
-/* 圖表網格佈局 */
 .charts-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
