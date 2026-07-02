@@ -3,6 +3,10 @@
     <div class="filter-section">
       <input type="text" v-model="searchQuery" :placeholder="$t('common.search_placeholder')" class="search-input" />
       <button class="search-btn">🔍 {{ $t('common.search') }}</button>
+
+      <button class="btn-export" @click="handleExport">
+        <span class="icon">📥</span> 匯出 Excel報表
+      </button>
     </div>
 
     <div class="cards-grid">
@@ -15,18 +19,13 @@
 
 <script setup>
 import { ref, computed } from 'vue'
-import { useBreakpoints } from '@vueuse/core'
-import { useI18n } from 'vue-i18n' // 👈 1. 引入 i18n
+import { useI18n } from 'vue-i18n'
 import MonitorCard from '@/components/common/MonitorCard.vue'
 import rawPatientData from '@/mock/patients.json'
+import { exportToExcel } from '@/utils/export.js'; // 匯入轉檔工具
 
-const { t } = useI18n() // 👈 2. 實例化 t 函數
-
-const breakpoints = useBreakpoints({ tablet: 768, desktop: 1024 })
-const isTablet = breakpoints.between('tablet', 'desktop')
-
+const { t } = useI18n()
 const searchQuery = ref('')
-const itemsPerPage = 8
 
 const formatData = (sourceArray) => {
   return sourceArray.map(item => {
@@ -48,10 +47,9 @@ const formatData = (sourceArray) => {
 
     return {
       id: item.accountId,
-      // 👈 3. 替換為 t('common.unknown') 等
       name: item.name || t('common.unknown'),
       age: age,
-      gender: item.gender === 'WOMAN' ? t('common.woman') : t('common.man'),
+      gender: item.gender === 'WOMAN' ? t('common.woman', '女') : t('common.man', '男'),
       hasAvatar: !!item.url,
       avatarUrl: item.url,
       electricity: item.electricity ?? 0,
@@ -66,7 +64,7 @@ const formatData = (sourceArray) => {
       kcal: Math.round(item.data.WalkStep?.cal || 0),
       heat: item.sunstroke ? 'warning' : 'normal',
       fatigue: fatigueKey,
-      location: item.companyName || t('common.unknown'), // 👈 替換
+      location: item.companyName || t('common.unknown', '未知'),
       status: status,
       sos: item.sos || false
     }
@@ -89,6 +87,39 @@ const pagedData = computed(() => {
   }
   return result
 })
+
+// 處理匯出 Excel 的邏輯
+const handleExport = () => {
+  // 針對「過濾後的平坦資料 (filteredPatients)」進行映射，而非分頁後的二維資料
+  const exportData = filteredPatients.value.map((row, index) => {
+
+    // 簡單的狀態文字轉換
+    const statusMap = { 'normal': '正常', 'warning': '預警', 'danger': '緊急' }
+    const heatMap = { 'normal': '正常', 'warning': '警戒' }
+    const fatigueMap = { 'normal': '正常', 'warning': '警戒', 'recovery': '回復', 'no_data': '無資料' }
+
+    return {
+      "序號": index + 1,
+      "姓名": row.name,
+      "性別": row.gender,
+      "年齡": row.age,
+      "心率 (bpm)": row.hr,
+      "血氧 (%)": row.spo2,
+      "體溫 (°C)": row.temp,
+      "血壓 (mmHg)": `${row.bpSys}/${row.bpDia}`,
+      "HRV": row.hrv,
+      "今日步數": row.step,
+      "消耗熱量 (kcal)": row.kcal,
+      "中暑風險": heatMap[row.heat] || '無資料',
+      "疲勞度": fatigueMap[row.fatigue] || '無資料',
+      "整體狀態": statusMap[row.status] || '正常',
+      "設備電量 (%)": row.electricity,
+      "所在位置": row.location
+    }
+  });
+
+  exportToExcel(exportData, '健康監測卡片數據總表', []);
+};
 </script>
 
 <style scoped>
@@ -104,6 +135,8 @@ const pagedData = computed(() => {
   display: flex;
   gap: 12px;
   margin-bottom: 16px;
+  align-items: center;
+  /* 讓按鈕與輸入框垂直居中對齊 */
 }
 
 .search-input {
@@ -113,6 +146,7 @@ const pagedData = computed(() => {
   padding: 8px 16px;
   border-radius: 6px;
   width: 200px;
+  outline: none;
 }
 
 .search-btn {
@@ -122,44 +156,63 @@ const pagedData = computed(() => {
   padding: 8px 16px;
   border-radius: 6px;
   cursor: pointer;
+  transition: all 0.2s;
+}
+
+.search-btn:hover {
+  background-color: #2a3d4f;
+  color: white;
+}
+
+/* ⭐ 新增的匯出按鈕樣式 (配合深色主題) */
+.btn-export {
+  background-color: #0ea5e9;
+  /* 亮藍色，使其明顯 */
+  border: 1px solid #0ea5e9;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  transition: opacity 0.2s, background-color 0.2s;
+  margin-left: auto;
+  /* 將匯出按鈕推到最右側 */
+}
+
+.btn-export:hover {
+  background-color: #0284c7;
 }
 
 /* ⭐ 平板滑動吸附核心 */
 .cards-grid {
   flex: 1;
   display: flex;
-  /* 改用 flex，確保卡片橫向排成一列 */
   overflow-x: auto;
-  /* 允許水平滑動 */
   overflow-y: hidden;
-
-  /* 關鍵：捲動吸附效果 (強迫吸附在每一頁的開頭) */
   scroll-snap-type: x mandatory;
   gap: 20px;
-  padding: 20px;
+  padding: 20px 0;
+  /* 調整內距避免切到陰影 */
 }
 
-/* 每一頁的容器，假設我們讓 8 個卡片放在一個群組裡 */
 .cards-page {
   flex: 0 0 100%;
-  /* 強制每一頁佔滿整個容器寬度 */
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  /* 4x2 的排版 */
   grid-template-rows: repeat(2, 1fr);
   gap: 15px;
   scroll-snap-align: start;
-  /* 這是滑動吸附的關鍵 */
 }
 
-/* 確保卡片會自動吸附對齊 */
 .cards-grid>* {
   scroll-snap-align: start;
 }
 
 .cards-grid.grid-tablet {
   grid-template-columns: repeat(2, 1fr);
-  /* 2欄 x 4列 = 8個 */
 }
 
 .no-data {
@@ -169,7 +222,6 @@ const pagedData = computed(() => {
   padding-top: 50px;
 }
 
-/* 隱藏滾動條但保持滑動功能 */
 .cards-grid::-webkit-scrollbar {
   display: none;
 }
