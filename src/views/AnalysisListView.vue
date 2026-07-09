@@ -68,10 +68,27 @@ const formatData = (sourceArray) => {
 
 const mockPatients = ref(formatData(rawPatientData.data.data))
 
+// 🟢 定義排序權重：SOS(4) > 危險/紅框(3) > 警告/黃框(2) > 正常/綠框(1)
+const getPriorityScore = (patient) => {
+  if (patient.sos) return 4
+  if (patient.status === 'danger') return 3
+  if (patient.status === 'warning') return 2
+  return 1
+}
+
+// 🟢 過濾並加入排序邏輯
 const filteredPatients = computed(() => {
-  if (!searchQuery.value.trim()) return mockPatients.value
-  const keyword = searchQuery.value.toLowerCase()
-  return mockPatients.value.filter(p => p.name.toLowerCase().includes(keyword))
+  // ⚠️ 加上 [... ] 展開運算符來「淺拷貝」陣列，避免 .sort() 污染原來的響應式資料
+  let list = [...mockPatients.value]
+
+  // 1. 先做模糊搜尋過濾
+  if (searchQuery.value.trim()) {
+    const keyword = searchQuery.value.toLowerCase()
+    list = list.filter(p => p.name.toLowerCase().includes(keyword))
+  }
+
+  // 2. 依照權重分數進行降冪排序 (分數高的排前面)
+  return list.sort((a, b) => getPriorityScore(b) - getPriorityScore(a))
 })
 
 const pagedData = computed(() => {
@@ -82,8 +99,6 @@ const pagedData = computed(() => {
   }
   return result
 })
-
-
 </script>
 
 <style scoped>

@@ -426,5 +426,73 @@
         "upload_normal": "Uploaded health info (Normal)",
         "upload_abnormal": "Uploaded health info (Abnormal)"
       }
+    },
+    "shift_log": {
+      "title": "Shift Handover Log",
+      "shift_day": "Day Shift ( 07:00-15:00 )",
+      "recorder": "Recorder",
+      "resident_event_record": "Resident Event Log",
+      "table": {
+        "time": "Time",
+        "severity": "Severity",
+        "category": "Category",
+        "bed_name": "Bed/Name",
+        "recorder": "Recorder",
+        "content": "Content",
+        "status_tracking": "Status Tracking"
+      },
+      "severity_levels": {
+        "high": "High",
+        "medium": "Medium",
+        "low": "Low",
+        "high_icon": "🔴 High"
+      },
+      "categories": {
+        "physiological": "Physiological",
+        "event": "Event",
+        "affair": "Affair",
+        "placeholder": "Category"
+      },
+      "status_options": {
+        "tracking": "Continuous Tracking",
+        "processed": "Processed/Under Observation"
+      },
+      "summary": {
+        "title": "Today's Summary of Completed Actions",
+        "sos_alert": "SOS Alert",
+        "low_battery_alert": "Low Battery Alert",
+        "night_movement_alert": "Night Movement Alert",
+        "remark": "Remark"
+      },
+      "form": {
+        "title": "Add Resident Event Record",
+        "time": "Time",
+        "severity": "Severity",
+        "category": "Category",
+        "bed_name": "Bed/Name",
+        "recorder": "Recorder",
+        "content": "Content",
+        "search_placeholder": "Enter bed number or name to search",
+        "add_btn": "Add"
+      },
+      "mock": {
+        "recorder_name_1": "Wang Xiaomei (Nurse/Caregiver)",
+        "recorder_name_2": "Wang Xiaomei",
+        "recorder_name_3": "Li Xiaoming",
+        "recorder_name_4": "Zhang Dazhong",
+        "patient_1": "102-B<br>Zhang XX",
+        "patient_2": "501-6<br>Zhang XX",
+        "patient_3": "202-3<br>Huang XX",
+        "patient_4": "402-3<br>Kang XX",
+        "content_1": "At 10:00 AM, body temperature was 38.2°C; antipyretic administered.<br>Measured 37.4°C at 2:26 PM.<br>Next shift: Please measure temperature every 2 hours.",
+        "content_2": "At 1:10 PM, resident attempted to get out of bed bedside and slid onto the floor.<br>No obvious trauma, conscious.<br>Next shift: Please monitor bed exit intent.",
+        "content_3": "Admitted to Room 202, Bed 3 at 08:01 AM.<br>Next shift: Please monitor adjustment status.",
+        "content_4": "Left room at 11:16 PM, confirmed resident returned to bed to sleep.",
+        "summary_desc_1": "[2026/06/29 13:00] 501-6 Bed Zhang XX triggered fall alarm",
+        "summary_remark_1": "Slid onto the floor while attempting to get out of bed",
+        "summary_desc_2": "[2026/06/29 14:34] 408-3 Bed Gao XX triggered low battery alert",
+        "summary_desc_3": "[2026/06/26 23:16] 402-3 Bed Kang XX triggered night movement alert",
+        "summary_remark_3": "Walked out of the room"
+      }
     }
 }

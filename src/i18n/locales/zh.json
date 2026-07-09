@@ -426,5 +426,73 @@
       "upload_normal": "上傳了健康訊息 (正常)",
       "upload_abnormal": "上傳了健康訊息 (異常)"
     }
+  },
+  "shift_log": {
+    "title": "交班日誌",
+    "shift_day": "白班 ( 07：00-15：00 )",
+    "recorder": "記錄人",
+    "resident_event_record": "住民事件記錄",
+    "table": {
+      "time": "時間",
+      "severity": "重要度",
+      "category": "類別",
+      "bed_name": "床號/姓名",
+      "recorder": "記錄人",
+      "content": "內容",
+      "status_tracking": "狀態追蹤"
+    },
+    "severity_levels": {
+      "high": "高",
+      "medium": "中",
+      "low": "低",
+      "high_icon": "🔴 高"
+    },
+    "categories": {
+      "physiological": "生理",
+      "event": "事件",
+      "affair": "事務",
+      "placeholder": "類別"
+    },
+    "status_options": {
+      "tracking": "需持續追蹤",
+      "processed": "已處理/待觀察"
+    },
+    "summary": {
+      "title": "今日已處置完成摘要",
+      "sos_alert": "SOS警報",
+      "low_battery_alert": "低電量警報",
+      "night_movement_alert": "夜間移動警報",
+      "remark": "備註"
+    },
+    "form": {
+      "title": "新增住民事件記錄",
+      "time": "時間",
+      "severity": "重要度",
+      "category": "類別",
+      "bed_name": "床號/姓名",
+      "recorder": "記錄人",
+      "content": "內容",
+      "search_placeholder": "輸入床號或姓名查詢",
+      "add_btn": "新增"
+    },
+    "mock": {
+      "recorder_name_1": "王小美 護理師/照服員",
+      "recorder_name_2": "王小美",
+      "recorder_name_3": "李小明",
+      "recorder_name_4": "張大中",
+      "patient_1": "102-B<br>張XX",
+      "patient_2": "501-6<br>張XX",
+      "patient_3": "202-3<br>黃XX",
+      "patient_4": "402-3<br>康XX",
+      "content_1": "早上10：00體溫38.2度，已給予退燒藥，<br>14：26測量為37.4度。<br>下一班請每2小時量一次體溫。",
+      "content_2": "下午13：10在床邊企圖自行下床時滑坐在地上，<br>無明顯外傷，意識清楚。<br>下一班請多注意下床意願。",
+      "content_3": "上午08：01入住X樓202室3床<br>下一班請多注意適應情況。",
+      "content_4": "晚上23：16離開房間，已確認住民回到房間床<br>上入睡。",
+      "summary_desc_1": "[2026/06/29 13：00] 501-6床 張XX 觸發跌倒警報",
+      "summary_remark_1": "在床邊試圖自行下床時滑坐在地上",
+      "summary_desc_2": "[2026/06/29 14：34] 408-3床 高XX 觸發低電量警報",
+      "summary_desc_3": "[2026/06/26 23：16] 402-3床 康XX 觸發夜間移動警報",
+      "summary_remark_3": "離開房間走動"
+    }
   }
 }

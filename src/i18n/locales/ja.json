@@ -426,5 +426,73 @@
         "upload_normal": "健康情報をアップロードしました (正常)",
         "upload_abnormal": "健康情報をアップロードしました (異常)"
       }
+    },
+    "shift_log": {
+      "title": "引き継ぎ日誌",
+      "shift_day": "日勤 ( 07:00-15:00 )",
+      "recorder": "記録者",
+      "resident_event_record": "入居者イベント記録",
+      "table": {
+        "time": "時間",
+        "severity": "重要度",
+        "category": "カテゴリー",
+        "bed_name": "ベッド番号/氏名",
+        "recorder": "記録者",
+        "content": "内容",
+        "status_tracking": "ステータス追跡"
+      },
+      "severity_levels": {
+        "high": "高",
+        "medium": "中",
+        "low": "低",
+        "high_icon": "🔴 高"
+      },
+      "categories": {
+        "physiological": "生理",
+        "event": "イベント",
+        "affair": "事務",
+        "placeholder": "カテゴリー"
+      },
+      "status_options": {
+        "tracking": "継続追跡が必要",
+        "processed": "処理済み/経過観察"
+      },
+      "summary": {
+        "title": "本日対応完了の概要",
+        "sos_alert": "SOS警報",
+        "low_battery_alert": "電池残量低下警報",
+        "night_movement_alert": "夜間移動警報",
+        "remark": "備考"
+      },
+      "form": {
+        "title": "入居者イベント記録の追加",
+        "time": "時間",
+        "severity": "重要度",
+        "category": "カテゴリー",
+        "bed_name": "ベッド番号/氏名",
+        "recorder": "記録者",
+        "content": "内容",
+        "search_placeholder": "ベッド番号または氏名で検索",
+        "add_btn": "追加"
+      },
+      "mock": {
+        "recorder_name_1": "王小美 (看護師/介護士)",
+        "recorder_name_2": "王小美",
+        "recorder_name_3": "李小明",
+        "recorder_name_4": "張大中",
+        "patient_1": "102-B<br>張XX",
+        "patient_2": "501-6<br>張XX",
+        "patient_3": "202-3<br>黄XX",
+        "patient_4": "402-3<br>康XX",
+        "content_1": "午前10:00体温38.2度、解熱剤投与済み。<br>14:26測定時37.4度。<br>次シフト：2時間ごとの検温をお願いします。",
+        "content_2": "午後13:10ベッドサイドで自力離床を試みた際に滑り落ちて床に座り込む。<br>外傷なし、意識明瞭。<br>次シフト：離床の意思に注意してください。",
+        "content_3": "午前08:01 X棟202室3床に入居。<br>次シフト：適応状況の観察をお願いします。",
+        "content_4": "午後23:16部屋を出たが、入居者がベッドに戻り就寝したことを確認。",
+        "summary_desc_1": "[2026/06/29 13:00] 501-6床 張XX様が転倒アラートを発生",
+        "summary_remark_1": "ベッドサイドで自力離床時に滑り落ちた",
+        "summary_desc_2": "[2026/06/29 14:34] 408-3床 高XX様が低バッテリーアラートを発生",
+        "summary_desc_3": "[2026/06/26 23:16] 402-3床 康XX様が夜間移動アラートを発生",
+        "summary_remark_3": "部屋から出て歩行"
+      }
     }
 }
