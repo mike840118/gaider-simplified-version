@@ -143,7 +143,7 @@ import TempIcon from '@/assets/icons/monitorCard/Temp.svg'
 import BpIcon from '@/assets/icons/monitorCard/Bp.svg'
 import HrvIcon from '@/assets/icons/monitorCard/HRV.svg'
 import StepIcon from '@/assets/icons/monitorCard/Step.svg'
-import KcalIcon from '@/assets/icons/monitorCard/Kcal.svg'
+import KcalIcon from '@/assets/icons/monitorCard/kcal.svg'
 import HeatStrokeIcon from '@/assets/icons/monitorCard/HeatStroke.svg'
 import TiredIcon from '@/assets/icons/monitorCard/Tired.svg'
 const props = defineProps({
