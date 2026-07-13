@@ -1,10 +1,10 @@
 <template>
   <div class="mobile-layout">
     <header class="mobile-header">
-      <span class="logo-icon">💠</span>
+      <img src="@/assets/logo.png" alt="Logo" class="logo-icon">
       <div class="logo-area">
         <h1>{{ $t('layout.title') }}</h1>
-        <h1>{{ $t('layout.title2') }}</h1>
+
       </div>
 
       <div class="header-right">
@@ -78,6 +78,7 @@ const isNavOpen = ref(false)
   min-height: 100vh;
   color: #e0e0e0;
   position: relative;
+  font-family: Arial, sans-serif
 }
 
 .mobile-header {
@@ -206,5 +207,12 @@ const isNavOpen = ref(false)
   /* 移除了原本給底部導覽列留的空間，現在可以佔滿 */
   height: calc(100vh - 56px);
   overflow: hidden;
+}
+
+.logo-icon {
+  font-size: 24px;
+  width: 40px;
+  color: #00bcd4;
+  /* 調整為截圖中的亮藍色 */
 }
 </style>

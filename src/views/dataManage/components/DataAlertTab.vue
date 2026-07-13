@@ -36,7 +36,11 @@
         <tr v-for="row in paginatedData" :key="row.id" class="bubble-row">
           <td>{{ row.index }}</td>
           <td>
-            <div class="avatar-placeholder-sm">{{ row.rawGender === 'WOMAN' ? '👩' : '👨' }}</div>
+            <div class="avatar-placeholder-sm">
+              <img v-if="row.avatar" :src="row.avatar" alt="User Avatar" class="user-avatar"
+                referrerpolicy="no-referrer" @error="row.avatar = null" />
+              <img v-else :src="userIcon" alt="User Icon" style="width: 24px;" />
+            </div>
           </td>
           <td class="text-blue">{{ row.name }}</td>
           <td>{{ row.gender }}</td>
@@ -47,7 +51,6 @@
           <td>{{ row.platform }}</td>
           <td>{{ row.version }}</td>
         </tr>
-
       </tbody>
     </table>
   </div>
@@ -57,18 +60,15 @@
 <script setup>
 import { ref, computed, watch } from 'vue'
 import Pagination from '@/components/Pagination.vue'
-// 1. 引入 useI18n
 import { useI18n } from 'vue-i18n'
+import userIcon from '@/assets/icons/Profile.png'
 
 const props = defineProps(['patients', 'metric', 'selectedUserId'])
 const currentPage = ref(1)
-
-// 2. 初始化 i18n
 const { t } = useI18n()
 
 watch([() => props.metric, () => props.selectedUserId], () => currentPage.value = 1)
 
-// 🌟 扁平化展開並過濾
 const filteredData = computed(() => {
   let list = props.patients || []
   if (props.selectedUserId) list = list.filter(p => p.accountId === props.selectedUserId)
@@ -87,14 +87,13 @@ const filteredData = computed(() => {
 
         allRecords.push({
           id: p.accountId + '_' + r.testTime,
+          avatar: p.url, // 取得 API 的圖片網址
           name: p.name || '未知',
           rawGender: p.gender,
-          // 3. 使用剛剛解構出來的 t() 函數，而不是 this.$t()
           gender: p.gender === 'WOMAN' ? t('common.woman') : t('common.man'),
           mac: p.deviceCode || '--',
           value: val,
           levelCode: r.level,
-          // 3. 使用 t() 函數
           statusText: r.level === 'URGENT' ? t('status.urgent') : t('status.warning'),
           time: r.testTime.replace('T', ' ').substring(0, 19),
           rawTime: new Date(r.testTime).getTime(),
@@ -276,6 +275,15 @@ input:checked+.slider:before {
   justify-content: center;
   font-size: 16px;
   margin: 0 auto;
+  overflow: hidden;
+  /* 確保長方形的圖片不會超出圓形外框 */
+}
+
+.user-avatar {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* 讓真實照片可以填滿圓形並自動裁切比例 */
 }
 
 .text-blue {

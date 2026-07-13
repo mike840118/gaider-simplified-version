@@ -14,7 +14,7 @@
             <img v-if="info.hasAvatar" :src="info.avatarUrl" alt="avatar" />
 
             <div v-else style="font-size: 24px; text-align:center; line-height:40px;">
-              {{ info.gender === '男' ? '👨' : '👩' }}
+              <img :src="personIcon" alt="Person" />
             </div>
           </div>
         </a>
@@ -28,7 +28,7 @@
       </div>
       <div class="header-right">
         <a @click="setUserInfo(info.id)">
-          <span class="edit-icon">✏️</span>
+          <img :src="editIcon" class="edit-icon" alt="edit" />
         </a>
         <div :style="{
           position: 'absolute',
@@ -45,33 +45,33 @@
 
     <div class="data-grid">
       <div class="grid-item g-hr" @click="routeUserInfo(info.id, 'heartRate')">
-        <div class="label c-hr">💓 {{ $t('card.hr') }}</div>
+        <div class="label c-hr"> <img :src="hrIcon" class="edit-icon" alt="edit" /> {{ $t('card.hr') }}</div>
         <div class="value">{{ info.hr }}<span class="unit">bpm</span></div>
       </div>
 
       <div class="grid-item g-spo2" @click="routeUserInfo(info.id, 'bloodOxygen')">
-        <div class="label c-spo2">💧 {{ $t('card.spo2') }}</div>
+        <div class="label c-spo2"><img :src="SpO2Icon" class="edit-icon" alt="edit" /> {{ $t('card.spo2') }}</div>
         <div class="value">{{ info.spo2 }}<span class="unit">%</span></div>
       </div>
 
       <div class="grid-item g-temp" @click="routeUserInfo(info.id, 'temperature')">
-        <div class="label c-temp">🌡️ {{ $t('card.temp') }}</div>
+        <div class="label c-temp"><img :src="TempIcon" class="edit-icon" alt="edit" /> {{ $t('card.temp') }}</div>
         <div class="value">{{ info.temp }}<span class="unit">°C</span></div>
       </div>
 
       <div class="grid-item g-bp" @click="routeUserInfo(info.id, 'bloodPressure')"
         :class="info.bpAlert ? 'bkBorder-red' : ''">
-        <div class="label c-bp">🩺 {{ $t('card.bp') }}</div>
+        <div class="label c-bp"><img :src="BpIcon" class="edit-icon" alt="edit" /> {{ $t('card.bp') }}</div>
         <div class="value">{{ info.bpSys }}/{{ info.bpDia }}<span class="unit">mmHg</span></div>
       </div>
 
       <div class="grid-item g-hrv" @click="routeUserInfo(info.id, 'rri')">
-        <div class="label c-hrv">📉 {{ $t('card.hrv') }}</div>
+        <div class="label c-hrv"><img :src="HrvIcon" class="edit-icon" alt="edit" /> {{ $t('card.hrv') }}</div>
         <div class="value">{{ info.hrv }}</div>
       </div>
 
       <div class="grid-item g-step" @click="routeUserInfo(info.id, 'yd')">
-        <div class="label c-step">👣 {{ $t('card.step') }}</div>
+        <div class="label c-step"><img :src="StepIcon" class="edit-icon" alt="edit" /> {{ $t('card.step') }}</div>
         <div class="value">{{ info.step }}</div>
       </div>
 
@@ -81,13 +81,13 @@
       </div>
 
       <div class="grid-item g-kcal" @click="routeUserInfo(info.id, 'yd')">
-        <div class="label c-kcal">🔥 {{ $t('card.kcal') }}</div>
+        <div class="label c-kcal"><img :src="KcalIcon" class="edit-icon" alt="edit" /> {{ $t('card.kcal') }}</div>
         <div class="value">{{ info.kcal }}</div>
       </div>
 
       <div class="grid-item g-heat" @click="routeUserInfo(info.id, 'sunstroke')">
         <div class="status-icon-wrap c-heat-bg">
-          <span class="status-icon c-heat">☀️</span>
+          <img :src="HeatStrokeIcon" class="edit-icon" alt="edit" />
         </div>
         <div class="status-text">
           <div class="s-label">{{ $t('card.heat_stroke') }}</div>
@@ -108,11 +108,16 @@
         }">
           {{ batteryIcon }} {{ info.electricity }}%
         </div>
+        <div class="status-icon-wrap c-heat-bg">
+          <img :src="TiredIcon" class="edit-icon" alt="edit" />
+        </div>
         <div class="status-text">
+
           <div class="s-label">{{ $t('card.fatigue') }}</div>
           <div class="s-value"
             :class="info.fatigue === 'recovery' ? 'c-blue' : (info.fatigue === 'warning' ? 'c-red' : 'c-green')">
-            {{ info.fatigue ? $t('status.' + info.fatigue) : '--' }}
+            {{ info.fatigue ? $t('status.' + info.fatigue) : '--'
+            }}
           </div>
         </div>
       </div>
@@ -130,8 +135,17 @@
 <script setup>
 import { ref, onMounted, nextTick, computed } from 'vue'
 import * as echarts from 'echarts'
-
-
+import personIcon from '@/assets/icons/Profile.png'
+import editIcon from '@/assets/icons/monitorCard/Edit.svg'
+import hrIcon from '@/assets/icons/monitorCard/HR.svg'
+import SpO2Icon from '@/assets/icons/monitorCard/SpO2.svg'
+import TempIcon from '@/assets/icons/monitorCard/Temp.svg'
+import BpIcon from '@/assets/icons/monitorCard/Bp.svg'
+import HrvIcon from '@/assets/icons/monitorCard/Hrv.svg'
+import StepIcon from '@/assets/icons/monitorCard/Step.svg'
+import KcalIcon from '@/assets/icons/monitorCard/Kcal.svg'
+import HeatStrokeIcon from '@/assets/icons/monitorCard/HeatStroke.svg'
+import TiredIcon from '@/assets/icons/monitorCard/Tired.svg'
 const props = defineProps({
   info: {
     type: Object,
@@ -202,6 +216,7 @@ onMounted(() => {
 
 .monitor-card {
   width: 100%;
+  height: 100%;
   background: #192731;
   border-radius: 12px;
   color: #fff;
@@ -213,6 +228,10 @@ onMounted(() => {
   font-family: 'Arial', sans-serif;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   z-index: 1;
+}
+
+.monitor-card img {
+  width: 18px;
 }
 
 .monitor-green {
@@ -329,7 +348,7 @@ onMounted(() => {
 }
 
 .edit-icon {
-  font-size: 14px;
+  font-size: 10px !important;
   color: #5f7a8c;
 }
 
@@ -420,7 +439,7 @@ onMounted(() => {
 }
 
 .value {
-  font-size: 16px;
+  font-size: 18px;
   font-weight: bold;
   color: #ffffff;
   display: flex;

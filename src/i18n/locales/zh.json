@@ -52,8 +52,7 @@
   },
   "layout": {
     "titleLayout": "健康大數據管理平台",
-    "title": "健康大數據",
-    "title2": "管理平台",
+    "title": "管理平台",
     "title_short": "健康平台",
     "nav": {
       "dashboard": "儀錶板",
@@ -141,7 +140,8 @@
       "title": "數據總覽",
       "night_safety": "夜間安全偵測 22 : 00 - 06 : 00",
       "just_now": "剛剛",
-      "abnormal": "異常",
+      "abnormal": "偵測到持續移動",
+      "abnormal2": "偵測到心率異常波動",
       "processing": "處理中"
     },
     "heat": {

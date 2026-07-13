@@ -11,8 +11,11 @@
       <div v-for="user in paginatedUsers" :key="user.id" class="user-card">
         <button class="edit-btn">✏️</button>
         <div class="avatar-container">
-          <img v-if="user.hasAvatar" :src="user.avatarUrl" class="avatar-photo" alt="avatar" />
-          <div v-else class="avatar-placeholder">{{ user.rawGender === 'WOMAN' ? '👩' : '👨' }}</div>
+          <img v-if="user.hasAvatar" :src="user.avatarUrl" class="avatar-photo" alt="avatar"
+            referrerpolicy="no-referrer" @error="user.hasAvatar = false" />
+          <div v-else class="avatar-placeholder">
+            <img :src="userIcon" alt="User Icon" style="width: 40px;" />
+          </div>
         </div>
         <div class="user-name">{{ user.name }}</div>
         <div class="user-meta">{{ user.age }}{{ $t('common.age') }} &nbsp; {{ user.gender }}</div>
@@ -46,10 +49,10 @@
 
 <script setup>
 import { ref, computed, watch } from 'vue'
-import { useI18n } from 'vue-i18n' // 👈 引入 i18n
+import { useI18n } from 'vue-i18n'
 import rawPatientData from '@/mock/patients.json'
-
-const { t } = useI18n() // 👈 實例化
+import userIcon from '@/assets/icons/Profile.png'
+const { t } = useI18n()
 
 const searchQuery = ref('')
 const currentPage = ref(1)
@@ -65,10 +68,10 @@ const formatUsers = (sourceArray) => {
 
     return {
       id: item.accountId || index,
-      name: item.name || t('common.unknown'), // 👈 i18n
+      name: item.name || t('common.unknown'),
       age: age,
-      gender: item.gender === 'WOMAN' ? t('common.woman') : t('common.man'), // 👈 i18n
-      rawGender: item.gender, // 👈 供 template 中顯示大頭貼 emoji 邏輯使用
+      gender: item.gender === 'WOMAN' ? t('common.woman') : t('common.man'),
+      rawGender: item.gender,
       hasAvatar: !!item.url,
       avatarUrl: item.url
     }
@@ -105,6 +108,7 @@ const changePage = (page) => {
   }
 }
 </script>
+
 <style scoped>
 /* 鎖定外層高度，防止外層滾輪 */
 .user-management-container {
@@ -189,13 +193,12 @@ const changePage = (page) => {
   margin-bottom: 12px;
 }
 
-/* ⭐ 新增真實大頭貼的樣式 */
+/* ⭐ 真實大頭貼的樣式 */
 .avatar-photo {
   width: 80px;
   height: 80px;
   border-radius: 50%;
   object-fit: cover;
-  /* 確保照片填滿圓形不變形 */
   border: 1px solid #cbd5e1;
 }
 
@@ -207,7 +210,6 @@ const changePage = (page) => {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 40px;
   border: 1px solid #cbd5e1;
   overflow: hidden;
 }

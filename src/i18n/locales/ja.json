@@ -37,7 +37,7 @@
     "bp": "血圧",
     "hrv": "HRV",
     "step": "歩数",
-    "kcal": "消費カロリー",
+    "kcal": "kcal",
     "heat_stroke": "熱中症状態",
     "fatigue": "疲労度"
   },
@@ -52,8 +52,7 @@
   },
   "layout": {
      "titleLayout": "健康・安全見守りプラットフォーム",
-    "title": "健康・安全見守り",
-    "title2": "プラットフォーム",
+    "title": "プラットフォーム",
     "title_short": "健康プラットフォーム",
     "nav": {
       "dashboard": "ダッシュボード",
@@ -141,7 +140,8 @@
       "title": "データ概要",
       "night_safety": "夜間安全監視 22:00 - 06:00",
       "just_now": "たった今",
-      "abnormal": "異常",
+      "abnormal": "継続的な動きを検知",
+    "abnormal2": "心拍数の異常な変動を検知",
       "processing": "処理中"
     },
     "heat": {

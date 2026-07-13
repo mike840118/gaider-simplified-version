@@ -26,7 +26,11 @@
           <tr v-for="row in paginatedData" :key="row.id">
             <td>{{ row.index }}</td>
             <td>
-              <div class="avatar-placeholder-sm">{{ row.rawGender === 'WOMAN' ? '👩' : '👨' }}</div>
+              <div class="avatar-placeholder-sm">
+                <img v-if="row.avatar" :src="row.avatar" alt="User Avatar" class="user-avatar"
+                  referrerpolicy="no-referrer" @error="row.avatar = null" />
+                <img v-else :src="userIcon" alt="User Icon" style="width: 24px;" />
+              </div>
             </td>
             <td>{{ row.name }}</td>
             <td>{{ row.gender }}</td>
@@ -54,6 +58,7 @@ import { ref, computed, watch } from 'vue'
 import Pagination from '@/components/Pagination.vue'
 import { exportToExcel } from '@/utils/export.js'
 import { useI18n } from 'vue-i18n'
+import userIcon from '@/assets/icons/Profile.png'
 const { t } = useI18n()
 
 const props = defineProps(['patients', 'metric', 'selectedUserId'])
@@ -61,7 +66,6 @@ const currentPage = ref(1)
 
 watch([() => props.metric, () => props.selectedUserId], () => currentPage.value = 1)
 
-// 🌟 扁平化展開所有歷史紀錄
 const filteredData = computed(() => {
   let list = props.patients || []
   if (props.selectedUserId) list = list.filter(p => p.accountId === props.selectedUserId)
@@ -79,6 +83,7 @@ const filteredData = computed(() => {
 
       allRecords.push({
         id: p.accountId + '_' + r.testTime,
+        avatar: p.url, // 取得 API 的圖片網址
         name: p.name || '未知',
         rawGender: p.gender,
         gender: p.gender === 'WOMAN' ? t('common.woman') : t('common.man'),
@@ -94,7 +99,6 @@ const filteredData = computed(() => {
     })
   })
 
-  // 依據時間由新到舊排序
   return allRecords.sort((a, b) => b.rawTime - a.rawTime).map((item, i) => {
     item.index = i + 1
     return item
@@ -110,9 +114,8 @@ const getStatusColor = (code) => {
 }
 
 const handleExport = () => {
-  // 直接使用 setup 內定義的 t 函數
   const exportData = filteredData.value.map(row => ({
-    [t('data_manage.table.index')]: row.index,     // 假設你在 i18n 定義了 export.index
+    [t('data_manage.table.index')]: row.index,
     [t('data_manage.table.name')]: row.name,
     [t('data_manage.table.gender')]: row.gender,
     [t('data_manage.table.mac')]: row.mac,
@@ -121,7 +124,6 @@ const handleExport = () => {
     [t('data_manage.table.time')]: row.time
   }))
 
-  // 檔名也可以翻譯，或者保持原樣
   const fileName = `${t('data_manage.sub_tabs.historyData')}_${t(`card.${props.metric}`)}`
   exportToExcel(exportData, fileName, [])
 }
@@ -210,6 +212,15 @@ const handleExport = () => {
   justify-content: center;
   font-size: 18px;
   margin: 0 auto;
+  overflow: hidden;
+  /* 隱藏超出的圖片部分 */
+}
+
+.user-avatar {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* 自動縮放並裁切填滿 */
 }
 
 .mac-text {

@@ -112,8 +112,7 @@ const pagedData = computed(() => {
 .filter-section {
   flex-shrink: 0;
   display: flex;
-  gap: 12px;
-  margin-bottom: 16px;
+  gap: 4px;
   align-items: center;
   /* 讓按鈕與輸入框垂直居中對齊 */
 }

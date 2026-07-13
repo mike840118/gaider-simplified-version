@@ -15,9 +15,13 @@
 
         <div v-for="user in filteredUserList" :key="user.accountId" class="user-item"
           :class="{ active: selectedUserId === user.accountId }" @click="selectedUserId = user.accountId">
+
           <div class="user-icon placeholder">
-            {{ user.gender === 'WOMAN' ? '👩' : '👨' }}
+            <img v-if="user.url" :src="user.url" alt="User Avatar" class="user-avatar" referrerpolicy="no-referrer"
+              @error="user.url = null" />
+            <img v-else :src="userIcon" alt="User Icon" style="width: 24px;" />
           </div>
+
           <span class="user-name-text">{{ user.name || $t('common.unknown') }}</span>
         </div>
 
@@ -63,7 +67,7 @@
 <script setup>
 import { ref, computed } from 'vue'
 import rawPatientData from '@/mock/patients_new.json'
-
+import userIcon from '@/assets/icons/Profile.png'
 import DataHistoryTab from './components/DataHistoryTab.vue'
 import DataAlertTab from './components/DataAlertTab.vue'
 import DataAnalysisTab from './components/DataAnalysisTab.vue'
@@ -84,7 +88,6 @@ const filteredUserList = computed(() => {
   })
 })
 </script>
-
 <style scoped>
 .data-wrapper {
   display: flex;
@@ -108,7 +111,6 @@ const filteredUserList = computed(() => {
   flex-shrink: 0;
 }
 
-/* 🌟 修改此處樣式：讓 Header 內的標題與 Input 左右排列並置中對齊 */
 .sidebar-header {
   background: #2f4955;
   color: white;
@@ -126,7 +128,6 @@ const filteredUserList = computed(() => {
   white-space: nowrap;
 }
 
-/* 🌟 新增：用戶搜尋框精美外觀樣式 */
 .user-search-input {
   width: 110px;
   padding: 4px 8px;
@@ -147,7 +148,6 @@ const filteredUserList = computed(() => {
   background-color: white;
   color: #333;
   width: 120px;
-  /* 聚焦時稍微拉寬，增加輸入舒適度 */
   border-color: #3bc8f6;
 }
 
@@ -190,6 +190,8 @@ const filteredUserList = computed(() => {
   height: 28px;
   border-radius: 50%;
   flex-shrink: 0;
+  overflow: hidden;
+  /* 🌟 確保真實圖片不會超出圓形外框 */
 }
 
 .user-icon.placeholder {
@@ -199,6 +201,13 @@ const filteredUserList = computed(() => {
   justify-content: center;
   font-size: 14px;
   border: 1px solid #cbd5e1;
+}
+
+/* 🌟 新增：讓真實圖片填滿圓框並維持比例裁切 */
+.user-avatar {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .user-name-text {

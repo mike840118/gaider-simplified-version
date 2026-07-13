@@ -1,41 +1,42 @@
 <template>
-    <div class="desktop-layout">
-        <header class="top-navbar">
-            <div class="brand-zone">
-                <span class="logo-icon">💠</span>
-                <div class="logo-area">
-                    <h1>{{ $t('layout.title') }}</h1>
-                    <h1>{{ $t('layout.title2') }}</h1>
-                </div>
-            </div>
+  <div class="desktop-layout">
+    <header class="top-navbar">
+      <div class="brand-zone">
 
-            <nav class="nav-links">
-                <RouterLink to="/" class="nav-item">{{ $t('layout.nav.dashboard') }}</RouterLink>
-                <RouterLink to="/analysisList" class="nav-item">{{ $t('layout.nav.analysis') }}</RouterLink>
-                <RouterLink to="/location" class="nav-item">{{ $t('layout.nav.location') }}</RouterLink>
-                <RouterLink to="/data" class="nav-item">{{ $t('layout.nav.data') }}</RouterLink>
-                <RouterLink to="/users" class="nav-item">{{ $t('layout.nav.users') }}</RouterLink>
-            </nav>
+        <img src="@/assets/logo.png" alt="Logo" class="logo-icon">
+        <div class="logo-area">
+          <h1>{{ $t('layout.title') }}</h1>
 
-            <div class="user-actions">
-                <button @click="toggleFullscreen" class="fs-btn">
-                    {{ isFullscreen ? '⛒' : '⛶' }}
-                </button>
+        </div>
+      </div>
 
-                <select v-model="locale" class="lang-select">
-                    <option value="zh">繁體中文</option>
-                    <option value="en">English</option>
-                    <option value="ja">日本語</option>
-                </select>
+      <nav class="nav-links">
+        <RouterLink to="/" class="nav-item">{{ $t('layout.nav.dashboard') }}</RouterLink>
+        <RouterLink to="/analysisList" class="nav-item">{{ $t('layout.nav.analysis') }}</RouterLink>
+        <RouterLink to="/location" class="nav-item">{{ $t('layout.nav.location') }}</RouterLink>
+        <RouterLink to="/data" class="nav-item">{{ $t('layout.nav.data') }}</RouterLink>
+        <RouterLink to="/users" class="nav-item">{{ $t('layout.nav.users') }}</RouterLink>
+      </nav>
 
-                <button class="logout-btn">{{ $t('layout.logout') }}</button>
-            </div>
-        </header>
+      <div class="user-actions">
+        <button @click="toggleFullscreen" class="fs-btn">
+          {{ isFullscreen ? '⛒' : '⛶' }}
+        </button>
 
-        <main class="main-content">
-            <slot />
-        </main>
-    </div>
+        <select v-model="locale" class="lang-select">
+          <option value="zh">繁體中文</option>
+          <option value="en">English</option>
+          <option value="ja">日本語</option>
+        </select>
+
+        <button class="logout-btn">{{ $t('layout.logout') }}</button>
+      </div>
+    </header>
+
+    <main class="main-content">
+      <slot />
+    </main>
+  </div>
 </template>
 
 <script setup>
@@ -47,170 +48,172 @@ const isFullscreen = ref(false)
 
 // ⭐ 1. 初始化讀取 LocalStorage
 onMounted(() => {
-    const savedLocale = localStorage.getItem('app-locale')
-    if (savedLocale) {
-        locale.value = savedLocale
-    }
+  const savedLocale = localStorage.getItem('app-locale')
+  if (savedLocale) {
+    locale.value = savedLocale
+  }
 
-    document.addEventListener('fullscreenchange', handleFullscreenChange)
+  document.addEventListener('fullscreenchange', handleFullscreenChange)
 })
 
 // ⭐ 2. 監聽 locale 變化並存入 LocalStorage
 watch(locale, (newLocale) => {
-    localStorage.setItem('app-locale', newLocale)
+  localStorage.setItem('app-locale', newLocale)
 })
 
 // 全螢幕切換邏輯 (保持不變)
 const toggleFullscreen = () => {
-    if (!document.fullscreenElement) {
-        document.documentElement.requestFullscreen()
-        isFullscreen.value = true
-    } else {
-        document.exitFullscreen()
-        isFullscreen.value = false
-    }
+  if (!document.fullscreenElement) {
+    document.documentElement.requestFullscreen()
+    isFullscreen.value = true
+  } else {
+    document.exitFullscreen()
+    isFullscreen.value = false
+  }
 }
 
 const handleFullscreenChange = () => {
-    isFullscreen.value = !!document.fullscreenElement
+  isFullscreen.value = !!document.fullscreenElement
 }
 
 onUnmounted(() => {
-    document.removeEventListener('fullscreenchange', handleFullscreenChange)
+  document.removeEventListener('fullscreenchange', handleFullscreenChange)
 })
 </script>
 <style scoped>
 .desktop-layout {
-    background-color: #121921;
-    min-height: 100vh;
-    color: #e0e0e0;
+  background-color: #121921;
+  min-height: 100vh;
+  color: #e0e0e0;
+  font-family: Arial, sans-serif
 }
 
 .top-navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #1a222c;
-    padding: 0 16px 0 0;
-    /* 右側保留一點空間 */
-    height: 64px;
-    border-bottom: 1px solid #2a3543;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #1a222c;
+  padding: 0 16px 0 0;
+  /* 右側保留一點空間 */
+  height: 64px;
+  border-bottom: 1px solid #2a3543;
 }
 
 /* 新增的 logo 區塊包裝器 */
 .brand-zone {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding-left: 20px;
-    /* 讓 logo 距離左邊緣一點空間 */
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-left: 20px;
+  /* 讓 logo 距離左邊緣一點空間 */
 }
 
 .logo-icon {
-    font-size: 32px;
-    color: #00bcd4;
-    /* 調整為截圖中的亮藍色 */
+  font-size: 24px;
+  width: 40px;
+  color: #00bcd4;
+  /* 調整為截圖中的亮藍色 */
 }
 
 .logo-area {
-    display: flex;
-    flex-direction: column;
-    /* 讓文字上下排列 */
-    align-items: flex-start;
-    /* 文字靠左對齊 */
-    justify-content: center;
-    gap: 2px;
-    /* 兩行文字的間距 */
+  display: flex;
+  flex-direction: column;
+  /* 讓文字上下排列 */
+  align-items: flex-start;
+  /* 文字靠左對齊 */
+  justify-content: center;
+  gap: 2px;
+  /* 兩行文字的間距 */
 }
 
 .logo-area h1 {
-    font-size: 15px;
-    /* 稍微調整讓上下兩行比例更好 */
-    font-weight: bold;
-    margin: 0;
-    color: #ffffff;
-    line-height: 1.2;
-    letter-spacing: 1px;
+  font-size: 15px;
+  /* 稍微調整讓上下兩行比例更好 */
+  font-weight: bold;
+  margin: 0;
+  color: #ffffff;
+  line-height: 1.2;
+  letter-spacing: 1px;
 }
 
 .nav-links {
-    display: flex;
-    height: 100%;
+  display: flex;
+  height: 100%;
 }
 
 .nav-item {
-    display: flex;
-    align-items: center;
-    padding: 0 16px;
-    /* 稍微加寬讓點擊範圍更好 */
-    color: #8da2b5;
-    text-decoration: none;
-    font-size: 15px;
-    transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  /* 稍微加寬讓點擊範圍更好 */
+  color: #8da2b5;
+  text-decoration: none;
+  font-size: 15px;
+  transition: all 0.2s;
 }
 
 .nav-item:hover {
-    color: #ffffff;
+  color: #ffffff;
 }
 
 .nav-item.router-link-exact-active {
-    color: #ffffff;
-    background-color: #243545;
-    border-bottom: 3px solid #4db8ff;
+  color: #ffffff;
+  background-color: #243545;
+  border-bottom: 3px solid #4db8ff;
 }
 
 .main-content {
-    padding: 24px;
-    min-height: calc(100vh - 170px);
+  padding: 12px;
+  min-height: calc(100vh - 170px);
 }
 
 .user-actions {
-    display: flex;
-    align-items: center;
-    gap: 16px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
 }
 
 .lang-select {
-    background-color: #1a222c;
-    color: #8da2b5;
-    border: 1px solid #2a3543;
-    padding: 6px 12px;
-    border-radius: 4px;
-    font-size: 14px;
-    cursor: pointer;
-    outline: none;
-    transition: all 0.2s;
+  background-color: #1a222c;
+  color: #8da2b5;
+  border: 1px solid #2a3543;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+  outline: none;
+  transition: all 0.2s;
 }
 
 .lang-select:hover,
 .lang-select:focus {
-    color: #ffffff;
-    border-color: #4db8ff;
+  color: #ffffff;
+  border-color: #4db8ff;
 }
 
 .logout-btn {
-    background: transparent;
-    border: none;
-    color: #ffffff;
-    cursor: pointer;
-    font-size: 15px;
-    border-left: 1px solid #2a3543;
-    padding-left: 16px;
+  background: transparent;
+  border: none;
+  color: #ffffff;
+  cursor: pointer;
+  font-size: 15px;
+  border-left: 1px solid #2a3543;
+  padding-left: 16px;
 }
 
 .fs-btn {
-    background: transparent;
-    border: 1px solid #2a3543;
-    color: #8da2b5;
-    padding: 6px 10px;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: all 0.2s;
+  background: transparent;
+  border: 1px solid #2a3543;
+  color: #8da2b5;
+  padding: 6px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: all 0.2s;
 }
 
 .fs-btn:hover {
-    color: #ffffff;
-    border-color: #4db8ff;
+  color: #ffffff;
+  border-color: #4db8ff;
 }
 </style>

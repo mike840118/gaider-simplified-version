@@ -52,7 +52,9 @@
     <div class="middle-section">
       <div class="stats-grid">
         <div class="stat-card" v-for="stat in stats" :key="stat.titleKey">
-          <div class="stat-icon" :class="stat.colorClass">{{ stat.icon }}</div>
+          <div class="stat-icon" :class="stat.colorClass">
+            <img :src="stat.icon" alt="icon" class="svg-icon" />
+          </div>
           <div class="stat-info">
             <div class="title">{{ $t(stat.titleKey) }}</div>
             <div class="value">{{ stat.value }}<span class="unit">{{ $t('common.unit_person') }}</span>
@@ -167,7 +169,13 @@ import BindDeviceModal from './components/BindDeviceModal.vue'
 import AdmissionModal from './components/AdmissionModal.vue'
 import BatteryViewModal from './components/BatteryDeviceModal.vue'
 import ShiftLogModal from './components/ShiftLogModal.vue'
-
+//icons
+import userIcon from '@/assets/icons/user.svg'
+import addIcon from '@/assets/icons/add.svg'
+import documentIcon from '@/assets/icons/document.svg'
+import onlineIcon from '@/assets/icons/online.svg'
+import offlineIcon from '@/assets/icons/offline.svg'
+import batteryIcon from '@/assets/icons/battery.svg'
 const { t } = useI18n() // 👈 初始化
 const patients = ref(rawPatientData.data.data)
 
@@ -184,21 +192,33 @@ const pendingEvents = computed(() => sosCount.value + urgentCount.value)
 
 // ⭐ 將 title 換成 titleKey 對應語系
 const stats = computed(() => [
-  { titleKey: 'dashboard.stats.total_members', value: totalMembers.value, icon: '👤', colorClass: 'c-gray' },
-  { titleKey: 'dashboard.stats.today_added', value: 5, icon: '➕', colorClass: 'c-blue' },
-  { titleKey: 'dashboard.stats.pending_events', value: pendingEvents.value, icon: '📋', colorClass: 'c-blue' },
-  { titleKey: 'dashboard.stats.online_count', value: onlineCount.value, icon: '📶', colorClass: 'c-blue' },
-  { titleKey: 'dashboard.stats.offline_count', value: offlineCount.value, icon: '📴', colorClass: 'c-gray' },
-  { titleKey: 'dashboard.stats.low_battery', value: lowBatteryCount.value, icon: '🔋', colorClass: 'c-gray' }
+  { titleKey: 'dashboard.stats.total_members', value: totalMembers.value, icon: userIcon, colorClass: 'c-gray' },
+  { titleKey: 'dashboard.stats.today_added', value: 5, icon: addIcon, colorClass: 'c-blue' },
+  { titleKey: 'dashboard.stats.pending_events', value: pendingEvents.value, icon: documentIcon, colorClass: 'c-blue' },
+  { titleKey: 'dashboard.stats.online_count', value: onlineCount.value, icon: onlineIcon, colorClass: 'c-blue' },
+  { titleKey: 'dashboard.stats.offline_count', value: offlineCount.value, icon: offlineIcon, colorClass: 'c-gray' },
+  { titleKey: 'dashboard.stats.low_battery', value: lowBatteryCount.value, icon: batteryIcon, colorClass: 'c-gray' }
 ])
 
-const safetyLogs = computed(() => patients.value.filter(p => p.level !== 'NORMAL').slice(0, 4).map(p => ({
-  id: p.accountId,
-  patient: p,
-  time: t('dashboard.overview.just_now'), // 👈 i18n
-  desc: `${p.companyName} ${p.name} ${t('dashboard.overview.abnormal')}`, // 👈 i18n
-  status: p.sos ? t('dashboard.handle_now') : t('dashboard.overview.processing') // 👈 i18n
-})))
+const safetyLogs = computed(() => patients.value
+  .filter(p => p.level !== 'NORMAL')
+  .slice(0, 4)
+  .map(p => {
+    // 🟢 判斷逻辑：如果 SOS 觸發或特定狀態，使用 abnormal2，否則使用一般 abnormal
+    // 您可以根據實際業務邏輯修改判斷條件 (例如 p.sos 或 p.level === 'URGENT')
+    const abnormalKey = (p.sos || p.level === 'URGENT')
+      ? 'dashboard.overview.abnormal2'
+      : 'dashboard.overview.abnormal';
+
+    return {
+      id: p.accountId,
+      patient: p,
+      time: t('dashboard.overview.just_now'),
+      desc: `${p.companyName || ''} ${p.name || ''} ${t(abnormalKey)}`,
+      status: p.sos ? t('dashboard.handle_now') : t('dashboard.overview.processing')
+    };
+  })
+);
 
 const isModalOpen = ref(false)
 const selectedAnnouncement = ref({})
@@ -504,10 +524,23 @@ const announcements = computed(() => [
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
 }
 
+/* 找到你原本的 stat-icon，在下方補上 img 的設定 */
 .stat-icon {
   font-size: 32px;
   width: 40px;
   text-align: center;
+  display: flex;
+  /* 建議加上 flex 讓圖片置中 */
+  align-items: center;
+  justify-content: center;
+}
+
+/* 新增這個樣式來控制 svg 圖片大小 */
+.svg-icon {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  /* 確保圖片等比例縮放且不變形 */
 }
 
 .stat-info {

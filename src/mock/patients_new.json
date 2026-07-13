@@ -7,6 +7,7 @@
       {
         "accountId": 12375,
         "name": "溫仁祥",
+        "url": "https://api.guidertech.com/files/2024-08-21/437f7688c5ce396609fa41c941459bbe.jpg",
         "gender": "MAN",
         "deviceCode": "863204051041667",
         "records": {
@@ -25747,6 +25748,7 @@
       {
         "accountId": 14767,
         "name": "Kevin_300C",
+          "url": "https://api.guidertech.com/files/2026-03-06/e8ef813f407331b3da442d5c4e38c5b3.jpg",
         "gender": "MAN",
         "deviceCode": "50:C0:F0:93:8D:E7",
         "records": {
@@ -42907,6 +42909,7 @@
       {
         "accountId": 17648,
         "name": "賴玉花",
+            "url": "https://api.guidertech.com/files/2025-01-09/ba2de3ec93ddd50345806dd1fcda1959.jpg",
         "gender": "WOMAN",
         "deviceCode": "CA:4C:0B:35:EF:F7",
         "records": {
@@ -47197,6 +47200,7 @@
       {
         "accountId": 17681,
         "name": "劉晏慈",
+          "url": "https://api.guidertech.com/files/2025-01-09/9bd62c1aa8c58a8c6585f4324f8ec88b.jpg",
         "gender": "WOMAN",
         "deviceCode": "D6:73:0A:35:61:F7",
         "records": {
@@ -55777,6 +55781,7 @@
       {
         "accountId": 14842,
         "name": "Ricky",
+         "url": "https://api.guidertech.com/files/2024-01-04/282721f0226706a5cb860f420138c500.jpeg",
         "gender": "MAN",
         "deviceCode": "50:C0:F0:05:76:42",
         "records": {
@@ -60067,6 +60072,7 @@
       {
         "accountId": 16808,
         "name": "青山尚美",
+           "url": "https://api.guidertech.com/files/2025-12-04/fbb560b2bac400456f13c328f7db68da.jpeg",
         "gender": "WOMAN",
         "deviceCode": "D7:2F:0B:35:61:F9",
         "records": {
@@ -64357,6 +64363,7 @@
       {
         "accountId": 21918,
         "name": "Carlos",
+          "url": "https://api.guidertech.com/files/2026-05-12/43a34257242cb024701f6c7c9c6beda9.png",
         "gender": "MAN",
         "deviceCode": "861768074440793",
         "records": {
@@ -68647,6 +68654,7 @@
       {
         "accountId": 13216,
         "name": "GuiderCare",
+         "url": "https://api.guidertech.com/files/2026-04-30/cf0bc7f638fe9799d8e9f9a4380d53c9.jpg",
         "gender": "MAN",
         "deviceCode": "50:C0:F0:C5:E7:C8",
         "records": {
@@ -77227,6 +77235,7 @@
       {
         "accountId": 19533,
         "name": "测试",
+        "url": "https://api.guidertech.com/files/2026-03-09/f9cad78cd387fe474d5a7cfd3cfcff80.jpg",
         "gender": "MAN",
         "deviceCode": "50:C0:F0:C6:99:55",
         "records": {
@@ -85807,6 +85816,7 @@
       {
         "accountId": 19449,
         "name": "花子",
+        "url": "https://api.guidertech.com/files/2025-12-13/366b316cb9484d1925377aea50a3209b.png",
         "gender": "WOMAN",
         "deviceCode": "D2:29:0B:35:CD:F6",
         "records": {

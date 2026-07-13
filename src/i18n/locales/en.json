@@ -52,8 +52,7 @@
   },
   "layout": {
     "titleLayout": "Health Big Data Management Platform",
-    "title": "Health Big Data",
-    "title2": "Management Platform",
+    "title": "Management Platform",
     "title_short": "Health Platform",
     "nav": {
       "dashboard": "Dashboard",
@@ -141,7 +140,8 @@
       "title": "Overview",
       "night_safety": "Night Safety 22:00-06:00",
       "just_now": "Just now",
-      "abnormal": "Abnormal",
+      "abnormal": "Continuous movement detected",
+    "abnormal2": "Abnormal heart rate fluctuation detected",
       "processing": "Processing"
     },
     "heat": {
