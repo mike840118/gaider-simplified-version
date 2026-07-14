@@ -94,7 +94,7 @@
         <div class="overview-list">
           <div class="list-header">{{ $t('dashboard.overview.night_safety') }}</div>
           <div class="list-item" v-for="log in safetyLogs" :key="log.id">
-            <span class="time c-gray">{{ log.time }}</span>
+            <!-- <span class="time c-gray">{{ log.time }}</span> -->
             <span class="desc"><strong>{{ log.desc }}</strong></span>
             <span class="status-btn" :class="log.patient.sos ? 'bg-yellow' : 'bg-light-gray'"
               @click="openSosModal(log.patient)">
@@ -214,7 +214,7 @@ const safetyLogs = computed(() => patients.value
       id: p.accountId,
       patient: p,
       time: t('dashboard.overview.just_now'),
-      desc: `${p.companyName || ''} ${p.name || ''} ${t(abnormalKey)}`,
+      desc: `${p.name || ''} ｜${t(abnormalKey)}`,
       status: p.sos ? t('dashboard.handle_now') : t('dashboard.overview.processing')
     };
   })

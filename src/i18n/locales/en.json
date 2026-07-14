@@ -51,8 +51,8 @@
     "recovery": "Recovery"
   },
   "layout": {
-    "titleLayout": "Health Big Data Management Platform",
-    "title": "Management Platform",
+    "titleLayout": "Health Platform",
+    "title": "Health Platform",
     "title_short": "Health Platform",
     "nav": {
       "dashboard": "Dashboard",
@@ -155,27 +155,27 @@
       "warning": "Warning",
       "normal": "Notice"
     },
-    "announcements_data": {
-     "item1": {
+   "announcements_data": {
+      "item1": {
         "tag": "[Important Notice]",
-        "title": "[Important Notice] In response to the peak season of respiratory infections, please implement patient health monitoring and real-time App reporting",
-        "previewDesc": "- Dear care and clinical colleagues: Due to the recent seasonal flu and res...",
+        "title": "[Important Notice] Health Monitoring and Reporting during Respiratory Infection Peak Season",
+        "previewDesc": "- Dear care and nursing staff: Due to seasonal flu and respiratory infections...",
         "time": "1:50 PM",
-        "content": "Dear care and clinical colleagues:\n\nIn response to the recent peak of seasonal flu and respiratory infectious diseases, to ensure infection control within the hospital/institution, please ensure all units implement the following epidemic prevention measures:\n\n1. Measure and record patients' body temperature and respiratory symptoms daily.\n2. If any abnormalities are found, please upload them immediately through the App's real-time reporting system.\n3. Please strictly wear protective equipment when contacting high-risk cases.\n\nThank you for your cooperation and hard work.\n[Publish Date] 2026-06-29"
+        "content": "Dear care and nursing staff:\n\nDue to the prevalence of seasonal flu and respiratory infections, please implement the following measures strictly to prevent facility-wide spread:\n\nCheck and record residents' body temperature and respiratory symptoms (e.g., cough, runny nose, dyspnea) daily.\nIf any abnormalities are found, record them in the App promptly and share information with relevant staff.\nWear appropriate personal protective equipment (PPE), such as masks, gloves, and gowns, when caring for high-risk residents.\n\nThank you for your understanding and cooperation.\n[Published] June 29, 2026"
       },
       "item2": {
-        "tag": "[Health Notice]",
-        "title": "[Health Notice] High summer temperatures are here, please pay extra attention to the hydration of [elders/patients]",
-        "previewDesc": "- Thank you for your hard work: Temperatures have been rising continuously recently. Because [elders/severe patients] often have a dull sense of thirst or poor expression...",
+        "tag": "[Health Alert]",
+        "title": "[Heatstroke Prevention] Strict Hydration and Health Management for Residents",
+        "previewDesc": "- Dear care and nursing staff: Temperatures have been rising. Elders or patients...",
         "time": "10:00 AM",
-        "content": "Thank you for your hard work, colleagues:\n\nTemperatures have been rising continuously recently. Because [elders/severe patients] often have a dull sense of thirst or cannot express it clearly, which can easily lead to dehydration or heatstroke risks, please strengthen care according to the following principles:\n\n1. Provide warm water at regular intervals and record daily water intake.\n2. Pay attention to indoor temperature and ventilation, and adjust air conditioning settings if necessary.\n3. If early signs of dehydration such as reduced urine output or dry skin are observed, please intervene early.\n\nPrevention is better than cure, please pay close attention.\n[Publish Date] 2026-06-29"
+        "content": "Dear care and nursing staff:\n\nWith ongoing high temperatures, elders or those in poor health may have a dulled thirst sensation or find it difficult to communicate discomfort, increasing the risk of dehydration and heatstroke. Please strictly implement the following:\n\nEncourage regular hydration and record intake as needed.\nCheck indoor temperature, humidity, and ventilation, and use air conditioning appropriately.\nIf symptoms of dehydration (e.g., reduced urine output, dry mouth/skin, fatigue) are observed, report to nursing staff immediately for proper management.\n\nEarly prevention and response are crucial for heatstroke. Thank you for your understanding and cooperation.\n[Published] June 29, 2026"
       },
       "item3": {
-        "tag": "[Care Notice]",
-        "title": "[Care Notice] Please ensure the implementation of the \"Five Major Fall Prevention Inspections\" and utilize the platform to report environmental hazards in real-time",
-        "previewDesc": "- Hello colleagues: Recently, the fall risk assessment index for [residents/patients] on each floor has...",
+        "tag": "[Fall Prevention]",
+        "title": "[Fall Prevention] Thorough Patrol Checks and Hazard Reporting",
+        "previewDesc": "- Dear care and nursing staff: Recently, the fall risk scores for some residents...",
         "time": "08:42 AM",
-        "content": "Hello colleagues:\n\nRecently, the fall risk assessment index for [residents/patients] on various floors has changed. To ensure the safety of individuals, all frontline care staff must implement the following fall prevention inspections after each shift handover:\n\n1. Bedside safety check: Please confirm that when [residents/patients] are out of bed or in bed, the bed rails are securely pulled up, the bed wheels are locked, and the bed exit alarm is functioning properly.\n\n2. Environmental inspection: If you find stagnant water in the aisles, dim lighting, or loose barrier-free handrails, please take photos immediately and report them by uploading them through the platform's \"Logistics Repair/Environmental Report\" section so that the General Affairs team can repair them promptly.\n\n3. Platform assessment sync update: For high-risk individuals, please update the latest data in the \"Fall Risk Assessment Form\" within the platform on the scheduled weekly assessment day, so that the relieving staff can grasp the latest prevention priorities.\n\nFall prevention is everyone's responsibility. A little more attention means a little less regret.\n[Publish Date] 2026-06-29"
+        "content": "Dear care and nursing staff:\n\nRecently, there have been changes in the fall risk assessments for some residents on various floors. To ensure safety, please confirm the following during rounds after shift handover:\n\nBedside Safety Check: Ensure necessary bed rails are correctly positioned, bed wheels are locked, and bed exit sensors are operating correctly when residents are in or out of bed.\nFacility Hazard Reporting: If water on floors, poor lighting, or loose handrails are found, safely take photos and report them via the \"Facility Repair/Environment Report\" screen on the platform.\nUpdate Fall Risk Assessments: Update the \"Fall Risk Assessment Form\" on the platform on scheduled evaluation days so that the next shift can verify the latest precautions.\n\nStaff diligence and information sharing are vital for fall prevention. Thank you for your understanding and cooperation.\n[Published] June 29, 2026"
       }
     }
   },
